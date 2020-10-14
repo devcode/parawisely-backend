@@ -17,14 +17,14 @@ class CreateTravelPlaceTable extends Migration
             $table->id();
             $table->integer('type_id');
             $table->integer('creator_id');
-            $table->string('name_place', 255);
-            $table->string('address', 999);
-            $table->integer('provinsi_id', 25);
-            $table->integer('kabupaten_id', 25);
-            $table->string('latitude', 999);
-            $table->string('longitude', 999);
-            $table->string('description', 999);
-            $table->string('image', 999);
+            $table->string('name_place');
+            $table->string('address');
+            $table->integer('provinsi_id');
+            $table->integer('kabupaten_id');
+            $table->string('latitude');
+            $table->string('longitude');
+            $table->string('description');
+            $table->string('image');
             $table->timestamps();
         });
     }
