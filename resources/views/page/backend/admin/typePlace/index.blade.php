@@ -7,7 +7,7 @@
             <h3>{{ $title }}</h3>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">Add {{ $title }}</button>
+            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">Tambah {{ $title }}</button>
         </div>
     </div>
 </div>
@@ -16,7 +16,7 @@
             <thead>
                 <tr>
                     <th>Icon</th>
-                    <th>Name Type</th>
+                    <th>Nama Tempat</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -57,12 +57,12 @@
                       </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Type Name</label>
+                    <label for="exampleFormControlInput1">Nama Tipe</label>
                     <input type="text" class="form-control" name="type_name" placeholder="name" autocomplete="off">
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>

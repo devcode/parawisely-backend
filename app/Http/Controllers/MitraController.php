@@ -5,10 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
-use App\Models\Level;
-use Illuminate\Support\Facades\File;
+use App\Models\TypePlace;
 
-class LevelController extends Controller
+class MitraController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +18,10 @@ class LevelController extends Controller
     {
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "Level";
+        $title = "Tambah Tempat";
         //
-        $dataLevel = Level::all();
-        return view('page.backend.admin.level.index', compact('title', 'dataLevel', 'dataAuth'));
+        $dataType = TypePlace::all();
+        return view('page.backend.mitra.index', compact('dataAuth', 'title', 'dataType'));
     }
 
     /**
@@ -43,15 +42,7 @@ class LevelController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name_level' => 'required',
-        ]);
-
-        Level::create([
-            'name_level' => $request->name_level,
-        ]);
-
-        return redirect()->route('level');
+        //
     }
 
     /**
@@ -71,13 +62,9 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Level $id)
+    public function edit($id)
     {
-        $id_user = Auth::guard('employee')->id();
-        $dataAuth = Employee::find($id_user);
-        $title = "Employee";
         //
-        return view('page.backend.admin.level.edit', compact('title', 'dataAuth', 'id'));
     }
 
     /**
@@ -87,18 +74,9 @@ class LevelController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Level $id)
+    public function update(Request $request, $id)
     {
-
-        $request->validate([
-            'name_level' => 'required',
-        ]);
-
-        Level::where('id', $id->id)->update([
-            'name_level' => $request->name_level,
-        ]);
-
-        return redirect()->route('level');
+        //
     }
 
     /**
@@ -109,7 +87,6 @@ class LevelController extends Controller
      */
     public function destroy($id)
     {
-        Level::destroy($id);
-        return redirect()->route('level');
+        //
     }
 }

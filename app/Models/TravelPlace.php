@@ -10,8 +10,8 @@ use App\Models\Employee;
 class TravelPlace extends Model
 {
     use HasFactory;
-    protected $table = 'tb_travel_place';
-    protected $fillable = ['type_id', 'creator_id', 'name_place', 'address', 'provinsi_id', 'kabupaten_id', 'kecamatan_id', 'kelurahan_id', 'latitude', 'longitude', 'description', 'image'];
+    protected $table = 'tb_place';
+    protected $fillable = ['type_id', 'creator_id', 'name_place', 'address', 'provinsi_id', 'kabupaten_id', 'latitude', 'longitude', 'description', 'image'];
 
     public function type()
     {

@@ -21,11 +21,11 @@ class PlaceController extends Controller
 
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "Place";
+        $title = "Tempat Wisata";
         //
         $dataPlace = TravelPlace::with(['type', 'employee'])->get();
         $dataType = TypePlace::all();
-        return view('page.backend.place.index', compact('title', 'dataPlace', 'dataType', 'dataAuth'));
+        return view('page.backend.admin.place.index', compact('title', 'dataPlace', 'dataType', 'dataAuth'));
     }
 
     /**
@@ -38,10 +38,10 @@ class PlaceController extends Controller
 
         $id_user = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id_user);
-        $title = "Place";
+        $title = "Tempat Wisata";
         //
         $dataType = TypePlace::all();
-        return view('page.backend.place.add', compact('title', 'dataAuth', 'dataType'));
+        return view('page.backend.admin.place.add', compact('title', 'dataAuth', 'dataType'));
     }
 
     /**
@@ -58,8 +58,6 @@ class PlaceController extends Controller
             'address' => 'required',
             'propinsi' => 'required',
             'kabupaten' => 'required',
-            'kecamatan' => 'required',
-            'kelurahan' => 'required',
             'description' => 'required',
             'type_place' => 'required',
             'latitude' => 'required',
@@ -71,7 +69,7 @@ class PlaceController extends Controller
 
         if ($image != null) {
             $image_name = $image->getClientOriginalName();
-            $image_full_name = $image_name;
+            $image_full_name = time() . "-" . $image_name;
             $upload_path = 'backend/uploads/placeImage';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
@@ -82,8 +80,6 @@ class PlaceController extends Controller
                 'address' => $request->address,
                 'provinsi_id' => $request->propinsi,
                 'kabupaten_id' => $request->kabupaten,
-                'kecamatan_id' => $request->kecamatan,
-                'kelurahan_id' => $request->kelurahan,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
@@ -91,7 +87,11 @@ class PlaceController extends Controller
             ]);
         }
 
-        return redirect()->route('place');
+        if (Auth::guard('employee')->user()->level_id == 1) {
+            return redirect()->route('place');
+        } else {
+            return redirect()->route('mitra');
+        }
     }
 
     /**
@@ -104,9 +104,9 @@ class PlaceController extends Controller
     {
         $id_user = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id_user);
-        $title = "Place";
+        $title = "Tempat Wisata";
         //
-        return view('page.backend.place.show', compact('dataAuth', 'title', 'id'));
+        return view('page.backend.admin.place.show', compact('dataAuth', 'title', 'id'));
     }
 
     /**
@@ -119,10 +119,10 @@ class PlaceController extends Controller
     {
         $id_user = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id_user);
-        $title = "Place";
+        $title = "Tempat Wisata";
         //
         $dataType = TypePlace::all();
-        return view('page.backend.place.edit', compact('dataAuth', 'title', 'id', 'dataType'));
+        return view('page.backend.admin.place.edit', compact('dataAuth', 'title', 'id', 'dataType'));
     }
 
     /**
@@ -138,6 +138,8 @@ class PlaceController extends Controller
         $request->validate([
             'name_place' => 'required',
             'address' => 'required',
+            'propinsi' => 'required',
+            'kabupaten' => 'required',
             'description' => 'required',
             'type_place' => 'required',
             'latitude' => 'required',
@@ -153,7 +155,7 @@ class PlaceController extends Controller
                 unlink($image_path);
             }
             $image_name = $image->getClientOriginalName();
-            $image_full_name = $image_name;
+            $image_full_name = time() . "-" . $image_name;
             $upload_path = 'backend/uploads/placeImage';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
@@ -162,6 +164,8 @@ class PlaceController extends Controller
                 'creator_id' => $id_user,
                 'name_place' => $request->name_place,
                 'address' => $request->address,
+                'provinsi_id' => $request->propinsi,
+                'kabupaten_id' => $request->kabupaten,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
@@ -173,6 +177,8 @@ class PlaceController extends Controller
                 'creator_id' => $id_user,
                 'name_place' => $request->name_place,
                 'address' => $request->address,
+                'provinsi_id' => $request->propinsi,
+                'kabupaten_id' => $request->kabupaten,
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,

@@ -10,6 +10,7 @@ use App\Http\Controllers\TypePlaceController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MapController;
+use App\Http\Controllers\MitraController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,12 +33,16 @@ Route::post('/procesLogin', [AuthController::class, 'procesLogin'])->name('proce
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
 Route::middleware(['AuthEmployee'])->group(function () {
+    //Admin Site
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/employee', [EmployeeController::class, 'index'])->name('employee');
     Route::get('/level', [LevelController::class, 'index'])->name('level');
     Route::get('/carousel', [CarouselController::class, 'index'])->name('carousel');
     Route::get('/type', [TypePlaceController::class, 'index'])->name('type');
     Route::get('/place', [PlaceController::class, 'index'])->name('place');
+
+    //Mitra Site
+    Route::get('/add-place', [MitraController::class, 'index'])->name('mitra');
 });
 
 // Route Employee
@@ -75,3 +80,5 @@ Route::get('/deletePlace/{id}', [PlaceController::class, 'destroy'])->name('dele
 // Route Profile
 Route::get('/showProfile', [ProfileController::class, 'show'])->name('profile');
 Route::post('/updateProfile/{id}', [ProfileController::class, 'update'])->name('updateProfile');
+Route::get('/changePassword/{id}', [ProfileController::class, 'changePassword'])->name('changePassword');
+Route::post('/procesChange/{id}', [ProfileController::class, 'procesChange'])->name('procesChange');

@@ -10,7 +10,7 @@
                 <div class="card-body">
                     <div class="form-group">
                         <label for="name_palce" class="control-label">Place Name</label>
-                        <input id="name_place" type="text" class="form-control{{ $errors->has('name_place') ? ' is-invalid' : '' }}" name="name_place" value="{{ old('name_place') }}" required>
+                        <input id="name_place" type="text" class="form-control{{ $errors->has('name_place') ? ' is-invalid' : '' }}" name="name_place" value="{{ old('name_place') }}" required autocomplete="off">
                         {!! $errors->first('name_place', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                     </div>
                     <div class="form-group">
@@ -42,24 +42,6 @@
                                 <label for="kabupaten" class="control-label">Kab / Kota</label>
                                 <select class="form-control" name="kabupaten" id="kabupaten">
                                     <option value="" selected>--Select Kabupaten--</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="kecamatan" class="control-label">Kecamatan</label>
-                                <select class="form-control" name="kecamatan" id="kecamatan">
-                                    <option value="" selected>--Select kecamatan--</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="kelurahan" class="control-label">Kelurahan / Desa</label>
-                                <select class="form-control" name="kelurahan" id="kelurahan">
-                                    <option value="" selected>--Select Kelurahan--</option>
                                 </select>
                             </div>
                         </div>
@@ -134,10 +116,20 @@
         $('#longitude').on('input', updateMarkerByInputs);
     </script>
     <script type="text/javascript">
-        var return_first = function () {
-            var tmp = "sZximLbjUzVrwGXySzdOe9M19AFenHzToxM4z5azIZYuXEt4wV";
-            return tmp;
-        }();
+        var return_first = function() {
+          var tmp = null;
+          $.ajax({
+              'async': false,
+              'type': "get",
+              'global': false,
+              'dataType': 'json',
+              'url': 'https://x.rajaapi.com/poe',
+              'success': function(data) {
+                  tmp = data.token;
+              }
+          });
+          return tmp;
+      }();
         $(document).ready(function () {
             $.ajax({
                 url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/provinsi',
@@ -172,48 +164,6 @@
 
                         } else {
                             $('#kabupaten').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
-                        }
-                    }
-                });
-            });
-            $("#kabupaten").change(function () {
-                var kabupaten = $("#kabupaten").val();
-                $.ajax({
-                    url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kecamatan',
-                    data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi,
-                    type: 'GET',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (json) {
-                        $("#kecamatan").html('');
-                        if (json.code == 200) {
-                            for (i = 0; i < Object.keys(json.data).length; i++) {
-                                $('#kecamatan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
-                            }
-                            $('#kelurahan').html($('<option>').text('-- Pilih Kelurahan --').attr('value', '-- Pilih Kelurahan --'));
-
-                        } else {
-                            $('#kecamatan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
-                        }
-                    }
-                });
-            });
-            $("#kecamatan").change(function () {
-                var kecamatan = $("#kecamatan").val();
-                $.ajax({
-                    url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kelurahan',
-                    data: "idkabupaten=" + kabupaten + "&idpropinsi=" + propinsi + "&idkecamatan=" + kecamatan,
-                    type: 'GET',
-                    dataType: 'json',
-                    cache: false,
-                    success: function (json) {
-                        $("#kelurahan").html('');
-                        if (json.code == 200) {
-                            for (i = 0; i < Object.keys(json.data).length; i++) {
-                                $('#kelurahan').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
-                            }
-                        } else {
-                            $('#kelurahan').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
                         }
                     }
                 });

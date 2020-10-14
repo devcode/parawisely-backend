@@ -24,7 +24,12 @@ class AuthController extends Controller
         if (!$login) {
             return redirect()->route('default')->withErrors(['Email / Password salah']);
         }
-        return redirect()->route('dashboard');
+
+        if (Auth::guard('employee')->user()->level_id == 1) {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('mitra');
+        }
     }
 
     public function logout()

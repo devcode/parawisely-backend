@@ -13,7 +13,7 @@ class CreateTravelPlaceTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_travel_place', function (Blueprint $table) {
+        Schema::create('tb_place', function (Blueprint $table) {
             $table->id();
             $table->integer('type_id');
             $table->integer('creator_id');
@@ -21,8 +21,6 @@ class CreateTravelPlaceTable extends Migration
             $table->string('address', 999);
             $table->integer('provinsi_id', 25);
             $table->integer('kabupaten_id', 25);
-            $table->integer('kecamatan_id', 25);
-            $table->integer('kelurahan_id', 25);
             $table->string('latitude', 999);
             $table->string('longitude', 999);
             $table->string('description', 999);

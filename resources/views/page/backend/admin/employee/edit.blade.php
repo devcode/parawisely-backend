@@ -9,7 +9,7 @@
                     {{ csrf_field() }}
                     <div class="modal-body">
                         <div class="form-group">
-                            <label for="exampleFormControlInput1">Name</label>
+                            <label for="exampleFormControlInput1">Nama</label>
                             <input type="text" class="form-control" name="name" value="{{ $id->name }}">
                         </div>
                         <div class="form-group">

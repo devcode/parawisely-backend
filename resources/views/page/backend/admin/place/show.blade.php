@@ -7,35 +7,35 @@
 <div class="row justify-content-center">
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">{{ $title }} {{ $id->name_place }}</div>
+            <div class="card-header">{{ $id->name_place }}</div>
             <div class="card-body">
                 <table class="table table-sm">
                     <tbody>
-                        <tr><td>Place Name</td><td>{{ $id->name_place }}</td></tr>
-                        <tr><td>Place Address</td><td>{{ $id->address }}</td></tr>
+                        <tr><td>Nama Tempat</td><td>{{ $id->name_place }}</td></tr>
+                        <tr><td>Alamat</td><td>{{ $id->address }}</td></tr>
                         <tr><td>Latitude</td><td>{{ $id->latitude }}</td></tr>
                         <tr><td>Longitude</td><td>{{ $id->longitude }}</td></tr>
                     </tbody>
                 </table>
             </div>
             <div class="card-footer">
-                <a href="{{ url('/place') }}" class="btn btn-danger">Back</a>
+                <a href="{{ url('/place') }}" class="btn btn-danger"><i class="fas fa-backward"></i> Kembali</a>
                 <a href="{{ url('/editPlace/'.$id->id) }}" class="btn btn-warning text-white"><i class="fas fa-edit"></i> edit </a>
             </div>
         </div>
         <div class="card mt-4">
-            <div class="card-header">Place Information</div>
+            <div class="card-header">Informasi Tempat</div>
             <div class="card-body">
                 <img src="{{ asset('backend/uploads/placeImage/'.$id->image) }}" width="100%" height="200" alt="">
                 <div class="description mt-3">
-                    <p>{{ $id->description }}</p>
+                    <p class="text-dark">{{ $id->description }}</p>
                 </div>
             </div>
         </div>
     </div>
     <div class="col-md-6">
         <div class="card">
-            <div class="card-header">Location</div>
+            <div class="card-header">Lokasi</div>
             <div class="card-body" id="mapid"></div>
         </div>
     </div>

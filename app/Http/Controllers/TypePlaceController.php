@@ -19,10 +19,10 @@ class TypePlaceController extends Controller
     {
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "TypePlace";
+        $title = "Tipe Tempat";
         //
         $dataType = TypePlace::all();
-        return view('page.backend.typePlace.index', compact('title', 'dataType', 'dataAuth'));
+        return view('page.backend.admin.typePlace.index', compact('title', 'dataType', 'dataAuth'));
     }
 
     /**
@@ -52,7 +52,7 @@ class TypePlaceController extends Controller
 
         if ($image != null) {
             $image_name = $image->getClientOriginalName();
-            $image_full_name = $image_name;
+            $image_full_name = time() . "-" . $image_name;
             $upload_path = 'backend/uploads/icon';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
@@ -86,9 +86,9 @@ class TypePlaceController extends Controller
     {
         $id_user = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id_user);
-        $title = "Carousel";
+        $title = "Tipe Tempat";
         //
-        return view('page.backend.typePlace.edit', compact('title', 'dataAuth', 'id'));
+        return view('page.backend.admin.typePlace.edit', compact('title', 'dataAuth', 'id'));
     }
 
     /**
@@ -113,7 +113,7 @@ class TypePlaceController extends Controller
                 unlink($image_path);
             }
             $image_name = $image->getClientOriginalName();
-            $image_full_name = $image_name;
+            $image_full_name = time() . "-" . $image_name;
             $upload_path = 'backend/uploads/icon';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;

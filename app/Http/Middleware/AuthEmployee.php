@@ -21,6 +21,7 @@ class AuthEmployee
         if ($mySession == "") {
             return redirect()->route('default');
         }
+
         return $next($request);
     }
 }

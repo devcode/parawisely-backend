@@ -7,7 +7,7 @@
             <h3>{{ $title }}</h3>
         </div>
         <div class="col-md-6">
-            <a href="{{ url('/addPlace') }}" class="btn btn-primary float-right" >Add {{ $title }}</a>
+            <a href="{{ url('/addPlace') }}" class="btn btn-primary float-right" >Tambah {{ $title }}</a>
         </div>
     </div>
 </div>
@@ -15,10 +15,10 @@
         <table class="dataTable">
             <thead>
                 <tr>
-                    <th>Type</th>
-                    <th>Uploads With</th>
-                    <th>Name Place</th>
-                    <th>Address</th>
+                    <th>Tipe</th>
+                    <th>Nama Tempat</th>
+                    <th>Alamat</th>
+                    <th>Aktif</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -26,9 +26,13 @@
                 @foreach ($dataPlace as $item)
                 <tr>
                     <td>{{ $item->type->type_name }}</td>
-                    <td>{{ $item->employee->name }}</td>
                     <td>{{ $item->name_place }}</td>
                     <td>{{ $item->address }}</td>
+                    <td>@if ($item->is_active != null)
+                        Aktif
+                        @else
+                        Tidak Aktif
+                    @endif</td>
                     <td>
                         <a href="{{ url('/deletePlace/'.$item->id) }}" class="btn btn-danger btn-sm btn_hapus"><i class="fas fa-trash-alt"></i></a>
                         <a href="{{ url('/editPlace/'.$item->id) }}" class="btn btn-warning btn-sm text-white"><i class="fas fa-edit"></i></a>

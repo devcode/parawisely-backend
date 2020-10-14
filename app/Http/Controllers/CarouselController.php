@@ -22,7 +22,7 @@ class CarouselController extends Controller
         $title = "Carousel";
         //
         $dataCarousel = Carousel::all();
-        return view('page.backend.carousel.index', compact('title', 'dataCarousel', 'dataAuth'));
+        return view('page.backend.admin.carousel.index', compact('title', 'dataCarousel', 'dataAuth'));
     }
 
     /**
@@ -52,7 +52,7 @@ class CarouselController extends Controller
 
         if ($image != null) {
             $image_name = $image->getClientOriginalName();
-            $image_full_name = $image_name;
+            $image_full_name = time() . "-" . $image_name;
             $upload_path = 'backend/uploads/carousel';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
@@ -88,7 +88,7 @@ class CarouselController extends Controller
         $dataAuth = Employee::find($id_user);
         $title = "Carousel";
         //
-        return view('page.backend.carousel.edit', compact('title', 'dataAuth', 'id'));
+        return view('page.backend.admin.carousel.edit', compact('title', 'dataAuth', 'id'));
     }
 
     /**
@@ -113,7 +113,7 @@ class CarouselController extends Controller
                 unlink($image_path);
             }
             $image_name = $image->getClientOriginalName();
-            $image_full_name = $image_name;
+            $image_full_name = time() . "-" . $image_name;
             $upload_path = 'backend/uploads/carousel';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;

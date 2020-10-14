@@ -7,7 +7,7 @@
             <h3>{{ $title }}</h3>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">Add {{ $title }}</button>
+            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">Tambah {{ $title }}</button>
         </div>
     </div>
 </div>
@@ -16,7 +16,7 @@
             <thead>
                 <tr>
                     <th>Image</th>
-                    <th>Name</th>
+                    <th>Nama</th>
                     <th>Email</th>
                     <th>Level</th>
                     <th>Action</th>
@@ -54,7 +54,7 @@
             {{ csrf_field() }}
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Name</label>
+                    <label for="exampleFormControlInput1">Nama</label>
                     <input type="text" class="form-control" name="name" placeholder="name" autocomplete="off">
                 </div>
                 <div class="form-group">
@@ -68,7 +68,7 @@
                 <div class="form-group">
                     <label for="exampleFormControlSelect1">Level</label>
                     <select class="form-control" name="level">
-                      <option disabled selected>--SELECT LEVEL--</option>
+                      <option disabled selected>--PILIH LEVEL--</option>
                       @foreach ($dataLevel as $row)
                         <option value="{{ $row->id }}">{{ $row->name_level }}</option>
                       @endforeach
@@ -83,7 +83,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </div>
         </form>

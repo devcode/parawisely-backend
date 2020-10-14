@@ -45,32 +45,45 @@
                 <h4>Parawisely</h4>
             </div>
 
-            <ul class="list-unstyled components">
-                <li class="{{ $title == "Dashboard" ? "active" : "" }}">
-                    <a href="{{ url('/dashboard') }}"><i class="fas fa-tachometer-alt"></i>
-                        <span class="side-link">Dashboard</span></a>
-                </li>
-                <li class="{{ $title == "Employee" ? "active" : "" }}">
-                    <a href="{{ url('/employee') }}"><i class="fas fa-user-tie"></i>
-                        <span class="side-link">Employee</span></a>
-                </li>
-                <li class="{{ $title == "Level" ? "active" : "" }}">
-                    <a href="{{ url('/level') }}"><i class="fas fa-user-lock"></i>
-                        <span class="side-link">Level Employee</span></a>
-                </li>
-                <li class="{{ $title == "Carousel" ? "active" : "" }}">
-                    <a href="{{ url('/carousel') }}"><i class="fas fa-credit-card"></i>
-                        <span class="side-link">Carousel</span></a>
-                </li>
-                <li class="{{ $title == "TypePlace" ? "active" : "" }}">
-                    <a href="{{ url('/type') }}"><i class="fas fa-align-justify"></i>
-                        <span class="side-link">Type Place</span></a>
-                </li>
-                <li class="{{ $title == "Place" ? "active" : "" }}">
-                    <a href="{{ url('/place') }}"><i class="fas fa-map-marker-alt"></i>
-                        <span class="side-link">Place</span></a>
-                </li>
-            </ul>
+            @if ($dataAuth->level_id == 1)
+                <ul class="list-unstyled components">
+                    <li class="{{ $title == "Dashboard" ? "active" : "" }}">
+                        <a href="{{ url('/dashboard') }}"><i class="fas fa-tachometer-alt"></i>
+                            <span class="side-link">Dashboard</span></a>
+                    </li>
+                    <li class="{{ $title == "Pegawai" ? "active" : "" }}">
+                        <a href="{{ url('/employee') }}"><i class="fas fa-user-tie"></i>
+                            <span class="side-link">Pegawai</span></a>
+                    </li>
+                    <li class="{{ $title == "Level" ? "active" : "" }}">
+                        <a href="{{ url('/level') }}"><i class="fas fa-user-lock"></i>
+                            <span class="side-link">Level Pegawai</span></a>
+                    </li>
+                    <li class="{{ $title == "Carousel" ? "active" : "" }}">
+                        <a href="{{ url('/carousel') }}"><i class="fas fa-credit-card"></i>
+                            <span class="side-link">Carousel</span></a>
+                    </li>
+                    <li class="{{ $title == "Tipe Tempat" ? "active" : "" }}">
+                        <a href="{{ url('/type') }}"><i class="fas fa-align-justify"></i>
+                            <span class="side-link">Tipe Tempat</span></a>
+                    </li>
+                    <li class="{{ $title == "Tempat Wisata" ? "active" : "" }}">
+                        <a href="{{ url('/place') }}"><i class="fas fa-map-marker-alt"></i>
+                            <span class="side-link">Tempat Wisata</span></a>
+                    </li>
+                </ul>
+            @else
+                <ul class="list-unstyled components">
+                    <li class="{{ $title == "Tambah Tempat" ? "active" : "" }}">
+                        <a href="{{ url('/add-place') }}"><i class="fas fa-tachometer-alt"></i>
+                            <span class="side-link">Tambah Tempat</span></a>
+                    </li>
+                    <li class="{{ $title == "Data Tempat" ? "active" : "" }}">
+                        <a href="{{ url('/data-place') }}"><i class="fas fa-map-marker-alt"></i>
+                            <span class="side-link">Data Tempat</span></a>
+                    </li>
+                </ul>
+            @endif
 
             <!-- <ul class="list-unstyled CTAs">
                 <li>
@@ -107,6 +120,10 @@
                                     <a class="dropdown-item" href="{{ url('/showProfile') }}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/changePassword/'.$dataAuth->id) }}">
+                                        <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Ganti Password
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

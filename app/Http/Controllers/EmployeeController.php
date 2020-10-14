@@ -19,7 +19,7 @@ class EmployeeController extends Controller
     {
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "Employee";
+        $title = "Pegawai";
         //
         $dataEmployee = Employee::with('level')->get();
         $dataLevel = Level::all();
@@ -57,7 +57,7 @@ class EmployeeController extends Controller
         if ($image != null) {
             $image_name = $image->getClientOriginalName();
             // $ext = strtolower($image->getClientOriginalExtension());
-            $image_full_name = $image_name;
+            $image_full_name = time() . "-" . $image_name;
             $upload_path = 'backend/uploads/';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
@@ -101,7 +101,7 @@ class EmployeeController extends Controller
     {
         $id_user = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id_user);
-        $title = "Employee";
+        $title = "Pegawai";
         //
         $dataLevel = Level::all();
         return view('page.backend.employee.edit', compact('title', 'dataLevel', 'dataAuth', 'id'));
@@ -132,7 +132,7 @@ class EmployeeController extends Controller
                 unlink($image_path);
             }
             $image_name = $image->getClientOriginalName();
-            $image_full_name = $image_name;
+            $image_full_name = time() . "-" . $image_name;
             $upload_path = 'backend/uploads/';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
