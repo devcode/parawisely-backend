@@ -75,16 +75,16 @@
     <div id="dropDownSelect1"></div>
 
     <!--===============================================================================================-->
-    <script src="{{ asset('backend/auth/vendor/jquery/jquery-3.2.1.min.js') }}"></script>
+    <script src="/backend/auth/vendor/jquery/jquery-3.2.1.min.js"></script>
     <!--===============================================================================================-->
-    <script src="{{ asset('backend/auth/vendor/animsition/js/animsition.min.js') }}"></script>
+    <script src="/backend/auth/vendor/animsition/js/animsition.min.js"></script>
     <!--===============================================================================================-->
-    <script src="{{ asset('backend/auth/vendor/bootstrap/js/popper.js') }}"></script>
-    <script src="{{ asset('backend/auth/vendor/bootstrap/js/bootstrap.min.js') }}"></script>
+    <script src="/backend/auth/vendor/bootstrap/js/popper.js"></script>
+    <script src="/backend/auth/vendor/bootstrap/js/bootstrap.min.js"></script>
     <!--===============================================================================================-->
-    <script src="{{ asset('backend/auth/vendor/select2/select2.min.js') }}"></script>
+    <script src="/backend/auth/vendor/select2/select2.min.js"></script>
     <!--===============================================================================================-->
-    <script src="{{ asset('backend/auth/js/main.js') }}"></script>
+    <script src="/backend/auth/js/main.js"></script>
 
 </body>
 
