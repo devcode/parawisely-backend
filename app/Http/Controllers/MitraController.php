@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
 use App\Models\TypePlace;
+use App\Models\TravelPlace;
 
 class MitraController extends Controller
 {
@@ -22,6 +23,17 @@ class MitraController extends Controller
         //
         $dataType = TypePlace::all();
         return view('page.backend.mitra.index', compact('dataAuth', 'title', 'dataType'));
+    }
+
+    public function show_data()
+    {
+        $id = Auth::guard('employee')->id();
+        $dataAuth = Employee::find($id);
+        $title = "Data Tempat";
+        //
+        $dataType = TypePlace::all();
+        $dataPlace = TravelPlace::with(['type', 'employee'])->where('creator_id', $dataAuth->id)->get();
+        return view('page.backend.mitra.data', compact('dataAuth', 'title', 'dataType', 'dataPlace'));
     }
 
     /**

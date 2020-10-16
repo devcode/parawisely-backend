@@ -19,9 +19,5 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/sample', function () {
-    return "text";
-});
-
-Route::get('/sample2', [ApiController::class, 'index'])->name('sample');
 Route::get('/get-data-place', [ApiController::class, 'dataPlace'])->name('dataPlace');
+Route::get('/get-data-type', [ApiController::class, 'dataType'])->name('dataType');

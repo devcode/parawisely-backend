@@ -18,3 +18,17 @@
 [1006/200904.431:ERROR:exception_snapshot_win.cc(100)] thread ID 4036 not found in process
 [1014/001632.412:ERROR:process_reader_win.cc(127)] NtOpenThread: {Access Denied} A process has requested access to an object, but has not been granted those access rights. (0xc0000022)
 [1014/001632.644:ERROR:exception_snapshot_win.cc(100)] thread ID 1996 not found in process
+[1016/131205.683:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\0864e069-3e93-447d-af59-0a7fd3e6bb68: The system cannot find the path specified. (0x3)
+[1016/131205.707:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\25ee9d04-9fc2-4d33-8c2b-e02932c13b49: The system cannot find the path specified. (0x3)
+[1016/131205.729:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\314b3f88-5355-4572-9c56-b2148add0c56: The system cannot find the path specified. (0x3)
+[1016/131205.731:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\34eaf249-a2ee-424b-9b35-60e6d4e5e6c9: The system cannot find the path specified. (0x3)
+[1016/131205.731:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\3f959aaa-b4bb-4c94-bed0-d068da9bd01f: The system cannot find the path specified. (0x3)
+[1016/131205.756:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\4ba25817-a4de-4f85-9f37-a1baf2e177cc: The system cannot find the path specified. (0x3)
+[1016/131205.757:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\708250c1-fd31-41df-89ca-9eea5662a660: The system cannot find the path specified. (0x3)
+[1016/131205.764:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\86961f7f-6d18-4a51-95c8-32f288e523a4: The system cannot find the path specified. (0x3)
+[1016/131205.789:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\8dccaa54-00c7-4cfd-8311-975871d2be1d: The system cannot find the path specified. (0x3)
+[1016/131205.813:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\91668739-beb9-4484-abfb-03b2442c29e4: The system cannot find the path specified. (0x3)
+[1016/131205.844:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\d3226eaf-8600-4f44-8c32-7fcd963c8491: The system cannot find the path specified. (0x3)
+[1016/131205.844:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\dc3073e0-8fdf-490c-91ac-ca647c9fd5bc: The system cannot find the path specified. (0x3)
+[1016/131205.844:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\f5e5b271-6c27-42a7-b4ae-93e9b74b4765: The system cannot find the path specified. (0x3)
+[1016/131205.844:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)

@@ -19,4 +19,9 @@ class Employee extends Model implements Authenticatable
     {
         return $this->hasOne(Level::class, 'id', 'level_id');
     }
+
+    public function setPasswordAttribute($password)
+    {
+        $this->attributes['password'] = bcrypt($password);
+    }
 }

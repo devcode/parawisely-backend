@@ -37,14 +37,18 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="name_palce" class="control-label">Nama Tempat</label>
-                                    <input id="name_place" type="text" class="form-control{{ $errors->has('name_place') ? ' is-invalid' : '' }}" name="name_place" value="{{ old('name_place') }}" required autocomplete="off">
-                                    {!! $errors->first('name_place', '<span class="invalid-feedback" role="alert">:message</span>') !!}
+                                    <input id="name_place" type="text" class="form-control @error('name_place') is-invalid @enderror" name="name_place" value="{{ old('name_place') }}"  autocomplete="off">
+                                    @error('name_place')
+                                        <div class="invalid-feedback pl-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="address" class="control-label">Tipe Tempat</label>
-                                    <select name="type_place" id="type" class="form-control">
+                                    <select name="type_place" id="type" class="form-control @error('type_place') is-invalid @enderror" >
                                         <option disabled selected>--SELECT TYPE--</option>
                                         @foreach ($dataType as $row)
                                             <option value="{{ $row->id }}">{{ $row->type_name }}</option>
@@ -58,17 +62,27 @@
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="provinsi" class="control-label">Provinsi</label>
-                                    <select class="form-control" name="propinsi" id="propinsi">
+                                    <select class="custom-select @error('propinsi') is-invalid @enderror" name="propinsi" id="propinsi">
                                         <option value="" selected>--Select Provinsi--</option>
                                     </select>
+                                    @error('propinsi')
+                                        <div class="invalid-feedback pl-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="kabupaten" class="control-label">Kab / Kota</label>
-                                    <select class="form-control" name="kabupaten" id="kabupaten">
+                                    <select class="custom-select @error('kabupaten') is-invalid @enderror" name="kabupaten" id="kabupaten">
                                         <option value="" selected>--Select Kabupaten--</option>
                                     </select>
+                                    @error('kabupaten')
+                                        <div class="invalid-feedback pl-2">
+                                            {{ $message }}
+                                        </div>
+                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -78,19 +92,22 @@
                             {!! $errors->first('description', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                         </div>
                             <div class="form-group">
-                                <input id="latitude" type="text" hidden class="form-control{{ $errors->has('latitude') ? ' is-invalid' : '' }}" name="latitude" value="{{ old('latitude', request('latitude')) }}" required>
-                                {!! $errors->first('latitude', '<span class="invalid-feedback" role="alert">:message</span>') !!}
+                                <input id="latitude" type="text" hidden class="form-control{{ $errors->has('latitude') ? ' is-invalid' : '' }}" name="latitude" value="{{ old('latitude', request('latitude')) }}" >
                             </div>
                             <div class="form-group">
-                                <input id="longitude" type="text" hidden class="form-control{{ $errors->has('longitude') ? ' is-invalid' : '' }}" name="longitude" value="{{ old('longitude', request('longitude')) }}" required>
-                                {!! $errors->first('longitude', '<span class="invalid-feedback" role="alert">:message</span>') !!}
+                                <input id="longitude" type="text" hidden class="form-control{{ $errors->has('longitude') ? ' is-invalid' : '' }}" name="longitude" value="{{ old('longitude', request('longitude')) }}" >
                             </div>
                         <div class="form-group">
                             <label for="image">Image</label>
                             <div class="custom-file">
-                                <input type="file" class="custom-file-input" name="image" id="image">
+                                <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
-                              </div>
+                                @error('image')
+                                    <div class="invalid-feedback pl-2">
+                                        {{ $message }}
+                                    </div>
+                                @enderror
+                            </div>
                         </div>
                         <div class="footer">
                             <button type="submit" class="btn btn-success">Simpan</button>

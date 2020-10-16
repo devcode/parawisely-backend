@@ -62,7 +62,7 @@ class PlaceController extends Controller
             'type_place' => 'required',
             'latitude' => 'required',
             'longitude' => 'required',
-            'image' => 'image|mimes:jpg,jpeg,png,gif'
+            'image' => 'required|image|mimes:jpg,jpeg,png,gif'
         ]);
 
         $image = $request->file('image');
@@ -88,9 +88,9 @@ class PlaceController extends Controller
         }
 
         if (Auth::guard('employee')->user()->level_id == 1) {
-            return redirect()->route('place');
+            return redirect()->route('place')->with('success', 'Data berhasil di Tambah');
         } else {
-            return redirect()->route('mitra');
+            return redirect()->route('mitra')->with('success', 'Data berhasil di Tambah');
         }
     }
 
@@ -184,7 +184,11 @@ class PlaceController extends Controller
                 'description' => $request->description,
             ]);
         }
-        return redirect()->route('place');
+        if (Auth::guard('employee')->user()->level_id == 1) {
+            return redirect()->route('place');
+        } else {
+            return redirect()->route('mitra');
+        }
     }
 
     /**
@@ -201,6 +205,20 @@ class PlaceController extends Controller
             unlink($image_path);
         }
         TravelPlace::destroy($id);
-        return redirect()->route('place');
+        if (Auth::guard('employee')->user()->level_id == 1) {
+            return redirect()->route('place');
+        } else {
+            return redirect()->route('mitra');
+        }
+    }
+
+    public function change(Request $request)
+    {
+        $place_id = $request->tempat_id;
+        $place = TravelPlace::find($place_id);
+        $place->is_active = $request->status;
+        $place->save();
+
+        return response()->json(['success' => 'Status change successfully.']);
     }
 }

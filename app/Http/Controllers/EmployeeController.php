@@ -23,7 +23,7 @@ class EmployeeController extends Controller
         //
         $dataEmployee = Employee::with('level')->get();
         $dataLevel = Level::all();
-        return view('page.backend.employee.index', compact('title', 'dataEmployee', 'dataLevel', 'dataAuth'));
+        return view('page.backend.admin.employee.index', compact('title', 'dataEmployee', 'dataLevel', 'dataAuth'));
     }
 
     /**
@@ -64,7 +64,7 @@ class EmployeeController extends Controller
             Employee::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => bcrypt($request->password),
+                'password' => $request->password,
                 'level_id' => $request->level,
                 'image' => $image_url
             ]);
@@ -72,12 +72,12 @@ class EmployeeController extends Controller
             Employee::create([
                 'name' => $request->name,
                 'email' => $request->email,
-                'password' => bcrypt($request->password),
+                'password' => $request->password,
                 'level_id' => $request->level,
                 'image' => "default.png"
             ]);
         }
-        return redirect()->route('employee');
+        return redirect()->back()->with('success', 'Data berhasil disimpan');
     }
 
     /**
@@ -104,7 +104,7 @@ class EmployeeController extends Controller
         $title = "Pegawai";
         //
         $dataLevel = Level::all();
-        return view('page.backend.employee.edit', compact('title', 'dataLevel', 'dataAuth', 'id'));
+        return view('page.backend.admin.employee.edit', compact('title', 'dataLevel', 'dataAuth', 'id'));
     }
 
     /**

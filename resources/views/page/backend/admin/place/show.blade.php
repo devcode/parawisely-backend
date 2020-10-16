@@ -19,7 +19,7 @@
                 </table>
             </div>
             <div class="card-footer">
-                <a href="{{ url('/place') }}" class="btn btn-danger"><i class="fas fa-backward"></i> Kembali</a>
+                <a href="{{ $dataAuth->creator_id == 1 ? url('/place') : url('/data-place') }}" class="btn btn-danger"><i class="fas fa-backward"></i> Kembali</a>
                 <a href="{{ url('/editPlace/'.$id->id) }}" class="btn btn-warning text-white"><i class="fas fa-edit"></i> edit </a>
             </div>
         </div>
