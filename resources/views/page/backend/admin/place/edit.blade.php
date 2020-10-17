@@ -74,7 +74,7 @@
                     </div>
                     <div class="card-footer">
                         <button type="submit" class="btn btn-success">Update</button>
-                        <a href="{{ url('/place') }}" class="btn btn-danger">Kembali</a>
+                        <a href="{{ $dataAuth->creator_id == 1 ? url('/place') : url('/data-place') }}" class="btn btn-danger">Kembali</a>
                     </div>
             </div>
         </div>

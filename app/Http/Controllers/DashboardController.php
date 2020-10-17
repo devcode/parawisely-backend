@@ -16,7 +16,7 @@ class DashboardController extends Controller
         $dataAuth = Employee::find($id);
         $title = "Dashboard";
         //
-        $dataEmployee = Employee::count();
+        $dataEmployee = Employee::get()->where('level_id', 2)->count();
         $dataCarousel = Carousel::count();
         $dataPlace = TravelPlace::count();
         return view('page.backend.admin.dashboard.index', compact('title', 'dataAuth', 'dataEmployee', 'dataCarousel', 'dataPlace'));

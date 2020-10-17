@@ -11,7 +11,7 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Employee Data</div>
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">Data Mitra</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $dataEmployee }}</div>
                     </div>
                     <div class="col-auto">
@@ -28,7 +28,7 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Carousel Image</div>
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">Gambar Carousel</div>
                         <div class="h5 mb-0 font-weight-bold text-gray-800">{{ $dataCarousel }}</div>
                     </div>
                     <div class="col-auto">
@@ -45,7 +45,7 @@
             <div class="card-body">
                 <div class="row no-gutters align-items-center">
                     <div class="col mr-2">
-                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Place</div>
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">Data Tempat</div>
                         <div class="row no-gutters align-items-center">
                             <div class="col-auto">
                                 <div class="h5 mb-0 mr-3 font-weight-bold text-gray-800">{{ $dataPlace }}</div>

@@ -27,6 +27,8 @@ use App\Http\Controllers\MitraController;
 // });
 
 Route::get('/', [AuthController::class, 'index'])->name('default');
+Route::get('/registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
+Route::post('procesRegister', [AuthController::class, 'procesRegister'])->name('procesRegister');
 Route::get('/map', [MapController::class, 'index'])->name('map');
 Route::get('/mapData', [MapController::class, 'dataMap'])->name('mapData');
 Route::post('/procesLogin', [AuthController::class, 'procesLogin'])->name('proces');
@@ -43,6 +45,7 @@ Route::middleware(['AuthEmployee'])->group(function () {
 
     //Mitra Site
     Route::get('/add-place', [MitraController::class, 'index'])->name('mitra');
+    Route::get('/data-place', [MitraController::class, 'show_data'])->name('dataPlace');
 });
 
 // Route Employee
@@ -76,9 +79,8 @@ Route::get('/showPlace/{id}', [PlaceController::class, 'show'])->name('showPlace
 Route::get('/editPlace/{id}', [PlaceController::class, 'edit'])->name('editPlace');
 Route::post('/updatePlace/{id}', [PlaceController::class, 'update'])->name('updatePlace');
 Route::get('/deletePlace/{id}', [PlaceController::class, 'destroy'])->name('deletePlace');
+Route::get('/changeActive', [PlaceController::class, 'change'])->name('changeActive');
 
 // Route Profile
 Route::get('/showProfile', [ProfileController::class, 'show'])->name('profile');
 Route::post('/updateProfile/{id}', [ProfileController::class, 'update'])->name('updateProfile');
-Route::get('/changePassword/{id}', [ProfileController::class, 'changePassword'])->name('changePassword');
-Route::post('/procesChange/{id}', [ProfileController::class, 'procesChange'])->name('procesChange');

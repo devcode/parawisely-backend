@@ -11,7 +11,7 @@ class TravelPlace extends Model
 {
     use HasFactory;
     protected $table = 'tb_place';
-    protected $fillable = ['type_id', 'creator_id', 'name_place', 'address', 'provinsi_id', 'kabupaten_id', 'latitude', 'longitude', 'description', 'image'];
+    protected $fillable = ['type_id', 'is_active', 'creator_id', 'name_place', 'address', 'provinsi_id', 'kabupaten_id', 'latitude', 'longitude', 'description', 'image'];
 
     public function type()
     {

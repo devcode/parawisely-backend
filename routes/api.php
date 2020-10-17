@@ -19,11 +19,10 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/sample', function () {
-    return "text";
-});
-
-Route::get('/sample2', [ApiController::class, 'index'])->name('sample');
 Route::get('/get-data-place', [ApiController::class, 'dataPlace'])->name('dataPlace');
+<<<<<<< HEAD
 
 Route::get('/travel-place', [ApiController::class, 'getTravelPlace'])->name('travel-place');
+=======
+Route::get('/get-data-type', [ApiController::class, 'dataType'])->name('dataType');
+>>>>>>> 003be4129b15852855b393e036cb6c9891ff368b
