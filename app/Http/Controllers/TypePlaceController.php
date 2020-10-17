@@ -62,7 +62,7 @@ class TypePlaceController extends Controller
             ]);
         }
 
-        return redirect()->route('type');
+        return redirect()->route('type')->with('success', 'ditambah');
     }
 
     /**
@@ -126,7 +126,7 @@ class TypePlaceController extends Controller
                 'type_name' => $request->type_name,
             ]);
         }
-        return redirect()->route('type');
+        return redirect()->route('type')->with('success', 'diupdate');
     }
 
     /**
@@ -143,6 +143,6 @@ class TypePlaceController extends Controller
             unlink($image_path);
         }
         TypePlace::destroy($id);
-        return redirect()->route('type');
+        return redirect()->route('type')->with('success', 'dihapus');
     }
 }

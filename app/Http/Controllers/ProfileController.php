@@ -6,7 +6,6 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Crypt;
 
 class ProfileController extends Controller
 {
@@ -49,26 +48,11 @@ class ProfileController extends Controller
                 'email' => $request->email,
             ]);
         }
-        return redirect()->route('dashboard');
-    }
 
-    public function changePassword(Employee $employee)
-    {
-        $title = "Change Password";
-        $id = Auth::guard('employee')->id();
-        $dataAuth = Employee::with('level')->find($id);
-        //
-        return view('page.backend.admin.profile.changePassword', compact('employee', 'dataAuth', 'title'));
-    }
-
-    public function procesChange(Request $request, Employee $id)
-    {
-        $password_now = $request->now_password;
-        $old_password = $request->old_password;
-        $retype_old_password = $request->retype_old_password;
-
-        echo "passsword old () =>  " . $id->password;
-        echo "<br>";
-        echo "passsword new () =>  " . bcrypt($old_password);
+        if (Auth::guard('employee')->user()->level_id == 1) {
+            return redirect()->route('dashboard');
+        } else {
+            return redirect()->route('mitra');
+        }
     }
 }

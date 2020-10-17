@@ -62,7 +62,7 @@ class CarouselController extends Controller
             ]);
         }
 
-        return redirect()->route('carousel');
+        return redirect()->route('carousel')->with('success', 'disimpan');
     }
 
     /**
@@ -126,7 +126,7 @@ class CarouselController extends Controller
                 'description' => $request->description,
             ]);
         }
-        return redirect()->route('carousel');
+        return redirect()->route('carousel')->with('success', 'diupdate');
     }
 
     /**
@@ -143,6 +143,6 @@ class CarouselController extends Controller
             unlink($image_path);
         }
         Carousel::destroy($id);
-        return redirect()->route('carousel');
+        return redirect()->route('carousel')->with('success', 'dihapus');
     }
 }

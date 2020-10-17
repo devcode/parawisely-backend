@@ -135,6 +135,10 @@
                 </div>
             </nav>
 
+            @if (\Session::has('success'))
+                <div class="flash-data" data-flashdata="{!! \Session::get('success') !!}"></div>
+            @endif
+
             @yield('content')
 
         </div>

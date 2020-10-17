@@ -51,7 +51,7 @@ class LevelController extends Controller
             'name_level' => $request->name_level,
         ]);
 
-        return redirect()->route('level');
+        return redirect()->route('level')->with('success', 'disimpan');
     }
 
     /**
@@ -98,7 +98,7 @@ class LevelController extends Controller
             'name_level' => $request->name_level,
         ]);
 
-        return redirect()->route('level');
+        return redirect()->route('level')->with('success', 'diupdate');
     }
 
     /**
@@ -110,6 +110,6 @@ class LevelController extends Controller
     public function destroy($id)
     {
         Level::destroy($id);
-        return redirect()->route('level');
+        return redirect()->route('level')->with('success', 'dihapus');
     }
 }

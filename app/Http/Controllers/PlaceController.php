@@ -88,9 +88,9 @@ class PlaceController extends Controller
         }
 
         if (Auth::guard('employee')->user()->level_id == 1) {
-            return redirect()->route('place')->with('success', 'Data berhasil di Tambah');
+            return redirect()->route('place')->with('success', 'disimpan');
         } else {
-            return redirect()->route('mitra')->with('success', 'Data berhasil di Tambah');
+            return redirect()->route('mitra')->with('success', 'disimpan');
         }
     }
 
@@ -185,9 +185,9 @@ class PlaceController extends Controller
             ]);
         }
         if (Auth::guard('employee')->user()->level_id == 1) {
-            return redirect()->route('place');
+            return redirect()->route('place')->with('success', 'diupdate');
         } else {
-            return redirect()->route('mitra');
+            return redirect()->route('mitra')->with('success', 'diupdate');
         }
     }
 
@@ -206,9 +206,9 @@ class PlaceController extends Controller
         }
         TravelPlace::destroy($id);
         if (Auth::guard('employee')->user()->level_id == 1) {
-            return redirect()->route('place');
+            return redirect()->route('place')->with('success', 'dihapus');
         } else {
-            return redirect()->route('mitra');
+            return redirect()->route('mitra')->with('success', 'dihapus');
         }
     }
 

@@ -77,7 +77,7 @@ class EmployeeController extends Controller
                 'image' => "default.png"
             ]);
         }
-        return redirect()->back()->with('success', 'Data berhasil disimpan');
+        return redirect()->route('employee')->with('success', 'disimpan');
     }
 
     /**
@@ -149,7 +149,7 @@ class EmployeeController extends Controller
                 'level_id' => $request->level,
             ]);
         }
-        return redirect()->route('employee');
+        return redirect()->route('employee')->with('success', 'diupdate');
     }
 
     /**
@@ -166,6 +166,6 @@ class EmployeeController extends Controller
             unlink($image_path);
         }
         Employee::destroy($id);
-        return redirect()->route('employee');
+        return redirect()->route('employee')->with('success', 'dihapus');
     }
 }

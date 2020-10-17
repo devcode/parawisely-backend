@@ -29,7 +29,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <a href="{{ url('/employee') }}" class="btn btn-secondary">Close</a>
+                        <a href="{{ $dataAuth->level_id == 1 ? url('/employee') : url('/add-place')  }}" class="btn btn-secondary">Kembali</a>
                         <button type="submit" class="btn btn-primary">Submit</button>
                     </div>
                 </form>
