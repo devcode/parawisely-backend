@@ -25,3 +25,5 @@ Route::get('/sample', function () {
 
 Route::get('/sample2', [ApiController::class, 'index'])->name('sample');
 Route::get('/get-data-place', [ApiController::class, 'dataPlace'])->name('dataPlace');
+
+Route::get('/travel-place', [ApiController::class, 'getTravelPlace'])->name('travel-place');
