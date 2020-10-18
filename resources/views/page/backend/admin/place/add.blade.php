@@ -15,7 +15,7 @@
     </div>
 </div>
 <div class="form-tambah">
-    <form action="{{ url('/addPlace') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+    <form action="/addPlace" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
         {{ csrf_field() }}
         <div class="row justify-content-center">
             <div class="col-md-5">
