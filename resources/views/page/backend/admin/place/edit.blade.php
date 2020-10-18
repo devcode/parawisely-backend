@@ -38,7 +38,7 @@
                         </div>
                         <div class="form-group">
                             <label for="description" class="control-label">Deskripsi</label>
-                            <textarea id="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" rows="4">{{ old('description',$id->description) }}</textarea>
+                            <textarea id="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" rows="8">{{ old('description',$id->description) }}</textarea>
                             {!! $errors->first('description', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                         </div>
                         <div class="form-group">
@@ -57,15 +57,13 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="latitude" class="control-label">Latitude</label>
-                                    <input id="latitude" type="text" class="form-control{{ $errors->has('latitude') ? ' is-invalid' : '' }}" name="latitude" value="{{ old('latitude', $id->latitude) }}" required>
+                                    <input id="latitude" type="text" class="form-control{{ $errors->has('latitude') ? ' is-invalid' : '' }}" name="latitude" value="{{ old('latitude', $id->latitude) }}" required hidden>
                                     {!! $errors->first('latitude', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="longitude" class="control-label">Longitude</label>
-                                    <input id="longitude" type="text" class="form-control{{ $errors->has('longitude') ? ' is-invalid' : '' }}" name="longitude" value="{{ old('longitude', $id->longitude) }}" required>
+                                    <input id="longitude" type="text" class="form-control{{ $errors->has('longitude') ? ' is-invalid' : '' }}" name="longitude" value="{{ old('longitude', $id->longitude) }}" required hidden>
                                     {!! $errors->first('longitude', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                                 </div>
                             </div>
@@ -103,6 +101,17 @@
         L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
             attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
         }).addTo(map);
+
+        var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+        var results = new L.LayerGroup().addTo(map);
+
+        searchControl.on('results', function(data){
+            results.clearLayers();
+            for (var i = data.results.length - 1; i >= 0; i--) {
+            results.addLayer(L.marker(data.results[i].latlng));
+            }
+        });
 
         var marker = L.marker(mapCenter).addTo(map);
         function updateMarker(lat, lng) {
@@ -143,6 +152,7 @@
           return tmp;
       }();
         $(document).ready(function () {
+            console.log("{{ $id->provinsi }}")
             $.ajax({
                 url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/provinsi',
                 type: 'GET',
@@ -150,10 +160,10 @@
                 success: function (json) {
                     if (json.code == 200) {
                         for (i = 0; i < Object.keys(json.data).length; i++) {
-                            if ({{ $id->provinsi_id }} == json.data[i].id) {
-                                $('#propinsi').append($('<option selected>').text(json.data[i].name).attr('value', json.data[i].id));
+                            if ("{{ $id->provinsi }}" == json.data[i].name) {
+                                $('#propinsi').append($('<option selected>').text(json.data[i].name).attr('value', json.data[i].name).attr('data-prov',json.data[i].id));
                             } else {
-                                $('#propinsi').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                                $('#propinsi').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name).attr('data-prov',json.data[i].id));
                             }
                         }
                     } else {
@@ -161,9 +171,9 @@
                     }
                 }
             });
-            console.log(propinsi)
+            var propinsi ="";
             $("#propinsi").change(function () {
-                var propinsi = $("#propinsi").val();
+                propinsi = $(this).find(':selected').data('prov');
                 $.ajax({
                     url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
                     data: "idpropinsi=" + propinsi,
@@ -174,7 +184,7 @@
                         $("#kabupaten").html('');
                         if (json.code == 200) {
                             for (i = 0; i < Object.keys(json.data).length; i++) {
-                                $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                                $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name));
                             }
                             $('#kecamatan').html($('<option>').text('-- Pilih Kecamatan --').attr('value', '-- Pilih Kecamatan --'));
                             $('#kelurahan').html($('<option>').text('-- Pilih Kelurahan --').attr('value', '-- Pilih Kelurahan --'));
@@ -190,29 +200,28 @@
         });
 
         function getKabupaten(){
-                var propinsi = {{ $id->provinsi_id }};
-                $.ajax({
-                    url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
-                    data: "idpropinsi=" + propinsi,
-                    type: 'GET',
-                    cache: false,
-                    dataType: 'json',
-                    success: function (json) {
-                        $("#kabupaten").html('');
-                        if (json.code == 200) {
-                            for (i = 0; i < Object.keys(json.data).length; i++) {
-                                if ({{ $id->kabupaten_id }} == json.data[i].id) {
-                                    $('#kabupaten').append($('<option selected>').text(json.data[i].name).attr('value', json.data[i].id));
-                                } else {
-                                    $('#propinsi').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
-                                    $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
-                                }
+            $.ajax({
+                url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
+                data: "idpropinsi=" + propinsi,
+                type: 'GET',
+                cache: false,
+                dataType: 'json',
+                success: function (json) {
+                    $("#kabupaten").html('');
+                    if (json.code == 200) {
+                        for (i = 0; i < Object.keys(json.data).length; i++) {
+                            if ("{{ $id->kabupaten }}" == json.data[i].name) {
+                                $('#kabupaten').append($('<option selected>').text(json.data[i].name).attr('value', json.data[i].name));
+                            } else {
+                                $('#propinsi').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name));
+                                $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name));
                             }
-                        } else {
-                            $('#kabupaten').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
                         }
+                    } else {
+                        $('#kabupaten').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
                     }
-                });
-            }
+                }
+            });
+        }
     </script>
 @endsection

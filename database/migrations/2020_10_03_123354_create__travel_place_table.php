@@ -19,8 +19,8 @@ class CreateTravelPlaceTable extends Migration
             $table->integer('creator_id');
             $table->string('name_place');
             $table->string('address');
-            $table->integer('provinsi_id');
-            $table->integer('kabupaten_id');
+            $table->string('provinsi');
+            $table->string('kabupaten');
             $table->string('latitude');
             $table->string('longitude');
             $table->string('description');

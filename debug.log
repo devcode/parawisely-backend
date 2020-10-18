@@ -32,3 +32,5 @@
 [1016/131205.844:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\dc3073e0-8fdf-490c-91ac-ca647c9fd5bc: The system cannot find the path specified. (0x3)
 [1016/131205.844:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\f5e5b271-6c27-42a7-b4ae-93e9b74b4765: The system cannot find the path specified. (0x3)
 [1016/131205.844:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1017/113518.557:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\b4bfd3d7-edf2-425b-9de9-f6e12c465a2d: The system cannot find the path specified. (0x3)
+[1017/113518.584:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
