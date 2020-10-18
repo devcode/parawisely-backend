@@ -9,7 +9,7 @@
     <!-- Bootstrap CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css"
         integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="{{ asset('backend/auth/css/style_registrasi.css') }}">
+    <link rel="stylesheet" type="text/css" href="backend/auth/css/style_registrasi.css">
 
     <title>Login</title>
 </head>
@@ -27,6 +27,13 @@
                 @if (\Session::has('success'))
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     {!! \Session::get('success') !!}
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                @elseif(\Session::has('error'))
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    {!! \Session::get('error') !!}
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

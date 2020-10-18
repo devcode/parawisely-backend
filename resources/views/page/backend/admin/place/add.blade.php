@@ -22,6 +22,7 @@
                 <div class="card shadow">
                     <div class="card-body">
                         <div id="map"></div>
+                        <div class='pointer'><< Klik untuk mencari tempat</div>
                         <div class="form-group mt-2">
                             <label for="address" class="control-label">Alamat</label>
                             <textarea id="address" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" rows="6">{{ old('address') }}</textarea>
@@ -127,6 +128,17 @@
         attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
     }).addTo(map);
 
+    var searchControl = new L.esri.Controls.Geosearch().addTo(map);
+
+    var results = new L.LayerGroup().addTo(map);
+
+    searchControl.on('results', function(data){
+        results.clearLayers();
+        for (var i = data.results.length - 1; i >= 0; i--) {
+        results.addLayer(L.marker(data.results[i].latlng));
+        }
+    });
+
     var marker = L.marker(mapCenter).addTo(map);
     function updateMarker(lat, lng) {
         marker
@@ -175,15 +187,16 @@
             success: function (json) {
                 if (json.code == 200) {
                     for (i = 0; i < Object.keys(json.data).length; i++) {
-                        $('#propinsi').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                        $('#propinsi').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name).attr('data-prov',json.data[i].id));
                     }
                 } else {
-                    $('#kabupaten').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan'));
+                    $('#kabupaten').append($('<option>').text('Data tidak di temukan').attr('value', 'Data tidak di temukan').attr('data-prov',json.data[i].id));
                 }
             }
         });
         $("#propinsi").change(function () {
-            var propinsi = $("#propinsi").val();
+            var propinsi = $(this).find(':selected').data('prov');
+            console.log(propinsi)
             $.ajax({
                 url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
                 data: "idpropinsi=" + propinsi,
@@ -194,7 +207,7 @@
                     $("#kabupaten").html('');
                     if (json.code == 200) {
                         for (i = 0; i < Object.keys(json.data).length; i++) {
-                            $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].id));
+                            $('#kabupaten').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name));
                         }
                         $('#kecamatan').html($('<option>').text('-- Pilih Kecamatan --').attr('value', '-- Pilih Kecamatan --'));
                         $('#kelurahan').html($('<option>').text('-- Pilih Kelurahan --').attr('value', '-- Pilih Kelurahan --'));
@@ -206,5 +219,8 @@
             });
         });
     });
+</script>
+<script>
+    setTimeout(function(){$('.pointer').fadeOut('slow');},3400);
 </script>
 @endsection

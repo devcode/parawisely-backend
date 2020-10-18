@@ -32,7 +32,7 @@ class AuthController extends Controller
         ]);
 
         if (!$login) {
-            return redirect()->route('default')->withErrors(['Email / Password salah']);
+            return redirect()->route('default')->with('error', 'Email / Password salah');
         }
 
         if (Auth::guard('employee')->user()->level_id == 1) {

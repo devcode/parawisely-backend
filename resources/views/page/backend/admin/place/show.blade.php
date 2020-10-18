@@ -1,3 +1,6 @@
+@php
+    use Illuminate\Support\Str;
+@endphp
 @extends('template.index')
 
 @section('content')
@@ -28,7 +31,7 @@
             <div class="card-body">
                 <img src="{{ asset('backend/uploads/placeImage/'.$id->image) }}" width="100%" height="200" alt="">
                 <div class="description mt-3">
-                    <p class="text-dark">{{ $id->description }}</p>
+                    <p class="text-dark font-weight-normal text-justify description-text">{{ $id->description }}</p>
                 </div>
             </div>
         </div>
@@ -48,6 +51,6 @@
     }).addTo(map);
 
     L.marker([{{ $id->latitude }}, {{ $id->longitude }}]).addTo(map)
-        .bindPopup('{!! $id->description !!}');
+        .bindPopup("{!! Str::limit($id->description, 30, ' ...') !!}");
 </script>
 @endsection
