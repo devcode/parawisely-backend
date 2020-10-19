@@ -14,13 +14,11 @@ class LevelTableSeeder extends Seeder
      */
     public function run()
     {
-        Level::create(
-            [
-                'name_level' => 'Administrator',
-            ],
-            [
-                'name_level' => 'Mitra'
-            ]
-        );
+        $data = [
+            ['name_level' => 'Administrator',],
+            ['name_level' => 'Mitra']
+        ];
+
+        Level::insert($data);
     }
 }
