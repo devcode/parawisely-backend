@@ -31,6 +31,7 @@ class TravelPlaceFactory extends Factory
         return [
             'type_id' => 1,
             'creator_id' => 1,
+            'is_active' => true,
             'name_place' => $this->faker->firstName,
             'address' => $this->faker->address,
             'provinsi' => $this->faker->lastName,
