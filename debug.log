@@ -34,3 +34,5 @@
 [1016/131205.844:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
 [1017/113518.557:ERROR:filesystem_win.cc(129)] GetFileAttributes C:\Users\Dendy\AppData\Local\Microsoft\Edge\User Data\Crashpad\attachments\b4bfd3d7-edf2-425b-9de9-f6e12c465a2d: The system cannot find the path specified. (0x3)
 [1017/113518.584:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1018/222050.618:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
+[1019/101352.389:ERROR:directory_reader_win.cc(43)] FindFirstFile: The system cannot find the path specified. (0x3)
