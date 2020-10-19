@@ -22,7 +22,7 @@
                     <th>Nama Tempat</th>
                     <th>Alamat</th>
                     <th>Verifikasi</th>
-                    <th>Action</th>
+                    <th width="12%" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
