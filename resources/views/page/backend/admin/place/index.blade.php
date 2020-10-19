@@ -18,6 +18,7 @@
         <table class="dataTable">
             <thead>
                 <tr>
+                    <th>Tipe</th>
                     <th>Nama Tempat</th>
                     <th>Alamat</th>
                     <th>Verifikasi</th>
@@ -27,6 +28,7 @@
             <tbody>
                 @foreach ($dataPlace as $item)
                 <tr>
+                    <td>{{ $item->type->type_name }}</td>
                     <td>{{ $item->name_place }}</td>
                     <td>{{ Str::limit($item->address, 30, ' ...')  }}</td>
                     <td> <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Aktif" data-off="Tidak Aktif" {{ $item->is_active ? 'checked' : '' }}></td>
