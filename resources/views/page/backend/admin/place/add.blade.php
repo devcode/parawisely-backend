@@ -24,7 +24,7 @@
                         <div id="map"></div>
                         <div class='pointer'><< Klik untuk mencari tempat</div>
                         <div class="form-group mt-2">
-                            <label for="address" class="control-label">Alamat</label>
+                            <label for="address" class="control-label">Alamat <span class="text-danger">*</span></label>
                             <textarea id="address" class="form-control{{ $errors->has('address') ? ' is-invalid' : '' }}" name="address" rows="6">{{ old('address') }}</textarea>
                             {!! $errors->first('address', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                         </div>
@@ -37,7 +37,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="name_palce" class="control-label">Nama Tempat</label>
+                                    <label for="name_palce" class="control-label">Nama Tempat<span class="text-danger"> *</span></label>
                                     <input id="name_place" type="text" class="form-control @error('name_place') is-invalid @enderror" name="name_place" value="{{ old('name_place') }}"  autocomplete="off">
                                     @error('name_place')
                                         <div class="invalid-feedback pl-2">
@@ -48,7 +48,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="address" class="control-label">Tipe Tempat</label>
+                                    <label for="address" class="control-label">Tipe Tempat<span class="text-danger"> *</span></label>
                                     <select name="type_place" id="type" class="form-control @error('type_place') is-invalid @enderror" >
                                         <option disabled selected>--SELECT TYPE--</option>
                                         @foreach ($dataType as $row)
@@ -62,7 +62,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="provinsi" class="control-label">Provinsi</label>
+                                    <label for="provinsi" class="control-label">Provinsi<span class="text-danger"> *</span></label>
                                     <select class="custom-select @error('propinsi') is-invalid @enderror" name="propinsi" id="propinsi">
                                         <option value="" selected>--Select Provinsi--</option>
                                     </select>
@@ -78,7 +78,7 @@
                                     <label for="kabupaten" class="control-label">Kab / Kota</label>
                                     <select class="custom-select @error('kabupaten') is-invalid @enderror" name="kabupaten" id="kabupaten">
                                         <option value="" selected>--Select Kabupaten--</option>
-                                    </select>
+                                    </select><span class="text-danger"> *</span>
                                     @error('kabupaten')
                                         <div class="invalid-feedback pl-2">
                                             {{ $message }}
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                         <div class="form-group">
-                            <label for="description" class="control-label">Deskripsi</label>
+                            <label for="description" class="control-label">Deskripsi<span class="text-danger"> *</span></label>
                             <textarea id="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" rows="4">{{ old('description') }}</textarea>
                             {!! $errors->first('description', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                         </div>
@@ -99,7 +99,7 @@
                                 <input id="longitude" type="text" hidden class="form-control{{ $errors->has('longitude') ? ' is-invalid' : '' }}" name="longitude" value="{{ old('longitude', request('longitude')) }}" >
                             </div>
                         <div class="form-group">
-                            <label for="image">Image</label>
+                            <label for="image">Image<span class="text-danger"> *</span></label>
                             <div class="custom-file">
                                 <input type="file" class="custom-file-input @error('image') is-invalid @enderror" name="image" id="image">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
@@ -135,7 +135,7 @@
     searchControl.on('results', function(data){
         results.clearLayers();
         for (var i = data.results.length - 1; i >= 0; i--) {
-        results.addLayer(L.marker(data.results[i].latlng));
+            results.addLayer(L.marker(data.results[i].latlng));
         }
     });
 
