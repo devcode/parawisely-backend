@@ -15,8 +15,8 @@
     </div>
 </div>
 <div class="form-tambah">
-    <form action="{{ url('/addPlace') }}" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
-        {{ csrf_field() }}
+    <form action="/addPlace" method="post" accept-charset="UTF-8" enctype="multipart/form-data">
+        @csrf
         <div class="row justify-content-center">
             <div class="col-md-5">
                 <div class="card shadow">

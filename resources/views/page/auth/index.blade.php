@@ -39,8 +39,8 @@
                     </button>
                 </div>
                 @endif
-                <form class="myform" method="POST" action="{{ url('/procesLogin') }}">
-                    {{ csrf_field() }}
+                <form class="myform" method="POST" action="/procesLogin">
+                    @csrf
                     <div class="row rtwo">
                         <div class="form-group col-md-12 ffour py-3">
                             <input type="email" class="form-control @error('email') is-invalid @enderror"

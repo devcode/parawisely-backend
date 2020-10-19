@@ -21,8 +21,8 @@
             </div>
             <div class="col-md-7 col-12 xcol">
                 <h2 class="title pt-5 pb-3">Registrasi</h2>
-                <form class="myform" method="POST" action="{{ url('/procesRegister') }}">
-                    {{ csrf_field() }}
+                <form class="myform" method="POST" action="/procesRegister">
+                    @csrf
                     <div class="row rone">
                         <div class="form-group col-md-12 fone py-3">
                             <input type="text" class="form-control @error('name') is-invalid @enderror" placeholder="Nama" autocomplete="off" name="name">

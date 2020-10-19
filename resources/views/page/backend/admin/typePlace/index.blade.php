@@ -23,7 +23,7 @@
             <tbody>
                 @foreach ($dataType as $item)
                 <tr>
-                    <td><img src="{{ asset('backend/uploads/icon/'.$item->type_icon) }}" width="50" alt=""></td>
+                    <td><img src="backend/uploads/icon/'{{ $item->type_icon }}" width="50" alt=""></td>
                     <td>{{ $item->type_name }}</td>
                     <td>
                         <a href="{{ url('/deleteTypePlace/'.$item->id) }}" class="btn btn-danger btn_hapus"><i class="fas fa-trash-alt"></i></a>
