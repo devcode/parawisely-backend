@@ -14,6 +14,7 @@ class AdminTableSeeder extends Seeder
      */
     public function run()
     {
+        #eho
         Employee::create([
             'name' => 'Admin',
             'email' => 'admin@gmail.com',
