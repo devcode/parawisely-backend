@@ -83,6 +83,7 @@ class PlaceController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
+                'is_active' => null,
                 'image' => $image_url
             ]);
         }
