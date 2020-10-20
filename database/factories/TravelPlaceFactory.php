@@ -23,10 +23,10 @@ class TravelPlaceFactory extends Factory
     {
         $mapCenterLatitude = -2.68496;
         $mapCenterLongitude = 113.95365;
-        $minLatitude = $mapCenterLatitude - 0.05;
-        $maxLatitude = $mapCenterLatitude + 0.05;
-        $minLongitude = $mapCenterLongitude - 0.07;
-        $maxLongitude = $mapCenterLongitude + 0.07;
+        $minLatitude = $mapCenterLatitude - 3.9;
+        $maxLatitude = $mapCenterLatitude + 3.9;
+        $minLongitude = $mapCenterLongitude - 2.07;
+        $maxLongitude = $mapCenterLongitude + 2.07;
 
         return [
             'type_id' => 1,
@@ -39,7 +39,7 @@ class TravelPlaceFactory extends Factory
             'latitude' => $this->faker->latitude($minLatitude, $maxLatitude),
             'longitude' => $this->faker->longitude($minLongitude, $maxLongitude),
             'description' => $this->faker->text,
-            'image' => 'https://picsum.photos/200/300'
+            'image' => 'https://picsum.photos/id/' . $this->faker->numberBetween(1, 100) . '/200/300'
         ];
     }
 }

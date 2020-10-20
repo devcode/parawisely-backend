@@ -19,6 +19,6 @@ class DatabaseSeeder extends Seeder
             TypePlaceTableSeeder::class
         ]);
 
-        \App\Models\TravelPlace::factory(10)->create();
+        \App\Models\TravelPlace::factory(50)->create();
     }
 }
