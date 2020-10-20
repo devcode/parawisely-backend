@@ -26,4 +26,4 @@ Route::get('/get-data-section', [ApiController::class, 'dataSection'])->name('da
 
 Route::get('/destinasi-pilihan', [ApiController::class, 'destinasiPilihan']);
 
-Route::get('/travel-place/{category}', [ApiController::class, 'getPlaceByCategory']);
+Route::get('/travel-place/{category}', [ApiController::class, 'getPlaceByTypeId']);
