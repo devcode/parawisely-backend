@@ -16,7 +16,7 @@ class TravelPlace extends Model
         'type_id', 'is_active', 'creator_id',
         'name_place', 'address', 'provinsi',
         'kabupaten', 'latitude', 'longitude',
-        'description', 'image'
+        'description', 'image', 'slug'
     ];
 
     public function type()

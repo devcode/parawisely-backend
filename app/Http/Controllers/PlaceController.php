@@ -88,7 +88,8 @@ class PlaceController extends Controller
                     'longitude' => $request->longitude,
                     'description' => $request->description,
                     'is_active' => 0,
-                    'image' => $image_url
+                    'image' => $image_url,
+                    'slug' => Str::slug($request->name_place)
                 ]);
             }
             if (Auth::guard('employee')->user()->level_id == 1) {
@@ -180,7 +181,8 @@ class PlaceController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
-                'image' => $image_url
+                'image' => $image_url,
+                'slug' => Str::slug($request->name_place)
             ]);
         } else {
             TravelPlace::where('id', $id->id)->update([
@@ -193,6 +195,7 @@ class PlaceController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
+                'slug' => Str::slug($request->name_place)
             ]);
         }
         if (Auth::guard('employee')->user()->level_id == 1) {

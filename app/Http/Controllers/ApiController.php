@@ -30,4 +30,16 @@ class ApiController extends Controller
         $data = TypePlace::all();
         return $this->success(response()->json($data));
     }
+
+    public function destinasiPilihan()
+    {
+        $data = TravelPlace::all()->random(4);
+        return $this->success($data);
+    }
+
+    protected function getPlaceByTypeId($id)
+    {
+        $data = TravelPlace::where('type_id', $id)->get();
+        return $this->success($data);
+    }
 }

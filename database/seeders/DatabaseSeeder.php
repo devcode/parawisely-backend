@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             LevelTableSeeder::class,
-            UserSeeder::class,
+            AdminTableSeeder::class,
             TypePlaceTableSeeder::class,
             PlaceTableSeeder::class
         ]);
