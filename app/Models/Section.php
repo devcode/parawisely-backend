@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Carousel extends Model
+class Section extends Model
 {
     use HasFactory;
-    protected $table = 'tb_carousel';
-    protected $fillable = ['image', 'description'];
+    protected $table = 'tb_section';
+    protected $fillable = ['image', 'title', 'description', 'link'];
 }

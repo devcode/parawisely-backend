@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCarouselTable extends Migration
+class CreateSectionTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,10 +13,12 @@ class CreateCarouselTable extends Migration
      */
     public function up()
     {
-        Schema::create('tb_carousel', function (Blueprint $table) {
+        Schema::create('tb_section', function (Blueprint $table) {
             $table->id();
+            $table->string('title');
             $table->string('image', 255);
             $table->string('description', 255);
+            $table->string('link');
             $table->timestamps();
         });
     }

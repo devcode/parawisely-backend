@@ -5,10 +5,10 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
-use App\Models\Carousel;
+use App\Models\Section;
 use App\Models\Employee;
 
-class CarouselController extends Controller
+class SectionController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -19,10 +19,10 @@ class CarouselController extends Controller
     {
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "Carousel";
+        $title = "Section";
         //
-        $dataCarousel = Carousel::all();
-        return view('page.backend.admin.carousel.index', compact('title', 'dataCarousel', 'dataAuth'));
+        $dataSection = Section::all();
+        return view('page.backend.admin.section.index', compact('title', 'dataSection', 'dataAuth'));
     }
 
     /**
@@ -53,16 +53,16 @@ class CarouselController extends Controller
         if ($image != null) {
             $image_name = $image->getClientOriginalName();
             $image_full_name = time() . "-" . $image_name;
-            $upload_path = 'backend/uploads/carousel';
+            $upload_path = 'backend/uploads/section';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
-            Carousel::create([
+            Section::create([
                 'image' => $image_url,
                 'description' => $request->description,
             ]);
         }
 
-        return redirect()->route('carousel')->with('success', 'disimpan');
+        return redirect()->route('section')->with('success', 'disimpan');
     }
 
     /**
@@ -82,13 +82,13 @@ class CarouselController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Carousel $id)
+    public function edit(Section $id)
     {
         $id_user = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id_user);
-        $title = "Carousel";
+        $title = "Section";
         //
-        return view('page.backend.admin.carousel.edit', compact('title', 'dataAuth', 'id'));
+        return view('page.backend.admin.section.edit', compact('title', 'dataAuth', 'id'));
     }
 
     /**
@@ -98,7 +98,7 @@ class CarouselController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Carousel $id)
+    public function update(Request $request, Section $id)
     {
         $request->validate([
             'image' => 'image|mimes:jpg,jpeg,png,gif',
@@ -108,25 +108,25 @@ class CarouselController extends Controller
         $image = $request->file('image');
 
         if ($image != null) {
-            $image_path = public_path("backend/uploads/carousel/{$id->image}");
+            $image_path = public_path("backend/uploads/section/{$id->image}");
             if (File::exists($image_path)) {
                 unlink($image_path);
             }
             $image_name = $image->getClientOriginalName();
             $image_full_name = time() . "-" . $image_name;
-            $upload_path = 'backend/uploads/carousel';
+            $upload_path = 'backend/uploads/section';
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
-            Carousel::where('id', $id->id)->update([
+            Section::where('id', $id->id)->update([
                 'image' => $image_url,
                 'description' => $request->description,
             ]);
         } else {
-            Carousel::where('id', $id->id)->update([
+            Section::where('id', $id->id)->update([
                 'description' => $request->description,
             ]);
         }
-        return redirect()->route('carousel')->with('success', 'diupdate');
+        return redirect()->route('section')->with('success', 'diupdate');
     }
 
     /**
@@ -137,12 +137,12 @@ class CarouselController extends Controller
      */
     public function destroy($id)
     {
-        $carousel = Carousel::find($id);
-        $image_path = public_path("backend/uploads/carousel/{$carousel->image}");
+        $Section = Section::find($id);
+        $image_path = public_path("backend/uploads/section/{$Section->image}");
         if (File::exists($image_path)) {
             unlink($image_path);
         }
-        Carousel::destroy($id);
-        return redirect()->route('carousel')->with('success', 'dihapus');
+        Section::destroy($id);
+        return redirect()->route('section')->with('success', 'dihapus');
     }
 }

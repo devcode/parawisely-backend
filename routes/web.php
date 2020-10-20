@@ -5,7 +5,7 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\LevelController;
-use App\Http\Controllers\CarouselController;
+use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TypePlaceController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\ProfileController;
@@ -39,7 +39,7 @@ Route::middleware(['AuthEmployee'])->group(function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
     Route::get('/employee', [EmployeeController::class, 'index'])->name('employee');
     Route::get('/level', [LevelController::class, 'index'])->name('level');
-    Route::get('/carousel', [CarouselController::class, 'index'])->name('carousel');
+    Route::get('/section', [SectionController::class, 'index'])->name('section');
     Route::get('/type', [TypePlaceController::class, 'index'])->name('type');
     Route::get('/place', [PlaceController::class, 'index'])->name('place');
 
@@ -60,11 +60,11 @@ Route::get('/editLevel/{id}', [LevelController::class, 'edit'])->name('editLevel
 Route::post('/updateLevel/{id}', [LevelController::class, 'update'])->name('updateLevel');
 Route::get('/deleteLevel/{id}', [LevelController::class, 'destroy'])->name('deleteLevel');
 
-// Route Carousel
-Route::post('/addCarousel', [CarouselController::class, 'store'])->name('addCarousel');
-Route::get('/editCarousel/{id}', [CarouselController::class, 'edit'])->name('editCarousel');
-Route::post('/updateCarousel/{id}', [CarouselController::class, 'update'])->name('updateCarousel');
-Route::get('/deleteCarousel/{id}', [CarouselController::class, 'destroy'])->name('deleteCarousel');
+// Route Section
+Route::post('/addSection', [SectionController::class, 'store'])->name('addSection');
+Route::get('/editSection/{id}', [SectionController::class, 'edit'])->name('editSection');
+Route::post('/updateSection/{id}', [SectionController::class, 'update'])->name('updateSection');
+Route::get('/deleteSection/{id}', [SectionController::class, 'destroy'])->name('deleteSection');
 
 // Route TypePlace
 Route::post('/addTypePlace', [TypePlaceController::class, 'store'])->name('addTypePlace');
