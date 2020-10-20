@@ -1,6 +1,7 @@
 const flashdata = $('.flash-data').data('flashdata');
+const flashdata_cek = $('.flash-data').data('cek');
 
-if (flashdata == "success") {
+if (flashdata_cek == "success") {
     Swal.fire({
         icon: 'success',
         title: 'Berhasil',
