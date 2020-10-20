@@ -7,6 +7,7 @@ use Illuminate\Auth\Authenticatable as AuthenticableTrait;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\Level;
+use Illuminate\Support\Facades\Crypt;
 
 class Employee extends Model implements Authenticatable
 {

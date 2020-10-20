@@ -22,7 +22,7 @@
                     <th>Nama Tempat</th>
                     <th>Alamat</th>
                     <th>Verifikasi</th>
-                    <th>Action</th>
+                    <th width="14%" class="text-center">Action</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,7 +32,7 @@
                     <td>{{ $item->name_place }}</td>
                     <td>{{ Str::limit($item->address, 30, ' ...')  }}</td>
                     <td> <input data-id="{{$item->id}}" class="toggle-class" type="checkbox" data-onstyle="success" data-offstyle="danger" data-toggle="toggle" data-on="Aktif" data-off="Tidak Aktif" {{ $item->is_active ? 'checked' : '' }}></td>
-                    <td>
+                    <td class="text-center">
                         <a href="{{ url('/deletePlace/'.$item->id) }}" class="btn btn-danger btn-sm btn_hapus"><i class="fas fa-trash-alt"></i></a>
                         <a href="{{ url('/editPlace/'.$item->id) }}" class="btn btn-warning btn-sm text-white"><i class="fas fa-edit"></i></a>
                         <a href="{{ url('/showPlace/'.$item->id) }}" class="btn btn-success btn-sm text-white"><i class="fas fa-search-plus"></i></a>
