@@ -25,6 +25,18 @@ class ApiController extends Controller
         return $this->success($data);
     }
 
+    public function getTypePlace()
+    {
+        $data = TypePlace::all();
+        return $this->success($data);
+    }
+
+    public function getEksplorasi()
+    {
+        $data = TypePlace::with('places')->get();
+        return $this->success($data);
+    }
+
     public function dataType()
     {
         $data = TypePlace::all();

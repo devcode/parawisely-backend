@@ -3,11 +3,6 @@
 use Illuminate\Support\Str;
 
 $database = parse_url(getenv("DATABASE_URL"));
-echo "host " . $database['host'] . '<br>';
-echo "port " . $database['port'] . '<br>';
-echo "path " . ltrim($database['path'], '/') . '<br>';
-echo "user " . $database['user'] . '<br>';
-echo "pass " . $database['pass'] . '<br>';
 
 return [
 
