@@ -59,9 +59,9 @@
                         <a href="{{ url('/level') }}"><i class="fas fa-user-lock"></i>
                             <span class="side-link">Level Pegawai</span></a>
                     </li>
-                    <li class="{{ $title == "Carousel" ? "active" : "" }}">
-                        <a href="{{ url('/carousel') }}"><i class="fas fa-credit-card"></i>
-                            <span class="side-link">Carousel</span></a>
+                    <li class="{{ $title == "Section" ? "active" : "" }}">
+                        <a href="{{ url('/section') }}"><i class="fas fa-credit-card"></i>
+                            <span class="side-link">Section</span></a>
                     </li>
                     <li class="{{ $title == "Tipe Tempat" ? "active" : "" }}">
                         <a href="{{ url('/type') }}"><i class="fas fa-align-justify"></i>
@@ -120,6 +120,10 @@
                                     <a class="dropdown-item" href="{{ url('/showProfile') }}">
                                         <i class="fas fa-user fa-sm fa-fw mr-2 text-gray-400"></i>
                                         Profile
+                                    </a>
+                                    <a class="dropdown-item" href="{{ url('/changePassword') }}">
+                                        <i class="fas fa-lock fa-sm fa-fw mr-2 text-gray-400"></i>
+                                        Ganti Password
                                     </a>
                                     <div class="dropdown-divider"></div>
                                     <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">

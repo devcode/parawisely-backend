@@ -45,6 +45,8 @@ class SectionController extends Controller
     {
         $request->validate([
             'image' => 'required|image|mimes:jpg,jpeg,png,gif',
+            'title' => 'required',
+            'link' => 'required',
             'description' => 'required',
         ]);
 
@@ -57,8 +59,10 @@ class SectionController extends Controller
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
             Section::create([
+                'title' => $request->title,
                 'image' => $image_url,
                 'description' => $request->description,
+                'link' => $request->link,
             ]);
         }
 
@@ -101,7 +105,9 @@ class SectionController extends Controller
     public function update(Request $request, Section $id)
     {
         $request->validate([
-            'image' => 'image|mimes:jpg,jpeg,png,gif',
+            'image' => '|image|mimes:jpg,jpeg,png,gif',
+            'title' => 'required',
+            'link' => 'required',
             'description' => 'required',
         ]);
 
@@ -118,12 +124,16 @@ class SectionController extends Controller
             $image->move($upload_path, $image_full_name);
             $image_url = $image_full_name;
             Section::where('id', $id->id)->update([
+                'title' => $request->title,
                 'image' => $image_url,
                 'description' => $request->description,
+                'link' => $request->link,
             ]);
         } else {
             Section::where('id', $id->id)->update([
+                'title' => $request->title,
                 'description' => $request->description,
+                'link' => $request->link,
             ]);
         }
         return redirect()->route('section')->with('success', 'diupdate');
@@ -137,8 +147,8 @@ class SectionController extends Controller
      */
     public function destroy($id)
     {
-        $Section = Section::find($id);
-        $image_path = public_path("backend/uploads/section/{$Section->image}");
+        $section = Section::find($id);
+        $image_path = public_path("backend/uploads/section/{$section->image}");
         if (File::exists($image_path)) {
             unlink($image_path);
         }

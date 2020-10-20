@@ -46,6 +46,7 @@ class TypePlaceController extends Controller
         $request->validate([
             'type_icon' => 'required|image|mimes:jpg,jpeg,png,gif',
             'type_name' => 'required',
+            'description' => 'required'
         ]);
 
         $image = $request->file('type_icon');
@@ -59,6 +60,7 @@ class TypePlaceController extends Controller
             TypePlace::create([
                 'type_icon' => $image_url,
                 'type_name' => $request->type_name,
+                'description' => $request->description,
             ]);
         }
 
@@ -103,6 +105,7 @@ class TypePlaceController extends Controller
         $request->validate([
             'type_icon' => 'image|mimes:jpg,jpeg,png,gif',
             'type_name' => 'required',
+            'description' => 'required'
         ]);
 
         $image = $request->file('image');
@@ -120,10 +123,12 @@ class TypePlaceController extends Controller
             TypePlace::where('id', $id->id)->update([
                 'type_icon' => $image_url,
                 'type_name' => $request->type_name,
+                'description' => $request->description,
             ]);
         } else {
             TypePlace::where('id', $id->id)->update([
                 'type_name' => $request->type_name,
+                'description' => $request->description,
             ]);
         }
         return redirect()->route('type')->with('success', 'diupdate');

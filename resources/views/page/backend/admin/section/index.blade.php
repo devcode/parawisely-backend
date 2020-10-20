@@ -7,7 +7,7 @@
             <h3>{{ $title }}</h3>
         </div>
         <div class="col-md-6">
-            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">Add {{ $title }}</button>
+            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">Tambah {{ $title }}</button>
         </div>
     </div>
 </div>
@@ -16,18 +16,22 @@
             <thead>
                 <tr>
                     <th>Image</th>
-                    <th>Description</th>
+                    <th>Judul</th>
+                    <th>Deskripsi</th>
+                    <th>Link</th>
                     <th>Action</th>
                 </tr>
             </thead>
             <tbody>
-                @foreach ($dataCarousel as $item)
+                @foreach ($dataSection as $item)
                 <tr>
-                    <td><img src="{{ asset('backend/uploads/carousel/'.$item->image) }}" width="80" alt=""></td>
+                    <td><img src="{{ asset('backend/uploads/section/'.$item->image) }}" width="80" alt=""></td>
+                    <td>{{ $item->title }}</td>
                     <td>{{ $item->description }}</td>
+                    <td>{{ $item->link }}</td>
                     <td>
-                        <a href="{{ url('/deleteCarousel/'.$item->id) }}" class="btn btn-danger btn_hapus"><i class="fas fa-trash-alt"></i></a>
-                        <a href="{{ url('/editCarousel/'.$item->id) }}" class="btn btn-warning text-white"><i class="fas fa-edit"></i></a>
+                        <a href="{{ url('/deleteSection/'.$item->id) }}" class="btn btn-danger btn_hapus"><i class="fas fa-trash-alt"></i></a>
+                        <a href="{{ url('/editSection/'.$item->id) }}" class="btn btn-warning text-white"><i class="fas fa-edit"></i></a>
                     </td>
                 </tr>
                 @endforeach
@@ -46,7 +50,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{ url('/addCarousel') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('/addSection') }}" method="post" enctype="multipart/form-data">
             {{ csrf_field() }}
             <div class="modal-body">
                 <div class="form-group">
@@ -57,13 +61,21 @@
                       </div>
                 </div>
                 <div class="form-group">
+                    <label for="title">Judul</label>
+                    <input type="text" class="form-control" name="title" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="title">Link</label>
+                    <input type="text" class="form-control" name="link" autocomplete="off">
+                </div>
+                <div class="form-group">
                     <label for="exampleFormControlInput1">Description</label>
                     <textarea cols="12" rows="7" type="text" class="form-control" name="description"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="submit" class="btn btn-primary">Submit</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
       </div>

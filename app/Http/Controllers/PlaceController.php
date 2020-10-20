@@ -19,7 +19,6 @@ class PlaceController extends Controller
      */
     public function index()
     {
-
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
         $title = "Tempat Wisata";

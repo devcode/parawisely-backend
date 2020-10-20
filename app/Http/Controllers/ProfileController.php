@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Employee;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Hash;
 
 class ProfileController extends Controller
 {
@@ -53,6 +54,37 @@ class ProfileController extends Controller
             return redirect()->route('dashboard');
         } else {
             return redirect()->route('mitra');
+        }
+    }
+
+    public function changePassword()
+    {
+        $id = Auth::guard('employee')->id();
+        $dataAuth = Employee::find($id);
+        $title = "Ganti Password";
+        //
+        return view('page.auth.changePassword', compact('dataAuth', 'title'));
+    }
+
+    public function changePasswordProccess(Request $request)
+    {
+        $request->validate([
+            'password_now' => 'required',
+            'password_new' => 'required|confirmed',
+            'password_new_confirmation' => 'required',
+        ]);
+
+        $id = Auth::guard('employee')->id();
+        $dataAuth = Employee::find($id);
+
+        if (!(Hash::check($request->password_now, $dataAuth->password))) {
+            return redirect()->back()->with('error', 'Password Saat ini tidak sama');
+        } elseif ($request->password_now == $request->password_new) {
+            return redirect()->back()->with('error', 'Password dulu dengan saat ini sama');
+        } else {
+            $dataAuth->password = $request->password_new;
+            $dataAuth->save();
+            return redirect()->back()->with('success', 'diupdate');
         }
     }
 }

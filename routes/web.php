@@ -84,3 +84,5 @@ Route::get('/changeActive', [PlaceController::class, 'change'])->name('changeAct
 // Route Profile
 Route::get('/showProfile', [ProfileController::class, 'show'])->name('profile');
 Route::post('/updateProfile/{id}', [ProfileController::class, 'update'])->name('updateProfile');
+Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('changePassword');
+Route::post('/changePassword', [ProfileController::class, 'changePasswordProccess'])->name('changePasswordProccess');

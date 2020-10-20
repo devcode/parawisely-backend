@@ -17,6 +17,7 @@
                 <tr>
                     <th>Icon</th>
                     <th>Nama Tempat</th>
+                    <th>Deskripsi</th>
                     <th>Action</th>
                 </tr>
             </thead>
@@ -25,6 +26,7 @@
                 <tr>
                     <td><img src="{{ asset('backend/uploads/icon/'. $item->type_icon) }}" width="50" alt=""></td>
                     <td>{{ $item->type_name }}</td>
+                    <td>{{ $item->description }}</td>
                     <td>
                         <a href="{{ url('/deleteTypePlace/'.$item->id) }}" class="btn btn-danger btn_hapus"><i class="fas fa-trash-alt"></i></a>
                         <a href="{{ url('/editTypePlace/'.$item->id) }}" class="btn btn-warning text-white"><i class="fas fa-edit"></i></a>
@@ -58,7 +60,11 @@
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Nama Tipe</label>
-                    <input type="text" class="form-control" name="type_name" placeholder="name" autocomplete="off">
+                    <input type="text" class="form-control" name="type_name" placeholder="nama tipe" autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="exampleFormControlInput1">Description</label>
+                    <textarea cols="12" rows="7" type="text" class="form-control" name="description"></textarea>
                 </div>
             </div>
             <div class="modal-footer">
