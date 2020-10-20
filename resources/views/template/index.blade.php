@@ -135,7 +135,9 @@
 
             @if (\Session::has('success'))
                 <div class="flash-data" data-flashdata="{!! \Session::get('success') !!}"></div>
-            @else
+            @endif
+
+            @if (\Session::has('gagal'))
                 <div class="flash-data" data-flashdata="{!! \Session::get('gagal') !!}"></div>
             @endif
 
