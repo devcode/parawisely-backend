@@ -103,7 +103,7 @@ class TypePlaceController extends Controller
     public function update(Request $request, TypePlace $id)
     {
         $request->validate([
-            'type_icon' => 'image|mimes:jpg,jpeg,png,gif',
+            'image' => 'image|mimes:jpg,jpeg,png,gif',
             'type_name' => 'required',
             'description' => 'required'
         ]);
@@ -111,7 +111,7 @@ class TypePlaceController extends Controller
         $image = $request->file('image');
 
         if ($image != null) {
-            $image_path = public_path("backend/uploads/icon/{$id->image}");
+            $image_path = public_path("backend\uploads\icon\{$id->image}");
             if (File::exists($image_path)) {
                 unlink($image_path);
             }
@@ -125,13 +125,14 @@ class TypePlaceController extends Controller
                 'type_name' => $request->type_name,
                 'description' => $request->description,
             ]);
+            return redirect()->route('type')->with('success', 'diupdate');
         } else {
             TypePlace::where('id', $id->id)->update([
                 'type_name' => $request->type_name,
                 'description' => $request->description,
             ]);
+            return redirect()->route('type')->with('success', 'diupdate');
         }
-        return redirect()->route('type')->with('success', 'diupdate');
     }
 
     /**
