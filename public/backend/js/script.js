@@ -6,7 +6,7 @@ if (flashdata == "success") {
         title: 'Berhasil',
         text: 'Data berhasil ' + flashdata
     });
-} else {
+} else if (flashdata == "gagal") {
     Swal.fire({
         icon: 'error',
         title: 'Gagal',
