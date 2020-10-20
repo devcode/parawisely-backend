@@ -68,7 +68,7 @@ class PlaceController extends Controller
         $image = $request->file('image');
 
         $place_name_new = $request->name_place;
-        $place_name = TravelPlace::where('name_place', $place_name_new)->get();
+        $place_name = TravelPlace::where('name_place', $place_name_new)->count();
 
         if ($place_name < 0) {
             if ($image != null) {
