@@ -14,12 +14,6 @@ class ApiController extends Controller
         return $this->success(TravelPlace::all());
     }
 
-    public function dataPlace()
-    {
-        $data = TravelPlace::all();
-        return $this->success($data);
-    }
-
     public function getTravelPlace()
     {
         $data = TravelPlace::all();

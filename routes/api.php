@@ -19,9 +19,8 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
 });
 
-Route::get('/get-data-place', [ApiController::class, 'dataPlace'])->name('dataPlace');
-Route::get('/travel-type', [ApiController::class, 'dataType']);
 Route::get('/travel-place', [ApiController::class, 'getTravelPlace'])->name('travel-place');
+Route::get('/travel-type', [ApiController::class, 'dataType'])->name('dataType');
 Route::get('/get-data-section', [ApiController::class, 'dataSection'])->name('dataSection');
 
 Route::get('/destinasi-pilihan', [ApiController::class, 'destinasiPilihan']);
