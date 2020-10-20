@@ -125,13 +125,14 @@ class TypePlaceController extends Controller
                 'type_name' => $request->type_name,
                 'description' => $request->description,
             ]);
+            return redirect()->route('type')->with('success', 'diupdate');
         } else {
             TypePlace::where('id', $id->id)->update([
                 'type_name' => $request->type_name,
                 'description' => $request->description,
             ]);
+            return redirect()->route('type')->with('success', 'diupdate');
         }
-        return redirect()->route('type')->with('success', 'diupdate');
     }
 
     /**
