@@ -15,10 +15,11 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             LevelTableSeeder::class,
-            AdminTableSeeder::class,
-            TypePlaceTableSeeder::class
+            UserSeeder::class,
+            TypePlaceTableSeeder::class,
+            PlaceTableSeeder::class
         ]);
 
-        \App\Models\TravelPlace::factory(50)->create();
+        // \App\Models\TravelPlace::factory(50)->create();
     }
 }

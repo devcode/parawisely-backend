@@ -16,15 +16,16 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        Level::create([
-            'name_level' => 'administrator'
-        ]);
+        // sudah di levelTableSeeder
+        // Level::create([
+        //     'name_level' => 'administrator'
+        // ]);
 
         Employee::create([
             'name' => 'admin',
             'email' => 'admin@parawisely.com',
             'password' => Hash::make(12345678),
-            'role_id' => 1,
+            'level_id' => 1,
             'image' => 'deafult.png'
         ]);
     }
