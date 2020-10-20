@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
-use App\Models\Carousel;
+use App\Models\Section;
 use App\Models\TravelPlace;
 
 class DashboardController extends Controller
@@ -17,7 +17,7 @@ class DashboardController extends Controller
         $title = "Dashboard";
         //
         $dataEmployee = Employee::get()->where('level_id', 2)->count();
-        $dataCarousel = Carousel::count();
+        $dataSection = Section::count();
         $dataPlace = TravelPlace::count();
         return view('page.backend.admin.dashboard.index', compact('title', 'dataAuth', 'dataEmployee', 'dataCarousel', 'dataPlace'));
     }
