@@ -3,6 +3,7 @@
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
+use phpDocumentor\Reflection\Types\Nullable;
 
 class CreateTravelTypeTable extends Migration
 {
@@ -17,7 +18,7 @@ class CreateTravelTypeTable extends Migration
             $table->id();
             $table->string('type_name', 255);
             $table->string('type_icon', 255)->default('icon.png');
-            $table->string('description', 500)->default(null);
+            $table->string('description', 500)->nullable();
             $table->timestamps();
         });
     }
