@@ -75,10 +75,10 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="form-group">
-                                    <label for="kabupaten" class="control-label">Kab / Kota</label>
+                                    <label for="kabupaten" class="control-label">Kab / Kota</label><span class="text-danger"> *</span>
                                     <select class="custom-select @error('kabupaten') is-invalid @enderror" name="kabupaten" id="kabupaten">
                                         <option value="" selected>--Select Kabupaten--</option>
-                                    </select><span class="text-danger"> *</span>
+                                    </select>
                                     @error('kabupaten')
                                         <div class="invalid-feedback pl-2">
                                             {{ $message }}
