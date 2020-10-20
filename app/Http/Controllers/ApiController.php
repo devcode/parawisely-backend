@@ -28,7 +28,7 @@ class ApiController extends Controller
     public function dataType()
     {
         $data = TypePlace::all();
-        return $this->success(response()->json($data));
+        return $this->success($data);
     }
 
     public function destinasiPilihan()
