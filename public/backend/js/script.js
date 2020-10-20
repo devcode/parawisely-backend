@@ -1,11 +1,18 @@
 const flashdata = $('.flash-data').data('flashdata');
 
-if (flashdata) {
+if (flashdata == "success") {
     Swal.fire({
         icon: 'success',
         title: 'Berhasil',
         text: 'Data berhasil ' + flashdata
     });
+} else {
+    Swal.fire({
+        icon: 'error',
+        title: 'Gagal',
+        text: 'Data sudah tersedia'
+    });
+
 }
 
 $('.btn_hapus').on('click', function (e) {

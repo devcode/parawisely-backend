@@ -133,6 +133,8 @@
 
             @if (\Session::has('success'))
                 <div class="flash-data" data-flashdata="{!! \Session::get('success') !!}"></div>
+            @elseif(\Session::has('gagal'))
+                <div class="flash-data" data-flashdata="{!! \Session::get('gagal') !!}"></div>
             @endif
 
             @yield('content')

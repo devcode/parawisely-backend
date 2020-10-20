@@ -67,31 +67,41 @@ class PlaceController extends Controller
 
         $image = $request->file('image');
 
-        if ($image != null) {
-            $image_name = $image->getClientOriginalName();
-            $image_full_name = time() . "-" . $image_name;
-            $upload_path = 'backend/uploads/placeImage';
-            $image->move($upload_path, $image_full_name);
-            $image_url = $image_full_name;
-            TravelPlace::create([
-                'type_id' => $request->type_place,
-                'creator_id' => $id_user,
-                'name_place' => $request->name_place,
-                'address' => $request->address,
-                'provinsi' => $request->propinsi,
-                'kabupaten' => $request->kabupaten,
-                'latitude' => $request->latitude,
-                'longitude' => $request->longitude,
-                'description' => $request->description,
-                'is_active' => 0,
-                'image' => $image_url
-            ]);
-        }
+        $place_name_new = $request->name_place;
+        $place_name = TravelPlace::where('name_place', $place_name_new)->get();
 
-        if (Auth::guard('employee')->user()->level_id == 1) {
-            return redirect()->route('place')->with('success', 'disimpan');
+        if ($place_name < 0) {
+            if ($image != null) {
+                $image_name = $image->getClientOriginalName();
+                $image_full_name = time() . "-" . $image_name;
+                $upload_path = 'backend/uploads/placeImage';
+                $image->move($upload_path, $image_full_name);
+                $image_url = $image_full_name;
+                TravelPlace::create([
+                    'type_id' => $request->type_place,
+                    'creator_id' => $id_user,
+                    'name_place' => $request->name_place,
+                    'address' => $request->address,
+                    'provinsi' => $request->propinsi,
+                    'kabupaten' => $request->kabupaten,
+                    'latitude' => $request->latitude,
+                    'longitude' => $request->longitude,
+                    'description' => $request->description,
+                    'is_active' => 0,
+                    'image' => $image_url
+                ]);
+            }
+            if (Auth::guard('employee')->user()->level_id == 1) {
+                return redirect()->route('place')->with('success', 'disimpan');
+            } else {
+                return redirect()->route('mitra')->with('success', 'disimpan');
+            }
         } else {
-            return redirect()->route('mitra')->with('success', 'disimpan');
+            if (Auth::guard('employee')->user()->level_id == 1) {
+                return redirect()->route('place')->with('gagal', 'data sudah tersedia');
+            } else {
+                return redirect()->route('mitra')->with('gagal', 'data sudah tersedia');
+            }
         }
     }
 
