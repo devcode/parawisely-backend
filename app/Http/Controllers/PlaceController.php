@@ -98,9 +98,9 @@ class PlaceController extends Controller
             }
         } else {
             if (Auth::guard('employee')->user()->level_id == 1) {
-                return redirect()->route('place')->with('gagal', 'data sudah tersedia');
+                return redirect()->route('place')->with('gagal', 'gagal');
             } else {
-                return redirect()->route('mitra')->with('gagal', 'data sudah tersedia');
+                return redirect()->route('mitra')->with('gagal', 'gagal');
             }
         }
     }
