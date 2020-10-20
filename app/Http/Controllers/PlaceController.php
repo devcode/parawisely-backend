@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Employee;
 use App\Models\TravelPlace;
 use App\Models\TypePlace;
+use Illuminate\Support\Str;
 
 class PlaceController extends Controller
 {
