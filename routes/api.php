@@ -26,7 +26,8 @@ Route::get('/eksplorasi', [ApiController::class, 'getEksplorasi']);
 Route::get('/get-data-place', [ApiController::class, 'dataPlace'])->name('dataPlace');
 Route::get('/travel-type', [ApiController::class, 'dataType']);
 Route::get('/travel-place', [ApiController::class, 'getTravelPlace'])->name('travel-place');
+Route::get('/get-data-section', [ApiController::class, 'dataSection'])->name('dataSection');
 
 Route::get('/destinasi-pilihan', [ApiController::class, 'destinasiPilihan']);
 
-Route::get('/travel-place/{category}', [ApiController::class, 'getPlaceByCategory']);
+Route::get('/travel-place/{category}', [ApiController::class, 'getPlaceByTypeId']);

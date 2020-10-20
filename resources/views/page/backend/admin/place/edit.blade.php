@@ -152,7 +152,6 @@
           return tmp;
       }();
         $(document).ready(function () {
-            console.log("{{ $id->provinsi }}")
             $.ajax({
                 url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/provinsi',
                 type: 'GET',
@@ -197,9 +196,12 @@
             });
 
             getKabupaten();
+            console.log(propinsi)
         });
 
         function getKabupaten(){
+            var provinsi = $('#propinsi').data('prov');
+            console.log(provinsi)
             $.ajax({
                 url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
                 data: "idpropinsi=" + propinsi,
