@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\TravelPlace;
 use App\Models\TypePlace;
+use App\Models\Section;
 
 class ApiController extends Controller
 {
@@ -22,6 +23,12 @@ class ApiController extends Controller
     public function dataType()
     {
         $data = TypePlace::all();
+        return $this->success($data);
+    }
+
+    public function dataSection()
+    {
+        $data = Section::all();
         return $this->success($data);
     }
 
