@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\File;
 use App\Models\Employee;
 use App\Models\TravelPlace;
 use App\Models\TypePlace;
+use App\Models\Island;
 use Illuminate\Support\Str;
 
 class PlaceController extends Controller
@@ -41,7 +42,8 @@ class PlaceController extends Controller
         $title = "Tempat Wisata";
         //
         $dataType = TypePlace::all();
-        return view('page.backend.admin.place.add', compact('title', 'dataAuth', 'dataType'));
+        $dataIsland = Island::all();
+        return view('page.backend.admin.place.add', compact('title', 'dataAuth', 'dataType', 'dataIsland'));
     }
 
     /**
@@ -55,6 +57,7 @@ class PlaceController extends Controller
         $id_user = Auth::guard('employee')->id();
         $request->validate([
             'name_place' => 'required',
+            'island' => 'required',
             'address' => 'required',
             'propinsi' => 'required',
             'kabupaten' => 'required',
@@ -70,7 +73,7 @@ class PlaceController extends Controller
         $place_name_new = $request->name_place;
         $place_name = TravelPlace::where('name_place', $place_name_new)->count();
 
-        if ($place_name < 0) {
+        if ($place_name == 0) {
             if ($image != null) {
                 $image_name = $image->getClientOriginalName();
                 $image_full_name = time() . "-" . $image_name;
@@ -80,6 +83,7 @@ class PlaceController extends Controller
                 TravelPlace::create([
                     'type_id' => $request->type_place,
                     'creator_id' => $id_user,
+                    'island_id' => $request->island,
                     'name_place' => $request->name_place,
                     'address' => $request->address,
                     'provinsi' => $request->propinsi,
@@ -134,7 +138,8 @@ class PlaceController extends Controller
         $title = "Tempat Wisata";
         //
         $dataType = TypePlace::all();
-        return view('page.backend.admin.place.edit', compact('dataAuth', 'title', 'id', 'dataType'));
+        $dataIsland = Island::all();
+        return view('page.backend.admin.place.edit', compact('dataAuth', 'title', 'id', 'dataType', 'dataIsland'));
     }
 
     /**
@@ -149,6 +154,7 @@ class PlaceController extends Controller
         $id_user = Auth::guard('employee')->id();
         $request->validate([
             'name_place' => 'required',
+            'island' => 'required',
             'address' => 'required',
             'propinsi' => 'required',
             'kabupaten' => 'required',
@@ -174,6 +180,7 @@ class PlaceController extends Controller
             TravelPlace::where('id', $id->id)->update([
                 'type_id' => $request->type_place,
                 'creator_id' => $id_user,
+                'island_id' => $request->island,
                 'name_place' => $request->name_place,
                 'address' => $request->address,
                 'provinsi' => $request->propinsi,
@@ -188,6 +195,7 @@ class PlaceController extends Controller
             TravelPlace::where('id', $id->id)->update([
                 'type_id' => $request->type_place,
                 'creator_id' => $id_user,
+                'island_id' => $request->island,
                 'name_place' => $request->name_place,
                 'address' => $request->address,
                 'provinsi' => $request->propinsi,

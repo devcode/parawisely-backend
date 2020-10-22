@@ -36,23 +36,37 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group">
-                            <label for="description" class="control-label">Deskripsi</label>
-                            <textarea id="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" rows="8">{{ old('description',$id->description) }}</textarea>
-                            {!! $errors->first('description', '<span class="invalid-feedback" role="alert">:message</span>') !!}
-                        </div>
-                        <div class="form-group">
-                            <label for="address" class="control-label">Tipe Tempat</label>
-                            <select name="type_place" id="type" class="form-control">
-                                @foreach ($dataType as $row)
-                                    @if ($row->id == $id->type_id)
-                                        <option value="{{ $row->id }}" selected>{{ $row->type_name }}</option>
-                                    @else
-                                        <option value="{{ $row->id }}">{{ $row->type_name }}</option>
-                                    @endif
-                                @endforeach
-                            </select>
-                            {!! $errors->first('address', '<span class="invalid-feedback" role="alert">:message</span>') !!}
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address" class="control-label">Tipe Tempat</label>
+                                    <select name="type_place" id="type" class="form-control">
+                                        @foreach ($dataType as $row)
+                                            @if ($row->id == $id->type_id)
+                                                <option value="{{ $row->id }}" selected>{{ $row->type_name }}</option>
+                                            @else
+                                                <option value="{{ $row->id }}">{{ $row->type_name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    {!! $errors->first('address', '<span class="invalid-feedback" role="alert">:message</span>') !!}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="address" class="control-label">Pulau</label>
+                                    <select name="island" id="island" class="form-control">
+                                        @foreach ($dataIsland as $item)
+                                            @if ($item->id == $id->island_id)
+                                                <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
+                                            @else
+                                                <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                            @endif
+                                        @endforeach
+                                    </select>
+                                    {!! $errors->first('address', '<span class="invalid-feedback" role="alert">:message</span>') !!}
+                                </div>
+                            </div>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -87,6 +101,11 @@
                                 <input type="file" class="custom-file-input" name="image" id="image">
                                 <label class="custom-file-label" for="customFile">Choose file</label>
                             </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="description" class="control-label">Deskripsi</label>
+                            <textarea id="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description" rows="10">{{ old('description',$id->description) }}</textarea>
+                            {!! $errors->first('description', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                         </div>
                     </div>
                 </div>

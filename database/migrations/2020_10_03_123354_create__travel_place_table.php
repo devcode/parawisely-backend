@@ -17,6 +17,7 @@ class CreateTravelPlaceTable extends Migration
             $table->id();
             $table->integer('type_id');
             $table->integer('creator_id');
+            $table->integer('island_id')->nullable();
             $table->string('name_place');
             $table->string('slug');
             $table->string('address', 255);

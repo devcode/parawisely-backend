@@ -34,18 +34,16 @@
             <div class="col-md-7">
                 <div class="card shadow">
                     <div class="card-body">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="form-group">
-                                    <label for="name_palce" class="control-label">Nama Tempat<span class="text-danger"> *</span></label>
-                                    <input id="name_place" type="text" class="form-control @error('name_place') is-invalid @enderror" name="name_place" value="{{ old('name_place') }}"  autocomplete="off">
-                                    @error('name_place')
-                                        <div class="invalid-feedback pl-2">
-                                            {{ $message }}
-                                        </div>
-                                    @enderror
+                        <div class="form-group">
+                            <label for="name_palce" class="control-label">Nama Tempat<span class="text-danger"> *</span></label>
+                            <input id="name_place" type="text" class="form-control @error('name_place') is-invalid @enderror" name="name_place" value="{{ old('name_place') }}"  autocomplete="off">
+                            @error('name_place')
+                                <div class="invalid-feedback pl-2">
+                                    {{ $message }}
                                 </div>
-                            </div>
+                            @enderror
+                        </div>
+                        <div class="row">
                             <div class="col-md-6">
                                 <div class="form-group">
                                     <label for="address" class="control-label">Tipe Tempat<span class="text-danger"> *</span></label>
@@ -56,6 +54,18 @@
                                         @endforeach
                                     </select>
                                     {!! $errors->first('address', '<span class="invalid-feedback" role="alert">:message</span>') !!}
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="island" class="control-label">Pulau<span class="text-danger"> *</span></label>
+                                    <select name="island" id="island" class="form-control @error('island') is-invalid @enderror" >
+                                        <option disabled selected>--PILIH PULAU--</option>
+                                        @foreach ($dataIsland as $row)
+                                            <option value="{{ $row->id }}">{{ $row->name }}</option>
+                                        @endforeach
+                                    </select>
+                                    {!! $errors->first('island', '<span class="invalid-feedback" role="alert">:message</span>') !!}
                                 </div>
                             </div>
                         </div>

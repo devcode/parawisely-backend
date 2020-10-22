@@ -3,13 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Comment;
+use App\Models\TravelPlace;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
-use App\Models\Island;
-use App\Models\TypePlace;
-use App\Models\TravelPlace;
 
-class MitraController extends Controller
+class CommentController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,22 +19,11 @@ class MitraController extends Controller
     {
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "Tambah Tempat";
+        $title = "Komentar";
         //
-        $dataType = TypePlace::all();
-        $dataIsland = Island::all();
-        return view('page.backend.mitra.index', compact('dataAuth', 'title', 'dataType', 'dataIsland'));
-    }
-
-    public function show_data()
-    {
-        $id = Auth::guard('employee')->id();
-        $dataAuth = Employee::find($id);
-        $title = "Data Tempat";
-        //
-        $dataType = TypePlace::all();
-        $dataPlace = TravelPlace::with(['type', 'employee'])->where('creator_id', $dataAuth->id)->get();
-        return view('page.backend.mitra.data', compact('dataAuth', 'title', 'dataType', 'dataPlace'));
+        $dataComment = Comment::with(['place'])->get();
+        $dataCommentCount = Comment::count();
+        return view('page.backend.admin.comment.index', compact('title', 'dataAuth', 'dataComment', 'dataCommentCount'));
     }
 
     /**
@@ -76,9 +64,10 @@ class MitraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Comment $id)
     {
-        //
+        $place = TravelPlace::find($id->place_id);
+        return view('page.backend.admin.comment.detail', compact('id', 'place'));
     }
 
     /**
@@ -88,9 +77,17 @@ class MitraController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Comment $id)
     {
-        //
+        $request->validate([
+            'comment' => 'required',
+        ]);
+
+        Comment::where('id', $id->id)->update([
+            'comment' => $request->comment
+        ]);
+
+        return redirect()->back()->with('success', 'diupdate');
     }
 
     /**
@@ -101,6 +98,7 @@ class MitraController extends Controller
      */
     public function destroy($id)
     {
-        //
+        Comment::destroy($id);
+        return redirect()->back()->with('success', 'dihapus');
     }
 }

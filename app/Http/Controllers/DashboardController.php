@@ -5,8 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
-// use App\Models\Section;
+use App\Models\Section;
 use App\Models\TravelPlace;
+use App\Models\Comment;
 
 class DashboardController extends Controller
 {
@@ -17,8 +18,10 @@ class DashboardController extends Controller
         $title = "Dashboard";
         //
         $dataEmployee = Employee::get()->where('level_id', 2)->count();
-        $dataSection = "0";
+        $dataSection = Section::count();
         $dataPlace = TravelPlace::count();
-        return view('page.backend.admin.dashboard.index', compact('title', 'dataAuth', 'dataEmployee', 'dataPlace'));
+        $dataCommentCount = Comment::count();
+        $dataComment = Comment::with('place')->orderBy('created_at', 'desc')->limit(3)->get();
+        return view('page.backend.admin.dashboard.index', compact('title', 'dataAuth', 'dataEmployee', 'dataPlace', 'dataCommentCount', 'dataComment', 'dataSection'));
     }
 }
