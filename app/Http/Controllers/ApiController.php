@@ -10,14 +10,34 @@ use App\Models\Section;
 
 class ApiController extends Controller
 {
-    public function index()
-    {
-        return $this->success(TravelPlace::all());
-    }
-
-    public function getTravelPlace()
+    public function getAllPlace()
     {
         $data = TravelPlace::all();
+        return $this->success($data);
+    }
+
+    public function getPlacebyType($slug)
+    {
+        $data = TypePlace::where('slug', $slug)->with('places')->get();
+        if (!$data) {
+            return $this->notFound();
+        }
+
+        return $this->success($data);
+    }
+
+    public function getPlaceDetail($slug)
+    {
+        $data = TravelPlace::where('slug', $slug)->first();
+        if (!$data) {
+            return $this->notFound();
+        }
+        return $this->success($data);
+    }
+
+    public function getAllSection()
+    {
+        $data = Section::all();
         return $this->success($data);
     }
 
@@ -33,33 +53,9 @@ class ApiController extends Controller
         return $this->success($data);
     }
 
-    public function dataType()
-    {
-        $data = TypePlace::all();
-        return $this->success($data);
-    }
-
-    public function dataSection()
-    {
-        $data = Section::all();
-        return $this->success($data);
-    }
-
-    public function dataIsland()
-    {
-        $data = Island::all();
-        return $this->success($data);
-    }
-
-    public function destinasiPilihan()
+    public function getDestinasiPilihan()
     {
         $data = TravelPlace::all()->random(4);
-        return $this->success($data);
-    }
-
-    protected function getPlaceByTypeId($id)
-    {
-        $data = TravelPlace::where('type_id', $id)->get();
         return $this->success($data);
     }
 }

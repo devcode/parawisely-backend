@@ -15,13 +15,13 @@ class TypePlaceTableSeeder extends Seeder
     public function run()
     {
         $data = [
-            ['type_name' => "Pegunungan"],
-            ['type_name' => "Museum"],
-            ['type_name' => "Pantai"],
-            ['type_name' => "Wahana Aktrasi"],
-            ['type_name' => "Monumen"],
-            ['type_name' => "Kebun Binatang"],
-            ['type_name' => "Kuliner"],
+            ['type_name' => "Pegunungan", 'slug' => 'pegunungan'],
+            ['type_name' => "Museum", 'slug' => 'museum'],
+            ['type_name' => "Pantai", 'slug' => 'pantai'],
+            ['type_name' => "Wahana Aktrasi", 'slug' => 'wahana-aktrasi'],
+            ['type_name' => "Monumen", 'slug' => 'monumen'],
+            ['type_name' => "Kebun Binatang", 'slug' => 'kebun-binatang'],
+            ['type_name' => "Kuliner", 'slug' => 'kuliner'],
         ];
 
         TypePlace::insert($data);

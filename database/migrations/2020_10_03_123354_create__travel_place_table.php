@@ -19,6 +19,7 @@ class CreateTravelPlaceTable extends Migration
             $table->integer('creator_id');
             $table->integer('island_id')->nullable();
             $table->string('name_place');
+            $table->string('slug');
             $table->string('address', 255);
             $table->string('provinsi');
             $table->string('kabupaten');
@@ -27,7 +28,6 @@ class CreateTravelPlaceTable extends Migration
             $table->string('description', 500);
             $table->string('image');
             $table->integer('is_active')->default(null);
-            $table->string('slug')->nullable();
             $table->timestamps();
         });
     }
