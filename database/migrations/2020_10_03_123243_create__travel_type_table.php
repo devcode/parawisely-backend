@@ -17,6 +17,7 @@ class CreateTravelTypeTable extends Migration
         Schema::create('tb_type_travel', function (Blueprint $table) {
             $table->id();
             $table->string('type_name', 255);
+            $table->string('slug');
             $table->string('type_icon', 255)->default('icon.png');
             $table->string('description', 500)->nullable();
             $table->timestamps();

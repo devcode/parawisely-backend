@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\File;
 use App\Models\Employee;
 use App\Models\TypePlace;
+use Illuminate\Support\Str;
 
 class TypePlaceController extends Controller
 {
@@ -60,6 +61,7 @@ class TypePlaceController extends Controller
             TypePlace::create([
                 'type_icon' => $image_url,
                 'type_name' => $request->type_name,
+                'slug' => Str::slug($request->type_name),
                 'description' => $request->description,
             ]);
         }
@@ -123,12 +125,14 @@ class TypePlaceController extends Controller
             TypePlace::where('id', $id->id)->update([
                 'type_icon' => $image_url,
                 'type_name' => $request->type_name,
+                'slug' => Str::slug($request->type_name),
                 'description' => $request->description,
             ]);
             return redirect()->route('type')->with('success', 'diupdate');
         } else {
             TypePlace::where('id', $id->id)->update([
                 'type_name' => $request->type_name,
+                'slug' => Str::slug($request->type_name),
                 'description' => $request->description,
             ]);
             return redirect()->route('type')->with('success', 'diupdate');

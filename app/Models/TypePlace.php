@@ -9,7 +9,7 @@ class TypePlace extends Model
 {
     use HasFactory;
     protected $table = 'tb_type_travel';
-    protected $fillable = ['type_name', 'type_icon'];
+    protected $fillable = ['type_name', 'slug', 'type_icon'];
 
     public function places()
     {

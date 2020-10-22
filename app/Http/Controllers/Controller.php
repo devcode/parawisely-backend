@@ -63,12 +63,12 @@ class Controller extends BaseController
      *
      * @return JsonResponse
      */
-    protected function notFound($message, $code = 404)
+    protected function notFound($message = 'Not Found', $code = 404)
     {
         return response()->json([
             'status'        => 'Not Found',
             'status_code'   => $code,
-            'message'       => $message ? $message : 'Not Found'
+            'message'       => $message
         ], isset(JsonResponse::$statusTexts[$code]) ? $code : JsonResponse::HTTP_NOT_FOUND);
     }
 
