@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Island;
 use Illuminate\Http\Request;
 use App\Models\TravelPlace;
 use App\Models\TypePlace;
@@ -41,6 +42,12 @@ class ApiController extends Controller
     public function dataSection()
     {
         $data = Section::all();
+        return $this->success($data);
+    }
+
+    public function dataIsland()
+    {
+        $data = Island::with('place')->get();
         return $this->success($data);
     }
 

@@ -22,6 +22,6 @@ class DashboardController extends Controller
         $dataPlace = TravelPlace::count();
         $dataCommentCount = Comment::count();
         $dataComment = Comment::with('place')->orderBy('created_at', 'desc')->limit(3)->get();
-        return view('page.backend.admin.dashboard.index', compact('title', 'dataAuth', 'dataEmployee', 'dataPlace', 'dataCommentCount', 'dataComment'));
+        return view('page.backend.admin.dashboard.index', compact('title', 'dataAuth', 'dataEmployee', 'dataPlace', 'dataCommentCount', 'dataComment', 'dataSection'));
     }
 }

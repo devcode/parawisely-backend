@@ -23,6 +23,8 @@ Route::get('/type-place', [ApiController::class, 'getTypePlace']);
 
 Route::get('/eksplorasi', [ApiController::class, 'getEksplorasi']);
 
+Route::get('/get-island', [ApiController::class, 'dataIsland']);
+
 Route::get('/get-data-place', [ApiController::class, 'dataPlace'])->name('dataPlace');
 Route::get('/travel-type', [ApiController::class, 'dataType']);
 Route::get('/travel-place', [ApiController::class, 'getTravelPlace'])->name('travel-place');

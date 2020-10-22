@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Comment;
 use App\Models\TravelPlace;
+use Illuminate\Support\Facades\Auth;
+use App\Models\Employee;
 
 class CommentController extends Controller
 {
@@ -15,7 +17,12 @@ class CommentController extends Controller
      */
     public function index()
     {
+        $id = Auth::guard('employee')->id();
+        $dataAuth = Employee::find($id);
+        $title = "Tempat Wisata";
         //
+        $dataComment = Comment::with(['place'])->get();
+        return view('page.backend.admin.comment.index', compact('title', 'dataPlace',  'dataAuth'));
     }
 
     /**
