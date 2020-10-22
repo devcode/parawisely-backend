@@ -19,10 +19,11 @@ class CommentController extends Controller
     {
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "Tempat Wisata";
+        $title = "Komentar";
         //
         $dataComment = Comment::with(['place'])->get();
-        return view('page.backend.admin.comment.index', compact('title', 'dataPlace',  'dataAuth'));
+        $dataCommentCount = Comment::count();
+        return view('page.backend.admin.comment.index', compact('title', 'dataAuth', 'dataComment', 'dataCommentCount'));
     }
 
     /**

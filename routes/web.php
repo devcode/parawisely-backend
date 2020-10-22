@@ -98,6 +98,7 @@ Route::get('/changePassword', [ProfileController::class, 'changePassword'])->nam
 Route::post('/changePassword', [ProfileController::class, 'changePasswordProccess'])->name('changePasswordProccess');
 
 //Route Comment
+Route::get('/showComment', [CommentController::class, 'index'])->name('showComment');
 Route::get('/detailComment/{id}', [CommentController::class, 'edit'])->name('detailComment');
 Route::post('/updateComment/{id}', [CommentController::class, 'update'])->name('updateComment');
 Route::get('/deleteComment/{id}', [CommentController::class, 'destroy'])->name('deleteComment');
