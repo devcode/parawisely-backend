@@ -53,17 +53,7 @@ class ApiController extends Controller
         return $this->success($data);
     }
 
-<<<<<<< HEAD
     public function getDestinasiPilihan()
-=======
-    public function dataIsland()
-    {
-        $data = Island::all();
-        return $this->success($data);
-    }
-
-    public function destinasiPilihan()
->>>>>>> 52d43bef2140d9bce0fc8a6afb995e3a2ab04d80
     {
         $data = TravelPlace::all()->random(4);
         return $this->success($data);
