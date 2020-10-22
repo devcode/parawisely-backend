@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\Employee;
+use App\Models\Island;
 use App\Models\TypePlace;
 use App\Models\TravelPlace;
 
@@ -22,7 +23,8 @@ class MitraController extends Controller
         $title = "Tambah Tempat";
         //
         $dataType = TypePlace::all();
-        return view('page.backend.mitra.index', compact('dataAuth', 'title', 'dataType'));
+        $dataIsland = Island::all();
+        return view('page.backend.mitra.index', compact('dataAuth', 'title', 'dataType', 'dataIsland'));
     }
 
     public function show_data()
