@@ -47,7 +47,7 @@ class ApiController extends Controller
 
     public function dataIsland()
     {
-        $data = Island::with('place')->get();
+        $data = Island::all();
         return $this->success($data);
     }
 
