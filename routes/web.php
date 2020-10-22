@@ -11,6 +11,9 @@ use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MapController;
 use App\Http\Controllers\MitraController;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\IslandController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -42,6 +45,7 @@ Route::middleware(['AuthEmployee'])->group(function () {
     Route::get('/section', [SectionController::class, 'index'])->name('section');
     Route::get('/type', [TypePlaceController::class, 'index'])->name('type');
     Route::get('/place', [PlaceController::class, 'index'])->name('place');
+    Route::get('/island', [IslandController::class, 'index'])->name('island');
 
     //Mitra Site
     Route::get('/add-place', [MitraController::class, 'index'])->name('mitra');
@@ -66,6 +70,12 @@ Route::get('/editSection/{id}', [SectionController::class, 'edit'])->name('editS
 Route::post('/updateSection/{id}', [SectionController::class, 'update'])->name('updateSection');
 Route::get('/deleteSection/{id}', [SectionController::class, 'destroy'])->name('deleteSection');
 
+//Route Island
+Route::post('/addIsland', [IslandController::class, 'store'])->name('addIsland');
+Route::get('/editIsland/{id}', [IslandController::class, 'edit'])->name('editIsland');
+Route::post('/updateIsland/{id}', [IslandController::class, 'update'])->name('updateIsland');
+Route::get('/deleteIsland/{id}', [IslandController::class, 'destroy'])->name('deleteIsland');
+
 // Route TypePlace
 Route::post('/addTypePlace', [TypePlaceController::class, 'store'])->name('addTypePlace');
 Route::get('/editTypePlace/{id}', [TypePlaceController::class, 'edit'])->name('editTypePlace');
@@ -86,3 +96,8 @@ Route::get('/showProfile', [ProfileController::class, 'show'])->name('profile');
 Route::post('/updateProfile/{id}', [ProfileController::class, 'update'])->name('updateProfile');
 Route::get('/changePassword', [ProfileController::class, 'changePassword'])->name('changePassword');
 Route::post('/changePassword', [ProfileController::class, 'changePasswordProccess'])->name('changePasswordProccess');
+
+//Route Comment
+Route::get('/detailComment/{id}', [CommentController::class, 'edit'])->name('detailComment');
+Route::post('/updateComment/{id}', [CommentController::class, 'update'])->name('updateComment');
+Route::get('/deleteComment/{id}', [CommentController::class, 'destroy'])->name('deleteComment');
