@@ -60,7 +60,6 @@
                                             @if ($item->id == $id->island_id)
                                                 <option value="{{ $item->id }}" selected>{{ $item->name }}</option>
                                             @else
-                                                <option value="" disabled selected>--PILIH PULAU--</option>
                                                 <option value="{{ $item->id }}">{{ $item->name }}</option>
                                             @endif
                                         @endforeach
