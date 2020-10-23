@@ -53,6 +53,12 @@ class ApiController extends Controller
         return $this->success($data);
     }
 
+    public function dataIsland()
+    {
+        $data = Island::all();
+        return $this->success($data);
+    }
+
     public function getDestinasiPilihan()
     {
         $data = TravelPlace::all()->random(4);
