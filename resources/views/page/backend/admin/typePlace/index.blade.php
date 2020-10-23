@@ -52,19 +52,19 @@
             {{ csrf_field() }}
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="image">Icon</label>
+                    <label for="image">Icon <span class="text-danger">*</span></label>
                     <div class="custom-file">
-                        <input type="file" class="custom-file-input" name="type_icon" id="image">
+                        <input type="file" class="custom-file-input" name="type_icon" id="image" required>
                         <label class="custom-file-label" for="customFile">Choose file</label>
                       </div>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Nama Tipe</label>
-                    <input type="text" class="form-control" name="type_name" placeholder="nama tipe" autocomplete="off">
+                    <label for="exampleFormControlInput1">Nama Tipe <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="type_name" placeholder="nama tipe" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Description</label>
-                    <textarea cols="12" rows="7" type="text" class="form-control" name="description"></textarea>
+                    <label for="exampleFormControlInput1">Description <span class="text-danger">*</span></label>
+                    <textarea cols="12" rows="7" type="text" class="form-control" name="description" required></textarea>
                 </div>
             </div>
             <div class="modal-footer">

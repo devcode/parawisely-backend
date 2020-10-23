@@ -48,8 +48,8 @@
             {{ csrf_field() }}
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Name</label>
-                    <input type="text" class="form-control" name="name_level" placeholder="name" autocomplete="off">
+                    <label for="exampleFormControlInput1">Name <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="name_level" placeholder="name" autocomplete="off" required>
                 </div>
             </div>
             <div class="modal-footer">

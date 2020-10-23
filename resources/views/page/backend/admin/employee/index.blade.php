@@ -54,20 +54,20 @@
             {{ csrf_field() }}
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Nama</label>
-                    <input type="text" class="form-control" name="name" placeholder="name" autocomplete="off">
+                    <label for="exampleFormControlInput1">Nama <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="name" placeholder="name" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Email</label>
-                    <input type="text" class="form-control" name="email" placeholder="example@gmail.com" autocomplete="off">
+                    <label for="exampleFormControlInput1">Email <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="email" placeholder="example@gmail.com" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Password</label>
-                    <input type="password" class="form-control" name="password" placeholder="password">
+                    <label for="exampleFormControlInput1">Password <span class="text-danger">*</span></label>
+                    <input type="password" class="form-control" name="password" placeholder="password" required>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlSelect1">Level</label>
-                    <select class="form-control" name="level">
+                    <label for="exampleFormControlSelect1">Level <span class="text-danger">*</span></label>
+                    <select class="form-control" name="level" required>
                       <option disabled selected>--PILIH LEVEL--</option>
                       @foreach ($dataLevel as $row)
                         <option value="{{ $row->id }}">{{ $row->name_level }}</option>

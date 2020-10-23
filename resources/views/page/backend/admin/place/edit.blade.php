@@ -180,6 +180,7 @@
                         for (i = 0; i < Object.keys(json.data).length; i++) {
                             if ("{{ $id->provinsi }}" == json.data[i].name) {
                                 $('#propinsi').append($('<option selected>').text(json.data[i].name).attr('value', json.data[i].name).attr('data-prov',json.data[i].id));
+                                getKabupaten(json.data[i].id)
                             } else {
                                 $('#propinsi').append($('<option>').text(json.data[i].name).attr('value', json.data[i].name).attr('data-prov',json.data[i].id));
                             }
@@ -189,9 +190,8 @@
                     }
                 }
             });
-            var propinsi ="";
             $("#propinsi").change(function () {
-                propinsi = $(this).find(':selected').data('prov');
+                var propinsi = $(this).find(':selected').data('prov');
                 $.ajax({
                     url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
                     data: "idpropinsi=" + propinsi,
@@ -213,17 +213,13 @@
                     }
                 });
             });
-
-            getKabupaten();
-            console.log(propinsi)
         });
 
-        function getKabupaten(){
-            var provinsi = $('#propinsi').data('prov');
+        function getKabupaten(provinsi){
             console.log(provinsi)
             $.ajax({
                 url: 'https://x.rajaapi.com/MeP7c5ne' + window.return_first + '/m/wilayah/kabupaten',
-                data: "idpropinsi=" + propinsi,
+                data: "idpropinsi=" + provinsi,
                 type: 'GET',
                 cache: false,
                 dataType: 'json',

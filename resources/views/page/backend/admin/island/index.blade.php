@@ -52,12 +52,12 @@
             {{ csrf_field() }}
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Nama</label>
-                    <input type="text" class="form-control" name="name" placeholder="name" autocomplete="off">
+                    <label for="exampleFormControlInput1">Nama <span class="text-danger">*</span></label>
+                    <input type="text" class="form-control" name="name" placeholder="name" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Description</label>
-                    <textarea cols="12" rows="7" type="text" class="form-control" name="description"></textarea>
+                    <label for="exampleFormControlInput1">Description <span class="text-danger">*</span></label>
+                    <textarea cols="12" rows="7" type="text" class="form-control" name="description" required></textarea>
                 </div>
                 <div class="form-group">
                     <label for="image">Image</label>
