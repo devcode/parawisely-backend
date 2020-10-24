@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Comment;
 use App\Models\Island;
 use Illuminate\Http\Request;
 use App\Models\TravelPlace;
@@ -63,5 +64,35 @@ class ApiController extends Controller
     {
         $data = TravelPlace::all()->random(4);
         return $this->success($data);
+    }
+
+    public function getComment($place_id)
+    {
+        $data = Comment::with('place')->where('place_id', $place_id)->get();
+        return $this->success($data);
+    }
+
+    public function sendComment(Request $request)
+    {
+        $request->validate([
+            'place_id' => 'required',
+            'name' => 'required',
+            'email' => 'required',
+            'comment' => 'required',
+        ]);
+
+        Comment::create([
+            'place_id' => $request->place_id,
+            'name' => $request->name,
+            'email' => $request->email,
+            'comment' => $request->comment
+        ]);
+
+        $msg = [
+            'success' => true,
+            'message' => 'Komentar berhasil dikirim'
+        ];
+
+        return response()->json($msg);
     }
 }
