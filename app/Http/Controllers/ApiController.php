@@ -82,19 +82,21 @@ class ApiController extends Controller
             'comment' => 'required',
         ]);
 
-        Comment::create([
+        $comment = Comment::create([
             'place_id' => $request->place_id,
             'name' => $request->name,
             'email' => $request->email,
             'comment' => $request->comment
         ]);
 
+        $comment->generate_token();
+
         $msg = [
             'success' => true,
             'message' => 'Komentar berhasil dikirim'
         ];
 
-        return response()->json($msg);
+        return response()->json($msg, 201);
     }
 
     public function sendContact(Request $request)
@@ -106,18 +108,20 @@ class ApiController extends Controller
             'message' => 'required',
         ]);
 
-        Comment::create([
+        $contact = Contact::create([
             'name' => $request->name,
             'email' => $request->email,
             'subject' => $request->subject,
             'message' => $request->message
         ]);
 
+        $contact->generate_token();
+
         $msg = [
             'success' => true,
             'message' => 'Pesan berhasil dikirim'
         ];
 
-        return response()->json($msg);
+        return response()->json($msg, 201);
     }
 }

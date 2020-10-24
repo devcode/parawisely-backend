@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\TravelPlace;
+use Illuminate\Support\Str;
 
 class Comment extends Model
 {
@@ -16,5 +17,12 @@ class Comment extends Model
     public function place()
     {
         return $this->hasOne(TravelPlace::class, 'id', 'place_id');
+    }
+
+    public function generateToken()
+    {
+        $this->api_token = Str::random(60);
+        $this->save();
+        return $this->api_token;
     }
 }
