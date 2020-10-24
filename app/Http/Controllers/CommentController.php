@@ -21,8 +21,19 @@ class CommentController extends Controller
         $dataAuth = Employee::find($id);
         $title = "Komentar";
         //
-        $dataComment = Comment::with(['place'])->get();
-        $dataCommentCount = Comment::count();
+        if ($dataAuth->level_id == 1) {
+            $dataComment = Comment::with(['place'])->get();
+            $dataCommentCount = Comment::count();
+        } else {
+            $dataAuth = Employee::find($id);
+            $dataComment = Comment::with(['place'])->whereHas('place', function ($query) use ($id) {
+                $query->where('creator_id', '=', $id);
+            })->get();
+            $dataCommentCount = Comment::with(['place'])->whereHas('place', function ($query) use ($id) {
+                $query->where('creator_id', '=', $id);
+            })->count();
+        }
+
         return view('page.backend.admin.comment.index', compact('title', 'dataAuth', 'dataComment', 'dataCommentCount'));
     }
 
@@ -66,8 +77,12 @@ class CommentController extends Controller
      */
     public function edit(Comment $id)
     {
+        $id_auth = Auth::guard('employee')->id();
+        $dataAuth = Employee::find($id_auth);
+        $title = "Komentar";
+        //
         $place = TravelPlace::find($id->place_id);
-        return view('page.backend.admin.comment.detail', compact('id', 'place'));
+        return view('page.backend.admin.comment.detail', compact('id', 'place', 'dataAuth'));
     }
 
     /**

@@ -10,6 +10,7 @@ use App\Models\TravelPlace;
 use App\Models\TypePlace;
 use App\Models\Island;
 use Illuminate\Support\Str;
+use App\Models\Comment;
 
 class PlaceController extends Controller
 {

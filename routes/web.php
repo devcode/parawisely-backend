@@ -9,7 +9,6 @@ use App\Http\Controllers\SectionController;
 use App\Http\Controllers\TypePlaceController;
 use App\Http\Controllers\PlaceController;
 use App\Http\Controllers\ProfileController;
-use App\Http\Controllers\MapController;
 use App\Http\Controllers\MitraController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\IslandController;
@@ -32,8 +31,6 @@ use App\Http\Controllers\IslandController;
 Route::get('/', [AuthController::class, 'index'])->name('default');
 Route::get('/registrasi', [AuthController::class, 'registrasi'])->name('registrasi');
 Route::post('procesRegister', [AuthController::class, 'procesRegister'])->name('procesRegister');
-Route::get('/map', [MapController::class, 'index'])->name('map');
-Route::get('/mapData', [MapController::class, 'dataMap'])->name('mapData');
 Route::post('/procesLogin', [AuthController::class, 'procesLogin'])->name('proces');
 Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
