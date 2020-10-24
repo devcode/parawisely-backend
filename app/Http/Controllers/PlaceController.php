@@ -10,6 +10,7 @@ use App\Models\TravelPlace;
 use App\Models\TypePlace;
 use App\Models\Island;
 use Illuminate\Support\Str;
+use App\Models\Comment;
 
 class PlaceController extends Controller
 {
@@ -122,7 +123,15 @@ class PlaceController extends Controller
         $dataAuth = Employee::find($id_user);
         $title = "Tempat Wisata";
         //
-        return view('page.backend.admin.place.show', compact('dataAuth', 'title', 'id'));
+        $place_id = $id->id;
+        $dataComment = Comment::with(['place'])->whereHas('place', function ($query) use ($place_id) {
+            $query->where('id', '=', $place_id);
+        })->get();
+        $dataCommentCount = Comment::with(['place'])->whereHas('place', function ($query) use ($place_id) {
+            $query->where('id', '=', $place_id);
+        })->count();
+
+        return view('page.backend.admin.place.show', compact('dataAuth', 'title', 'id', 'dataComment', 'dataCommentCount'));
     }
 
     /**

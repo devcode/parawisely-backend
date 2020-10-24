@@ -66,7 +66,7 @@
 </div>
 
 <div class="row">
-    <div class="col-xl-8 col-lg-7">
+    <div class="col-xl-7 col-lg-6">
         <div class="card shadow">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">Komentar Terbaru</h6>
@@ -78,7 +78,7 @@
                         <div class="komentar">
                             <h6 class="text-primary">{{ $item->place->name_place }}</h6>
                             <h6><i class="fas fa-user"></i> {{ $item->name }} , <span class="font-italic text-success">{{ date("d-m-Y", strtotime($item->created_at)) }}</span></h6>
-                            <p class="text-dark font-weight-normal text-justify" style="font-size:15px;">{{ Str::limit($item->comment, 100, ' ...')  }} <a onclick="getComment({{ $item->id }})" class="text-primary" style="cursor: pointer">Detail</a>
+                            <p class="text-dark font-weight-normal text-justify" style="font-size:15px;">{{ Str::limit($item->comment, 100, ' ...')  }} <a onclick="getComment({{ $item->id }})" class="text-primary" style="cursor: pointer" >Detail</a>
                             <hr>
                         </div>
                     @endforeach
@@ -94,12 +94,38 @@
             </div>
         </div>
     </div>
-    <div class="col-xl-4 col-lg-5"></div>
+    <div class="col-xl-5 col-lg-4">
+        <div class="card shadow">
+            <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
+                <h6 class="m-0 font-weight-bold">Pesan Terbaru</h6>
+                <a href="{{ url('/showComment') }}" class="text-primary">Lihat Semua</a>
+            </div>
+            <div class="card-body pb-0 pt-3">
+                @if ($dataContactCount != 0)
+                    @foreach ($dataContact as $row)
+                        <div class="contact">
+                            <h6 class="text-primary">{{ $row->email }}</h6>
+                            <h6><i class="fas fa-user"></i> {{ $row->name }} , <span class="font-italic text-success">{{ date("d-m-Y", strtotime($row->created_at)) }}</span></h6>
+                            <p class="text-dark font-weight-normal text-justify" style="font-size:15px;">{{ Str::limit($row->message, 100, ' ...')  }} <a href="{{ url('/detailContact/'.$row->id) }}" class="text-primary" style="cursor: pointer">Detail</a>
+                            <hr>
+                        </div>
+                    @endforeach
+                @else
+                    <div class="contact">
+                        <h6 class="text-primary">Tidak ada pesan</h6>
+                        <hr>
+                    </div>
+                @endif
+                <div class="bawah m-0 float-right">
+                    <p class="text-danger font-weight-normal text-justify" style="font-size:15px;">Jumlah Pesan {{ $dataContactCount }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Content Row -->
 
 <div class="line"></div>
-
 
 @endsection
