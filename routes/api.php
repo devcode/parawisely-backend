@@ -48,3 +48,4 @@ Route::get('/destinasi-pilihan', [ApiController::class, 'getDestinasiPilihan']);
 //Route Comment
 Route::get('/getComment/{place_id}', [ApiController::class, 'getComment']);
 Route::post('/sendComment', [ApiController::class, 'sendComment']);
+Route::post('/sendContact', [ApiController::class, 'sendContact']);

@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 use App\Models\TravelPlace;
 use App\Models\TypePlace;
 use App\Models\Section;
+use App\Models\Contact;
 
 class ApiController extends Controller
 {
@@ -91,6 +92,30 @@ class ApiController extends Controller
         $msg = [
             'success' => true,
             'message' => 'Komentar berhasil dikirim'
+        ];
+
+        return response()->json($msg);
+    }
+
+    public function sendContact(Request $request)
+    {
+        $request->validate([
+            'name' => 'required',
+            'email' => 'required',
+            'subject' => 'required',
+            'message' => 'required',
+        ]);
+
+        Comment::create([
+            'name' => $request->name,
+            'email' => $request->email,
+            'subject' => $request->subject,
+            'message' => $request->message
+        ]);
+
+        $msg = [
+            'success' => true,
+            'message' => 'Pesan berhasil dikirim'
         ];
 
         return response()->json($msg);
