@@ -82,14 +82,12 @@ class ApiController extends Controller
             'comment' => 'required',
         ]);
 
-        $comment = Comment::create([
+        Comment::create([
             'place_id' => $request->place_id,
             'name' => $request->name,
             'email' => $request->email,
             'comment' => $request->comment
         ]);
-
-        $comment->generate_token();
 
         $msg = [
             'success' => true,
@@ -108,14 +106,12 @@ class ApiController extends Controller
             'message' => 'required',
         ]);
 
-        $contact = Contact::create([
+        Contact::create([
             'name' => $request->name,
             'email' => $request->email,
             'subject' => $request->subject,
             'message' => $request->message
         ]);
-
-        $contact->generate_token();
 
         $msg = [
             'success' => true,
