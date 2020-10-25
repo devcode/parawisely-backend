@@ -19,6 +19,11 @@ class TravelPlace extends Model
         'description', 'image', 'slug'
     ];
 
+    public function comments()
+    {
+        return $this->hasMany(Comment::class, 'place_id', 'id');
+    }
+
     public function type()
     {
         return $this->hasOne(TypePlace::class, 'id', 'type_id');

@@ -9,6 +9,7 @@ use App\Models\TravelPlace;
 use App\Models\TypePlace;
 use App\Models\Section;
 use App\Models\Contact;
+use Illuminate\Support\Facades\Validator;
 
 class ApiController extends Controller
 {
@@ -30,7 +31,7 @@ class ApiController extends Controller
 
     public function getPlaceDetail($slug)
     {
-        $data = TravelPlace::where('slug', $slug)->first();
+        $data = TravelPlace::where('slug', $slug)->with('comments')->first();
         if (!$data) {
             return $this->notFound();
         }
@@ -75,26 +76,29 @@ class ApiController extends Controller
 
     public function sendComment(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'place_id' => 'required',
-            'name' => 'required',
-            'email' => 'required',
-            'comment' => 'required',
+            'name' => 'required|min:3',
+            'email' => 'required|email',
+            'comment' => 'required|min:10'
         ]);
 
-        Comment::create([
-            'place_id' => $request->place_id,
-            'name' => $request->name,
-            'email' => $request->email,
-            'comment' => $request->comment
-        ]);
+        if ($validator->fails()) {
+            return $this->fail($validator->errors());
+        } else {
+            $comment = Comment::create([
+                'place_id' => $request->place_id,
+                'name' => $request->name,
+                'email' => $request->email,
+                'comment' => $request->comment
+            ]);
 
-        $msg = [
-            'success' => true,
-            'message' => 'Komentar berhasil dikirim'
-        ];
-
-        return response()->json($msg);
+            if ($comment) {
+                return $this->success($comment);
+            } else {
+                return $this->fail('post gagal');
+            }
+        }
     }
 
     public function sendContact(Request $request)
