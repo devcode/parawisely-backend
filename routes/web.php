@@ -103,5 +103,6 @@ Route::get('/deleteComment/{id}', [CommentController::class, 'destroy'])->name('
 
 //Route Contact
 Route::get('/showContact', [ContactController::class, 'index'])->name('showContact');
+Route::get('/deleteContact/{id}', [ContactController::class, 'destroy'])->name('deleteContact');
 Route::get('/detailContact/{id}', [ContactController::class, 'show'])->name('detailComment');
 Route::post('/sendEmail', [ContactController::class, 'send'])->name('sendEmail');

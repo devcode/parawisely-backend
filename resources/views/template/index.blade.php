@@ -232,6 +232,22 @@
                     }
                 })
             }
+
+            function getContact(id){
+                console.log(id)
+                $.ajax({
+                    url: `{{ url('/detailContact/${id}') }}`,
+                    method: "get",
+                    data: {
+                        id: id
+                    },
+                    success: function(data) {
+                        $('#contact_modal').modal('show');
+                        $('#contact_detail').html(data);
+                        console.log(data)
+                    }
+                })
+            }
         </script>
 </body>
 

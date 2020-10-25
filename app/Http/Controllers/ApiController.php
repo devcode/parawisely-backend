@@ -103,25 +103,27 @@ class ApiController extends Controller
 
     public function sendContact(Request $request)
     {
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'name' => 'required',
             'email' => 'required',
             'subject' => 'required',
             'message' => 'required',
         ]);
 
-        Contact::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'subject' => $request->subject,
-            'message' => $request->message
-        ]);
-
-        $msg = [
-            'success' => true,
-            'message' => 'Pesan berhasil dikirim'
-        ];
-
-        return response()->json($msg, 201);
+        if ($validator->fails()) {
+            return $this->fail($validator->errors());
+        } else {
+            $contact = Contact::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'subject' => $request->subject,
+                'message' => $request->message
+            ]);
+            if ($contact) {
+                return $this->success($contact);
+            } else {
+                return $this->fail('post gagal');
+            }
+        }
     }
 }
