@@ -110,7 +110,7 @@ class ApiController extends Controller
             'message' => 'required',
         ]);
 
-        Comment::create([
+        Contact::create([
             'name' => $request->name,
             'email' => $request->email,
             'subject' => $request->subject,
@@ -122,6 +122,6 @@ class ApiController extends Controller
             'message' => 'Pesan berhasil dikirim'
         ];
 
-        return response()->json($msg);
+        return response()->json($msg, 201);
     }
 }

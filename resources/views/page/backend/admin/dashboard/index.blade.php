@@ -98,7 +98,7 @@
         <div class="card shadow">
             <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                 <h6 class="m-0 font-weight-bold">Pesan Terbaru</h6>
-                <a href="{{ url('/showComment') }}" class="text-primary">Lihat Semua</a>
+                <a href="{{ url('/showContact') }}" class="text-primary">Lihat Semua</a>
             </div>
             <div class="card-body pb-0 pt-3">
                 @if ($dataContactCount != 0)

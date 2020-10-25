@@ -11,6 +11,17 @@ use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    public function index()
+    {
+        $id_auth = Auth::guard('employee')->id();
+        $dataAuth = Employee::find($id_auth);
+        $title = "Pesan";
+        //
+        $dataContactCount = Contact::count();
+        $dataContact = Contact::limit(3)->get();
+        return view('page.backend.admin.contact.index', compact('dataAuth', 'title', 'dataContactCount', 'dataContact'));
+    }
+
     public function show(Contact $id)
     {
         $id_auth = Auth::guard('employee')->id();

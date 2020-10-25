@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
             TypePlaceTableSeeder::class,
             PlaceTableSeeder::class,
             IslandSeeder::class,
+            ContactSeeder::class,
         ]);
 
         // \App\Models\TravelPlace::factory(50)->create();
