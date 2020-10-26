@@ -14,10 +14,10 @@
     integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css">
     <link rel="stylesheet" href="{{ asset('backend/css/style.css') }}">
+    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.3.1/dist/leaflet.css"
     integrity="sha512-Rksm5RenBEKSKFjgI3a41vrjkw4EVPlJ3+OiI65vTjIdo9brlAacEuKOiQ5OFh7cOI1bkDwLqdLw3Zg0cRJAAQ=="
     crossorigin=""/>
-    <link href="https://gitcdn.github.io/bootstrap-toggle/2.2.2/css/bootstrap-toggle.min.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="https://cdn-geoweb.s3.amazonaws.com/esri-leaflet-geocoder/0.0.1-beta.5/esri-leaflet-geocoder.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/fontawesome.min.css" integrity="sha512-kJ30H6g4NGhWopgdseRb8wTsyllFUYIx3hiUwmGAkgA9B/JbzUBDQVr2VVlWGde6sdBVOG7oU8AL35ORDuMm8g==" crossorigin="anonymous" />
 
@@ -43,8 +43,7 @@
         integrity="sha384-uefMccjFJAIv6A+rW+L4AHf99KvxDjWSu1z9VI8SKNVmz4sk7buKt/6v9KI65qnm"
         crossorigin="anonymous"></script>
     <script src="https://cdn.datatables.net/1.10.22/js/jquery.dataTables.min.js"></script>
-    <script src="{{asset('backend/js/sweetalert2.all.min.js')}}"></script>
-    <script src="{{asset('backend/js/script.js')}}"></script>
+
 </head>
 
 <body>
@@ -155,84 +154,100 @@
                 </div>
             </nav>
 
-            @if (\Session::has('success'))
-                <div class="flash-data" data-flashdata="{!! \Session::get('success') !!}" data-cek="success"></div>
-            @elseif(\Session::has('gagal'))
-                <div class="flash-data" data-flashdata="{!! \Session::get('gagal') !!}"></div>
-            @endif
-
             @yield('content')
 
         </div>
 
-
-        <!-- Logout Modal-->
-        <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel">Ready to Leave?</h5>
-                        <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">×</span>
-                        </button>
-                    </div>
-                    <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
-                    <div class="modal-footer">
-                        <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                        <a class="btn btn-primary" href="{{ url('/logout') }}">Logout</a>
-                    </div>
-                </div>
+@if (\Session::has('success'))
+    <div class="flash-data" data-flashdata="{!! \Session::get('success') !!}" data-cek="success"></div>
+@elseif(\Session::has('gagal'))
+    <div class="flash-data" data-flashdata="{!! \Session::get('gagal') !!}"></div>
+@endif
+<!-- Logout Modal-->
+<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Yakin Keluar ?</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">Pilih "Logout" untuk keluar dari halaman ini.</div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <a class="btn btn-primary" href="{{ url('/logout') }}">Logout</a>
             </div>
         </div>
+    </div>
+</div>
 
-        {{-- modal detail comment  --}}
-        <div class="modal fade" id="comment_modal" tabindex="-1" role="dialog">
-            <div class="modal-dialog">
-                <div class="modal-content" id="comment_detail">
+{{-- modal detail comment  --}}
+<div class="modal fade" id="comment_modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" id="comment_detail">
 
-                </div>
-            </div>
         </div>
+    </div>
+</div>
 
-        {{-- modal detail contact  --}}
-        <div class="modal fade bd-example-modal-xl" tabindex="-1" id="contact_modal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-            <div class="modal-dialog modal-xl">
-              <div class="modal-content" id="contact_detail">
+{{-- modal detail contact  --}}
+<div class="modal fade bd-example-modal-xl" tabindex="-1" id="contact_modal" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl">
+        <div class="modal-content" id="contact_detail">
 
-              </div>
-            </div>
-          </div>
+        </div>
+    </div>
+    </div>
 
-        <script type="text/javascript">
-            $(document).ready(function () {
-                $('#sidebarCollapse').on('click', function () {
-                    $('#sidebar').toggleClass('active');
-                });
-                $('.dataTable').DataTable();
-            });
-            $('.custom-file-input').on('change', function() {
-                let fileName = $(this).val().split('\\').pop();
-                $(this).next('.custom-file-label').addClass("selected").html(fileName);
-            });
-        </script>
 
-        <script>
-            function getComment(id){
-                console.log(id)
-                $.ajax({
-                    url: `{{ url('/detailComment/${id}') }}`,
-                    method: "get",
-                    data: {
-                        id: id
-                    },
-                    success: function(data) {
-                        $('#comment_modal').modal('show');
-                        $('#comment_detail').html(data);
-                        console.log(data)
-                    }
-                })
+<script src="{{asset('backend/js/sweetalert2.all.min.js')}}"></script>
+<script src="{{asset('backend/js/script.js')}}"></script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#sidebarCollapse').on('click', function () {
+            $('#sidebar').toggleClass('active');
+        });
+        $('.dataTable').DataTable();
+    });
+    $('.custom-file-input').on('change', function() {
+        let fileName = $(this).val().split('\\').pop();
+        $(this).next('.custom-file-label').addClass("selected").html(fileName);
+    });
+</script>
+
+<script>
+    function getComment(id){
+        console.log(id)
+        $.ajax({
+            url: `{{ url('/detailComment/${id}') }}`,
+            method: "get",
+            data: {
+                id: id
+            },
+            success: function(data) {
+                $('#comment_modal').modal('show');
+                $('#comment_detail').html(data);
+                console.log(data)
             }
-        </script>
+        })
+    }
+
+    function getContact(id){
+        console.log(id)
+        $.ajax({
+            url: `{{ url('/detailContact/${id}') }}`,
+            method: "get",
+            data: {
+                id: id
+            },
+            success: function(data) {
+                $('#contact_modal').modal('show');
+                $('#contact_detail').html(data);
+            }
+        })
+    }
+</script>
 </body>
 
 </html>

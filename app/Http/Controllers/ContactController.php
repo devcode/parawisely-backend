@@ -47,4 +47,10 @@ class ContactController extends Controller
         Mail::to($request->email_recipe)->send(new ContactEmail($data));
         return back()->with('success', 'Email Berhasil dikirim');
     }
+
+    public function destroy($id)
+    {
+        Contact::destroy($id);
+        return redirect()->back()->with('success', 'dihapus');
+    }
 }

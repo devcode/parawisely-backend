@@ -106,7 +106,7 @@
                         <div class="contact">
                             <h6 class="text-primary">{{ $row->email }}</h6>
                             <h6><i class="fas fa-user"></i> {{ $row->name }} , <span class="font-italic text-success">{{ date("d-m-Y", strtotime($row->created_at)) }}</span></h6>
-                            <p class="text-dark font-weight-normal text-justify" style="font-size:15px;">{{ Str::limit($row->message, 100, ' ...')  }} <a href="{{ url('/detailContact/'.$row->id) }}" class="text-primary" style="cursor: pointer">Detail</a>
+                            <p class="text-dark font-weight-normal text-justify" style="font-size:15px;">{{ Str::limit($row->message, 100, ' ...')  }} <a onclick="getContact({{ $row->id }})" class="text-primary" style="cursor: pointer" >Detail</a>
                             <hr>
                         </div>
                     @endforeach
