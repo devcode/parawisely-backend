@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TravelPlaceResource;
 use App\Models\Comment;
 use App\Models\Island;
 use Illuminate\Http\Request;
@@ -17,6 +18,30 @@ class ApiController extends Controller
     {
         $data = TravelPlace::all();
         return $this->success($data);
+    }
+
+    public function map()
+    {
+        $places = TravelPlace::with('type')->get();
+
+        $geoJSON = $places->map(function ($place) {
+            return [
+                'type' => "Feature",
+                'properties' => new TravelPlaceResource($place),
+                'geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [
+                        $place->longitude,
+                        $place->latitude
+                    ]
+                ]
+            ];
+        });
+
+        return response()->json([
+            'type' => 'FeatureCollection',
+            'features' => $geoJSON
+        ]);
     }
 
     public function getPlacebyType($slug)
@@ -59,6 +84,12 @@ class ApiController extends Controller
     public function dataIsland()
     {
         $data = Island::all();
+        return $this->success($data);
+    }
+
+    public function wisataDaerah()
+    {
+        $data = Island::with('places')->get();
         return $this->success($data);
     }
 
