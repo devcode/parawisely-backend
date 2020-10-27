@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route Place
 Route::get('/map', [ApiController::class, 'map']);
 Route::get('/place', [ApiController::class, 'getAllPlace']);
+Route::get('/place/type/{id}', [ApiController::class, 'getPlaceByType']);
 Route::get('/place-type', [ApiController::class, 'getTypePlace']);
 Route::get('/place/{slug}', [ApiController::class, 'getPlaceDetail']);
 Route::get('/type/{slug}', [ApiController::class, 'getPlacebyType']);

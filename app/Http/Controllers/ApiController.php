@@ -44,14 +44,22 @@ class ApiController extends Controller
         ]);
     }
 
-    public function getPlacebyType($slug)
+    public function getPlacebyType($id)
     {
-        $data = TypePlace::where('slug', $slug)->with('places')->get();
-        if (!$data) {
-            return $this->notFound();
+        if ($id == 0) { // all
+            return $this->success(TravelPlace::all());
         }
 
-        return $this->success($data);
+        if (!is_numeric($id)) {
+            return $this->fail();
+        }
+
+        $data = TravelPlace::where('type_id', $id)->get();
+        if ($data) {
+            return $this->success($data);
+        } else {
+            return $this->notfound();
+        }
     }
 
     public function getPlaceDetail($slug)
