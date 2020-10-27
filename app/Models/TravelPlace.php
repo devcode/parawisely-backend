@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\TypePlace;
 use App\Models\Employee;
+use App\Models\Island;
 
 class TravelPlace extends Model
 {
@@ -13,7 +14,7 @@ class TravelPlace extends Model
 
     protected $table = 'tb_place';
     protected $fillable = [
-        'type_id', 'is_active', 'creator_id',
+        'type_id', 'is_active', 'creator_id', 'island_id',
         'name_place', 'slug', 'address', 'provinsi',
         'kabupaten', 'latitude', 'longitude',
         'description', 'image', 'slug'
@@ -32,5 +33,10 @@ class TravelPlace extends Model
     public function employee()
     {
         return $this->hasOne(Employee::class, 'id', 'creator_id');
+    }
+
+    public function island()
+    {
+        return $this->hasOne(Island::class, 'id', 'island_id');
     }
 }
