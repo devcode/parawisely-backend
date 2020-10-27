@@ -4,6 +4,7 @@ namespace Database\Factories;
 
 use App\Models\TravelPlace;
 use Illuminate\Database\Eloquent\Factories\Factory;
+use Illuminate\Support\Str;
 
 class TravelPlaceFactory extends Factory
 {
@@ -29,16 +30,17 @@ class TravelPlaceFactory extends Factory
         $maxLongitude = $mapCenterLongitude + 2.07;
 
         return [
-            'type_id' => 1,
+            'type_id' => $this->faker->numberBetween(1, 4),
             'creator_id' => 1,
             'is_active' => true,
             'name_place' => $this->faker->firstName,
+            'slug' => Str::slug($this->faker->firstName),
             'address' => $this->faker->address,
             'provinsi' => $this->faker->lastName,
             'kabupaten' => $this->faker->lastName,
             'latitude' => $this->faker->latitude($minLatitude, $maxLatitude),
             'longitude' => $this->faker->longitude($minLongitude, $maxLongitude),
-            'description' => $this->faker->text,
+            'description' => $this->faker->text(100000),
             'image' => 'https://picsum.photos/id/' . $this->faker->numberBetween(1, 100) . '/200/300'
         ];
     }

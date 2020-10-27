@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\TravelPlaceResource;
 use App\Models\Comment;
 use App\Models\Island;
 use Illuminate\Http\Request;
@@ -19,14 +20,46 @@ class ApiController extends Controller
         return $this->success($data);
     }
 
-    public function getPlacebyType($slug)
+    public function map()
     {
-        $data = TypePlace::where('slug', $slug)->with('places')->get();
-        if (!$data) {
-            return $this->notFound();
+        $places = TravelPlace::with('type')->get();
+
+        $geoJSON = $places->map(function ($place) {
+            return [
+                'type' => "Feature",
+                'properties' => new TravelPlaceResource($place),
+                'geometry' => [
+                    'type' => 'Point',
+                    'coordinates' => [
+                        $place->longitude,
+                        $place->latitude
+                    ]
+                ]
+            ];
+        });
+
+        return response()->json([
+            'type' => 'FeatureCollection',
+            'features' => $geoJSON
+        ]);
+    }
+
+    public function getPlacebyType($id)
+    {
+        if ($id == 0) { // all
+            return $this->success(TravelPlace::all());
         }
 
-        return $this->success($data);
+        if (!is_numeric($id)) {
+            return $this->fail();
+        }
+
+        $data = TravelPlace::where('type_id', $id)->get();
+        if ($data) {
+            return $this->success($data);
+        } else {
+            return $this->notfound();
+        }
     }
 
     public function getPlaceDetail($slug)
@@ -59,6 +92,12 @@ class ApiController extends Controller
     public function dataIsland()
     {
         $data = Island::all();
+        return $this->success($data);
+    }
+
+    public function wisataDaerah()
+    {
+        $data = Island::with('places')->get();
         return $this->success($data);
     }
 

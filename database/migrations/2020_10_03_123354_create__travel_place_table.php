@@ -25,7 +25,7 @@ class CreateTravelPlaceTable extends Migration
             $table->string('kabupaten');
             $table->string('latitude');
             $table->string('longitude');
-            $table->string('description', 500);
+            $table->text('description');
             $table->string('image');
             $table->integer('is_active')->default(null);
             $table->timestamps();
