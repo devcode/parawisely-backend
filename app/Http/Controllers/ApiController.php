@@ -125,17 +125,22 @@ class ApiController extends Controller
         if ($validator->fails()) {
             return $this->fail($validator->errors());
         } else {
-            $comment = Comment::create([
-                'place_id' => $request->place_id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'comment' => $request->comment
-            ]);
+            $hasComment = TravelPlace::where('id', $request->place_id)->first();
+            if ($hasComment) {
+                $comment = Comment::create([
+                    'place_id' => $request->place_id,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'comment' => $request->comment
+                ]);
 
-            if ($comment) {
-                return $this->success($comment);
+                if ($comment) {
+                    return $this->success($comment);
+                } else {
+                    return $this->fail('post gagal');
+                }
             } else {
-                return $this->fail('post gagal');
+                return $this->notFound();
             }
         }
     }
