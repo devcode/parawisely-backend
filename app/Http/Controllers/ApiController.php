@@ -109,7 +109,15 @@ class ApiController extends Controller
 
     public function getComment($place_id)
     {
-        $data = Comment::with('place')->where('place_id', $place_id)->get();
+        if (!is_numeric($place_id)) {
+            return $this->fail();
+        }
+        $data = Comment::where('place_id', $place_id)->get();
+
+        if (!$data) {
+            return $this->notFound();
+        }
+
         return $this->success($data);
     }
 
@@ -134,8 +142,10 @@ class ApiController extends Controller
                     'comment' => $request->comment
                 ]);
 
+                $comme = Comment::where('place_id', $request->place_id)->get();
+
                 if ($comment) {
-                    return $this->success($comment);
+                    return $this->success($comme);
                 } else {
                     return $this->fail('post gagal');
                 }
