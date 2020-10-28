@@ -52,11 +52,13 @@
             {{ csrf_field() }}
             <div class="modal-body">
                 <div class="form-group">
-                    <label for="image">Icon <span class="text-danger">*</span></label>
-                    <div class="custom-file">
+                    <label for="image">Icon <a class="text-primary" href="https://labs.mapbox.com/maki-icons/">https://labs.mapbox.com/maki-icons/</a> <span class="text-danger">*</span></label>
+                    {{-- <div class="custom-file">
                         <input type="file" class="custom-file-input" name="type_icon" id="image" required>
                         <label class="custom-file-label" for="customFile">Choose file</label>
-                      </div>
+                      </div> --}}
+                    <input type="text" class="form-control" name="icon" placeholder="nama icon" autocomplete="off" required>
+                    <small id="emailHelp" class="form-text text-muted">Untuk menambahkan icon pilih nama icon dari link di atas.</small>
                 </div>
                 <div class="form-group">
                     <label for="exampleFormControlInput1">Nama Tipe <span class="text-danger">*</span></label>

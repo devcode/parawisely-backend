@@ -11,6 +11,7 @@ use App\Models\TypePlace;
 use App\Models\Section;
 use App\Models\Contact;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Http\Response;
 
 class ApiController extends Controller
 {
@@ -59,6 +60,27 @@ class ApiController extends Controller
             return $this->success($data);
         } else {
             return $this->notfound();
+        }
+    }
+
+
+    public function getPlacebyTypeCk(Request $request)
+    {
+        $categories = $request->input('categories');
+
+        if ($categories == null) { // All Data
+            return $this->success(TravelPlace::all());
+        }
+
+        if (!is_array($categories)) {
+            return $this->fail();
+        }
+
+        $data = TravelPlace::whereIn('type_id', $categories)->get();
+        if ($data) {
+            return $this->success($data);
+        } else {
+            return $this->notFound();
         }
     }
 
@@ -178,6 +200,21 @@ class ApiController extends Controller
             } else {
                 return $this->fail('post gagal');
             }
+        }
+    }
+
+    public function searchPlace(Request $request)
+    {
+        $params = $request->data;
+
+        $places = TravelPlace::with(['type'])->whereHas('type', function ($query) use ($params) {
+            $query->where('type_name', 'like', '%' . $params . '%');
+        })->orWhere('name_place', 'like', '%' . $params . '%')->orWhere('provinsi', 'like', '%' . $params . '%')->orWhere('kabupaten', 'like', '%' . $params . '%')->get();
+
+        if ($places) {
+            return $this->success($places);
+        } else {
+            return $this->notFound();
         }
     }
 }

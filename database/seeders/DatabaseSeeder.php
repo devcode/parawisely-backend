@@ -22,6 +22,6 @@ class DatabaseSeeder extends Seeder
             ContactSeeder::class,
         ]);
 
-        \App\Models\TravelPlace::factory(100)->create();
+        // \App\Models\TravelPlace::factory(100)->create();
     }
 }
