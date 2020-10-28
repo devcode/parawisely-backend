@@ -205,7 +205,7 @@ class ApiController extends Controller
 
     public function searchPlace(Request $request)
     {
-        $params = $request->data;
+        $params = $request->input('data');
 
         $places = TravelPlace::with(['type'])->whereHas('type', function ($query) use ($params) {
             $query->where('type_name', 'like', '%' . $params . '%');
