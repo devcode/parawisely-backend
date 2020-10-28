@@ -34,6 +34,7 @@ Route::get('/travel-place/{category}', [ApiController::class, 'getPlaceByTypeId'
 //Route Type
 Route::get('/type-place', [ApiController::class, 'getTypePlace']);
 Route::get('/travel-type', [ApiController::class, 'dataType']);
+Route::get('/ck-type', [ApiController::class, 'getPlacebyTypeCk']);
 
 //Route Eksplorasi
 Route::get('/eksplorasi', [ApiController::class, 'getEksplorasi']);
@@ -52,3 +53,6 @@ Route::get('/destinasi-pilihan', [ApiController::class, 'getDestinasiPilihan']);
 Route::get('/getComment/{place_id}', [ApiController::class, 'getComment']);
 Route::post('/sendComment', [ApiController::class, 'sendComment']);
 Route::post('/sendContact', [ApiController::class, 'sendContact']);
+
+// Route SearchPlace
+Route::get('/searchPlace', [ApiController::class, 'searchPlace']);
