@@ -109,7 +109,15 @@ class ApiController extends Controller
 
     public function getComment($place_id)
     {
-        $data = Comment::with('place')->where('place_id', $place_id)->get();
+        if (!is_numeric($place_id)) {
+            return $this->fail();
+        }
+        $data = Comment::where('place_id', $place_id)->get();
+
+        if (!$data) {
+            return $this->notFound();
+        }
+
         return $this->success($data);
     }
 
@@ -125,17 +133,24 @@ class ApiController extends Controller
         if ($validator->fails()) {
             return $this->fail($validator->errors());
         } else {
-            $comment = Comment::create([
-                'place_id' => $request->place_id,
-                'name' => $request->name,
-                'email' => $request->email,
-                'comment' => $request->comment
-            ]);
+            $hasComment = TravelPlace::where('id', $request->place_id)->first();
+            if ($hasComment) {
+                $comment = Comment::create([
+                    'place_id' => $request->place_id,
+                    'name' => $request->name,
+                    'email' => $request->email,
+                    'comment' => $request->comment
+                ]);
 
-            if ($comment) {
-                return $this->success($comment);
+                $comme = Comment::where('place_id', $request->place_id)->get();
+
+                if ($comment) {
+                    return $this->success($comme);
+                } else {
+                    return $this->fail('post gagal');
+                }
             } else {
-                return $this->fail('post gagal');
+                return $this->notFound();
             }
         }
     }
