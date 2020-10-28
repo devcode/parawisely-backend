@@ -16,7 +16,7 @@ class CreateIslandTable extends Migration
         Schema::create('tb_island', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->string('description', 255);
+            $table->string('description', 999);
             $table->string('image', 255);
             $table->string('slug')->nullable();
             $table->timestamps();

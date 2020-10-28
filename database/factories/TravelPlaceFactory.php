@@ -40,7 +40,7 @@ class TravelPlaceFactory extends Factory
             'kabupaten' => $this->faker->lastName,
             'latitude' => $this->faker->latitude($minLatitude, $maxLatitude),
             'longitude' => $this->faker->longitude($minLongitude, $maxLongitude),
-            'description' => $this->faker->text(100000),
+            'description' => $this->faker->text(100),
             'image' => 'https://picsum.photos/id/' . $this->faker->numberBetween(1, 100) . '/200/300'
         ];
     }
