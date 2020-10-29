@@ -8,6 +8,9 @@ use Illuminate\Support\Facades\File;
 use App\Models\Employee;
 use App\Models\TypePlace;
 use Illuminate\Support\Str;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\TypeImport;
+use App\Exports\TypeExport;
 
 class TypePlaceController extends Controller
 {
@@ -45,26 +48,16 @@ class TypePlaceController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'type_icon' => 'required|image|mimes:jpg,jpeg,png,gif',
+            'icon' => 'required',
             'type_name' => 'required',
-            'description' => 'required'
         ]);
 
-        $image = $request->file('type_icon');
-
-        if ($image != null) {
-            $image_name = $image->getClientOriginalName();
-            $image_full_name = time() . "-" . $image_name;
-            $upload_path = 'backend/uploads/icon';
-            $image->move($upload_path, $image_full_name);
-            $image_url = $image_full_name;
-            TypePlace::create([
-                'type_icon' => $image_url,
-                'type_name' => $request->type_name,
-                'slug' => Str::slug($request->type_name),
-                'description' => $request->description,
-            ]);
-        }
+        TypePlace::create([
+            'type_icon' => $request->icon,
+            'type_name' => $request->type_name,
+            'slug' => Str::slug($request->type_name),
+            'description' => $request->description,
+        ]);
 
         return redirect()->route('type')->with('success', 'ditambah');
     }
@@ -105,38 +98,17 @@ class TypePlaceController extends Controller
     public function update(Request $request, TypePlace $id)
     {
         $request->validate([
-            'image' => 'image|mimes:jpg,jpeg,png,gif',
+            'icon' => 'required',
             'type_name' => 'required',
-            'description' => 'required'
         ]);
 
-        $image = $request->file('image');
-
-        if ($image != null) {
-            $image_path = public_path("backend\uploads\icon\{$id->image}");
-            if (File::exists($image_path)) {
-                unlink($image_path);
-            }
-            $image_name = $image->getClientOriginalName();
-            $image_full_name = time() . "-" . $image_name;
-            $upload_path = 'backend/uploads/icon';
-            $image->move($upload_path, $image_full_name);
-            $image_url = $image_full_name;
-            TypePlace::where('id', $id->id)->update([
-                'type_icon' => $image_url,
-                'type_name' => $request->type_name,
-                'slug' => Str::slug($request->type_name),
-                'description' => $request->description,
-            ]);
-            return redirect()->route('type')->with('success', 'diupdate');
-        } else {
-            TypePlace::where('id', $id->id)->update([
-                'type_name' => $request->type_name,
-                'slug' => Str::slug($request->type_name),
-                'description' => $request->description,
-            ]);
-            return redirect()->route('type')->with('success', 'diupdate');
-        }
+        TypePlace::where('id', $id->id)->update([
+            'type_icon' => $request->icon,
+            'type_name' => $request->type_name,
+            'slug' => Str::slug($request->type_name),
+            'description' => $request->description,
+        ]);
+        return redirect()->route('type')->with('success', 'diupdate');
     }
 
     /**
@@ -147,12 +119,18 @@ class TypePlaceController extends Controller
      */
     public function destroy($id)
     {
-        $type = TypePlace::find($id);
-        $image_path = public_path("backend/uploads/icon/{$type->type_icon}");
-        if (File::exists($image_path)) {
-            unlink($image_path);
-        }
         TypePlace::destroy($id);
         return redirect()->route('type')->with('success', 'dihapus');
+    }
+
+    public function fileImport(Request $request)
+    {
+        Excel::import(new TypeImport, $request->file('file')->store('temp'));
+        return back()->with('success', 'disimpan');
+    }
+
+    public function fileExport()
+    {
+        return Excel::download(new TypeExport, 'type-collection.xlsx');
     }
 }

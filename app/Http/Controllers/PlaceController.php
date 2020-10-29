@@ -11,6 +11,9 @@ use App\Models\TypePlace;
 use App\Models\Island;
 use Illuminate\Support\Str;
 use App\Models\Comment;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\PlaceImport;
+use App\Exports\PlaceExport;
 
 class PlaceController extends Controller
 {
@@ -251,5 +254,16 @@ class PlaceController extends Controller
         $place->save();
 
         return response()->json(['success' => 'Status change successfully.']);
+    }
+
+    public function fileImport(Request $request)
+    {
+        Excel::import(new PlaceImport, $request->file('file')->store('temp'));
+        return back()->with('success', 'disimpan');
+    }
+
+    public function fileExport()
+    {
+        return Excel::download(new PlaceExport, 'place-collection.xlsx');
     }
 }

@@ -8,6 +8,9 @@ use App\Models\Employee;
 use App\Models\Island;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\File;
+use Maatwebsite\Excel\Facades\Excel;
+use App\Imports\IslandImport;
+use App\Exports\IslandExport;
 
 class IslandController extends Controller
 {
@@ -156,5 +159,16 @@ class IslandController extends Controller
         Island::destroy($id);
 
         return redirect()->back()->with('success', 'dihapus');
+    }
+
+    public function fileImport(Request $request)
+    {
+        Excel::import(new IslandImport, $request->file('file')->store('temp'));
+        return back()->with('success', 'disimpan');
+    }
+
+    public function fileExport()
+    {
+        return Excel::download(new IslandExport, 'pulau-collection.xlsx');
     }
 }

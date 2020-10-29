@@ -55,4 +55,4 @@ Route::post('/sendComment', [ApiController::class, 'sendComment']);
 Route::post('/sendContact', [ApiController::class, 'sendContact']);
 
 // Route SearchPlace
-Route::get('/searchPlace', [ApiController::class, 'searchPlace']);
+Route::get("/search/{query}", [ApiController::class, 'getSearch']);

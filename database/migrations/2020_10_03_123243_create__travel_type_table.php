@@ -18,7 +18,7 @@ class CreateTravelTypeTable extends Migration
             $table->id();
             $table->string('type_name', 255);
             $table->string('slug');
-            $table->string('type_icon')->default('icon.png');
+            $table->string('type_icon')->default('mountain-15');
             $table->string('description', 500)->nullable();
             $table->timestamps();
         });

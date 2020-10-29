@@ -3,11 +3,15 @@
 @section('content')
 <div class="title">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-4">
             <h3>{{ $title }}</h3>
         </div>
-        <div class="col-md-6">
-            <button class="btn btn-primary float-right" data-toggle="modal" data-target="#addModal">Tambah {{ $title }}</button>
+        <div class="col-md-8">
+            <div class="button float-right">
+                <a href="{{ url('/importIsland') }}" class="btn btn-success" data-toggle="modal" data-target="#importIsland">Import <i class="fas fa-file-excel"></i></a>
+                <a href="{{ url('/exportIsland') }}" class="btn btn-success" >Export <i class="fas fa-file-excel"></i></a>
+                <button class="btn btn-primary" data-toggle="modal" data-target="#addModal">Tambah {{ $title }}</button>
+            </div>
         </div>
     </div>
 </div>
@@ -70,6 +74,36 @@
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Kembali</button>
                 <button type="submit" class="btn btn-primary">Submit</button>
+            </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- Modal -->
+<div class="modal fade" id="importIsland" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Import {{ $title }}</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <form action="{{ url('/importIsland') }}" method="POST" enctype="multipart/form-data">
+            <div class="modal-body">
+                @csrf
+                <div class="form-group mb-4">
+                    <div class="custom-file text-left">
+                        <input type="file" name="file" class="custom-file-input" id="customFile">
+                        <label class="custom-file-label" for="customFile">Choose file</label>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
             </div>
         </form>
       </div>

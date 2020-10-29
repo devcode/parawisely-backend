@@ -68,10 +68,6 @@
                         <a href="{{ url('/level') }}"><i class="fas fa-user-lock"></i>
                             <span class="side-link">Level Pegawai</span></a>
                     </li>
-                    <li class="{{ $title == "Section" ? "active" : "" }}">
-                        <a href="{{ url('/section') }}"><i class="fas fa-credit-card"></i>
-                            <span class="side-link">Section</span></a>
-                    </li>
                     <li class="{{ $title == "Pulau" ? "active" : "" }}">
                         <a href="{{ url('/island') }}"><i class="fas fa-globe-asia"></i>
                             <span class="side-link">Pulau</span></a>

@@ -39,4 +39,14 @@ class TravelPlace extends Model
     {
         return $this->hasOne(Island::class, 'id', 'island_id');
     }
+
+    public function scopeWhereLike($query, $column, $value)
+    {
+        return $query->where($column, 'ilike', "%" . $value . "%");
+    }
+
+    public function scopeOrWhereLike($query, $column, $value)
+    {
+        return $query->orWhere($column, 'ilike', "%{$value}%");
+    }
 }

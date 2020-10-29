@@ -203,18 +203,17 @@ class ApiController extends Controller
         }
     }
 
-    public function searchPlace(Request $request)
+    public function getSearch($query)
     {
-        $params = $request->input('data');
+        // $places = TravelPlace::whereLike('name_place', $query)->get();
+        $places = TravelPlace::with('type')->whereHas('type', function ($kontol) use ($query) {
+            $kontol->where('type_name', 'ilike', "%" . $query . "%");
+        })->OrWhereLike('name_place', $query)->OrWhereLike('provinsi', $query)->OrWhereLike('kabupaten', $query)->get();
 
-        $places = TravelPlace::with(['type'])->whereHas('type', function ($query) use ($params) {
-            $query->where('type_name', 'like', '%' . $params . '%');
-        })->orWhere('name_place', 'like', '%' . $params . '%')->orWhere('provinsi', 'like', '%' . $params . '%')->orWhere('kabupaten', 'like', '%' . $params . '%')->get();
-
-        if ($places) {
-            return $this->success($places);
-        } else {
+        if (is_null($places)) {
             return $this->notFound();
+        } else {
+            return $this->success($places);
         }
     }
 }
