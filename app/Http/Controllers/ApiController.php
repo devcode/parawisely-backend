@@ -10,6 +10,7 @@ use App\Models\TravelPlace;
 use App\Models\TypePlace;
 use App\Models\Section;
 use App\Models\Contact;
+use GuzzleHttp\Promise\Is;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Http\Response;
 
@@ -17,7 +18,7 @@ class ApiController extends Controller
 {
     public function getAllPlace()
     {
-        $data = TravelPlace::all();
+        $data = TravelPlace::where('is_active', 1)->with('comments')->get();
         return $this->success($data);
     }
 
@@ -48,16 +49,12 @@ class ApiController extends Controller
     public function wisataDaerahLah($islandId, $idPlace)
     {
         if ($idPlace == 0 && $islandId) {
-            return $this->success(Island::with('places')->get());
+            return $this->success(Island::where('id', $islandId)->with('places')->first());
         }
 
         if (!is_numeric($idPlace) && !is_numeric($islandId)) {
             return $this->fail();
         }
-
-        // $data = Island::where('id', $islandId)->whereHas('places', function ($place) use ($idPlace) {
-        //     $place->where('type_id', '=', 2);
-        // })->get();
 
         $data = Island::where('id', $islandId)->with(['places' => function ($query) use ($idPlace) {
             $query->where('type_id', $idPlace);
