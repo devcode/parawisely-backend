@@ -45,17 +45,44 @@ class ApiController extends Controller
         ]);
     }
 
+    public function wisataDaerahLah($islandId, $idPlace)
+    {
+        if ($idPlace == 0 && $islandId) {
+            return $this->success(Island::with('places')->get());
+        }
+
+        if (!is_numeric($idPlace) && !is_numeric($islandId)) {
+            return $this->fail();
+        }
+
+        // $data = Island::where('id', $islandId)->whereHas('places', function ($place) use ($idPlace) {
+        //     $place->where('type_id', '=', 2);
+        // })->get();
+
+        $data = Island::where('id', $islandId)->with(['places' => function ($query) use ($idPlace) {
+            $query->where('type_id', $idPlace);
+        }])->first();
+
+        // $data = TravelPlace::where('island_id', $islandId)->where('type_id', $idPlace)->get();
+
+        if ($data) {
+            return $this->success($data);
+        } else {
+            return $this->notFound();
+        }
+    }
+
     public function getPlacebyType($id)
     {
-        if ($id == 0) { // all
-            return $this->success(TravelPlace::all());
+        if ($id == 0) {
+            return $this->success(TravelPlace::with('comments')->get());
         }
 
         if (!is_numeric($id)) {
             return $this->fail();
         }
 
-        $data = TravelPlace::where('type_id', $id)->get();
+        $data = TravelPlace::where('type_id', $id)->with('comments')->get();
         if ($data) {
             return $this->success($data);
         } else {
@@ -67,7 +94,6 @@ class ApiController extends Controller
     public function getPlacebyTypeCk(Request $request)
     {
         $categories = $request->input('categories');
-
         if ($categories == null) { // All Data
             return $this->success(TravelPlace::all());
         }
@@ -115,6 +141,17 @@ class ApiController extends Controller
     {
         $data = Island::all();
         return $this->success($data);
+    }
+
+    public function wisataDaerahDetail($slug)
+    {
+        $data = Island::where('slug', $slug)->with('places')->first();
+
+        if (is_null($data)) {
+            return $this->notFound();
+        } else {
+            return $this->success($data);
+        }
     }
 
     public function wisataDaerah()
@@ -201,6 +238,19 @@ class ApiController extends Controller
                 return $this->fail('post gagal');
             }
         }
+    }
+
+    public function getPlacePagination(Request $request)
+    {
+        if (!is_numeric($request->get('page')) && $request->get('limit')) {
+            return $this->fail();
+        }
+        $page = $request->has('page') ? $request->get('page') : 1;
+        $limit = $request->has('limit') ? $request->get('limit') : 10;
+
+        $data = TravelPlace::with('comments')->limit($limit)->offset(($page - 1) * $limit)->get()->toArray();
+
+        return $this->success($data);
     }
 
     public function getSearch($query)
