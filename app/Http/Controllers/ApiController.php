@@ -18,7 +18,7 @@ class ApiController extends Controller
 {
     public function getAllPlace()
     {
-        $data = TravelPlace::where('status', 1)->with('comments')->get();
+        $data = TravelPlace::where('is_active', 1)->with('comments')->get();
         return $this->success($data);
     }
 
