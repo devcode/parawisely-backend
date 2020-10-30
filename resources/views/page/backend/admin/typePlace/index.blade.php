@@ -52,7 +52,7 @@
             <span aria-hidden="true">&times;</span>
           </button>
         </div>
-        <form action="{{ url('/addTypePlace') }}" method="post" enctype="multipart/form-data">
+        <form action="{{ url('/addTypePlace') }}" method="post">
             {{ csrf_field() }}
             <div class="modal-body">
                 <div class="form-group">
@@ -69,8 +69,8 @@
                     <input type="text" class="form-control" name="type_name" placeholder="nama tipe" autocomplete="off" required>
                 </div>
                 <div class="form-group">
-                    <label for="exampleFormControlInput1">Description <span class="text-danger">*</span></label>
-                    <textarea cols="12" rows="7" type="text" class="form-control" name="description" required></textarea>
+                    <label for="exampleFormControlInput1">Description</label>
+                    <textarea cols="12" rows="7" type="text" class="form-control" name="description"></textarea>
                 </div>
             </div>
             <div class="modal-footer">

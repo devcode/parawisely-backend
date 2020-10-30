@@ -31,6 +31,7 @@ class TravelPlaceFactory extends Factory
 
         return [
             'type_id' => $this->faker->numberBetween(1, 4),
+            'island_id' => $this->faker->numberBetween(1, 6),
             'creator_id' => 1,
             'is_active' => true,
             'name_place' => $this->faker->firstName,
