@@ -24,7 +24,7 @@ class ApiController extends Controller
 
     public function map()
     {
-        $places = TravelPlace::with('type')->get();
+        $places = TravelPlaceResource::collection(TravelPlace::with('type')->get());
 
         $geoJSON = $places->map(function ($place) {
             return [
