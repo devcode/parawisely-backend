@@ -65,7 +65,6 @@ class IslandController extends Controller
             $name = 'island-' . time() . '-' . $image->getClientOriginalName();
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
-            $disk = Storage::disk('gcs');
 
             Island::create([
                 'name' => $request->name,
@@ -132,16 +131,14 @@ class IslandController extends Controller
             // $upload_path = 'backend/uploads/island';
             // $image->move($upload_path, $image_full_name);
             // $image_url = $image_full_name;
-            $name = time() . '-' . $image->getClientOriginalName();
+            $name = 'island-' . time() . '-' . $image->getClientOriginalName();
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
-            $disk = Storage::disk('gcs');
-            $file_to_db = $disk->url($image_path);
 
             Island::where('id', $id->id)->update([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => $file_to_db,
+                'image' => $name,
                 'slug' => Str::slug($request->name)
             ]);
         } else {
