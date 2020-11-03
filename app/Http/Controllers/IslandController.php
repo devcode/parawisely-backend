@@ -66,13 +66,11 @@ class IslandController extends Controller
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
             $disk = Storage::disk('gcs');
-            $file_to_db = $disk->url($image_path);
-
 
             Island::create([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => $file_to_db,
+                'image' => $name,
                 'slug' => Str::slug($request->name)
             ]);
             return redirect()->back()->with('success', 'disimpan');

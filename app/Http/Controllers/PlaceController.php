@@ -82,7 +82,7 @@ class PlaceController extends Controller
         if ($place_name == 0) {
             if ($image != null) {
                 // Script buat save data image ke google cloud storage
-                $name = time() . '-' . $image->getClientOriginalName();
+                $name = 'place-' . time() . '-' . $image->getClientOriginalName();
                 $image_path = '/images/' . $name;
                 Storage::disk('gcs')->put($image_path, file_get_contents($image));
                 $disk = Storage::disk('gcs');
