@@ -13,6 +13,7 @@ use App\Http\Controllers\MitraController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\IslandController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -63,22 +64,26 @@ Route::post('/updateLevel/{id}', [LevelController::class, 'update'])->name('upda
 Route::get('/deleteLevel/{id}', [LevelController::class, 'destroy'])->name('deleteLevel');
 
 // Route Section
-Route::post('/addSection', [SectionController::class, 'store'])->name('addSection');
-Route::get('/editSection/{id}', [SectionController::class, 'edit'])->name('editSection');
-Route::post('/updateSection/{id}', [SectionController::class, 'update'])->name('updateSection');
-Route::get('/deleteSection/{id}', [SectionController::class, 'destroy'])->name('deleteSection');
+// Route::post('/addSection', [SectionController::class, 'store'])->name('addSection');
+// Route::get('/editSection/{id}', [SectionController::class, 'edit'])->name('editSection');
+// Route::post('/updateSection/{id}', [SectionController::class, 'update'])->name('updateSection');
+// Route::get('/deleteSection/{id}', [SectionController::class, 'destroy'])->name('deleteSection');
 
 //Route Island
 Route::post('/addIsland', [IslandController::class, 'store'])->name('addIsland');
 Route::get('/editIsland/{id}', [IslandController::class, 'edit'])->name('editIsland');
 Route::post('/updateIsland/{id}', [IslandController::class, 'update'])->name('updateIsland');
 Route::get('/deleteIsland/{id}', [IslandController::class, 'destroy'])->name('deleteIsland');
+Route::post('/importIsland', [IslandController::class, 'fileImport'])->name('file-import');
+Route::get('/exportIsland', [IslandController::class, 'fileExport'])->name('file-export');
 
 // Route TypePlace
 Route::post('/addTypePlace', [TypePlaceController::class, 'store'])->name('addTypePlace');
 Route::get('/editTypePlace/{id}', [TypePlaceController::class, 'edit'])->name('editTypePlace');
 Route::post('/updateTypePlace/{id}', [TypePlaceController::class, 'update'])->name('updateTypePlace');
 Route::get('/deleteTypePlace/{id}', [TypePlaceController::class, 'destroy'])->name('deleteTypePlace');
+Route::post('/importType', [TypePlaceController::class, 'fileImport'])->name('file-import');
+Route::get('/exportType', [TypePlaceController::class, 'fileExport'])->name('file-export');
 
 // Route Place
 Route::get('/addPlace', [PlaceController::class, 'create']);
@@ -88,6 +93,8 @@ Route::get('/editPlace/{id}', [PlaceController::class, 'edit'])->name('editPlace
 Route::post('/updatePlace/{id}', [PlaceController::class, 'update'])->name('updatePlace');
 Route::get('/deletePlace/{id}', [PlaceController::class, 'destroy'])->name('deletePlace');
 Route::get('/changeActive', [PlaceController::class, 'change'])->name('changeActive');
+Route::post('/file-import', [PlaceController::class, 'fileImport'])->name('file-import');
+Route::get('/exportPlace', [PlaceController::class, 'fileExport'])->name('file-export');
 
 // Route Profile
 Route::get('/showProfile', [ProfileController::class, 'show'])->name('profile');
@@ -106,3 +113,15 @@ Route::get('/showContact', [ContactController::class, 'index'])->name('showConta
 Route::get('/deleteContact/{id}', [ContactController::class, 'destroy'])->name('deleteContact');
 Route::get('/detailContact/{id}', [ContactController::class, 'show'])->name('detailComment');
 Route::post('/sendEmail', [ContactController::class, 'send'])->name('sendEmail');
+
+Route::get('/images', function () {
+    $images = [];
+    $files = Storage::disk('gcs')->files('images');
+    foreach ($files as $file) {
+        $images[] = [
+            'name' => str_replace('images/', '', $file),
+            'src' => Storage::disk('gcs')->url($file)
+        ];
+    }
+    return response()->json($images);
+});

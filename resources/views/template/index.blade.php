@@ -67,6 +67,7 @@
             </div>
 
             @if ($dataAuth->level_id == 1)
+<<<<<<< HEAD
             <ul class="list-unstyled components">
                 <li class="{{ $title == "Dashboard" ? "active" : "" }}">
                     <a href="{{ url('/dashboard') }}"><i class="fas fa-tachometer-alt"></i>
@@ -97,6 +98,34 @@
                         <span class="side-link">Tempat Wisata</span></a>
                 </li>
             </ul>
+=======
+                <ul class="list-unstyled components">
+                    <li class="{{ $title == "Dashboard" ? "active" : "" }}">
+                        <a href="{{ url('/dashboard') }}"><i class="fas fa-tachometer-alt"></i>
+                            <span class="side-link">Dashboard</span></a>
+                    </li>
+                    <li class="{{ $title == "Pegawai" ? "active" : "" }}">
+                        <a href="{{ url('/employee') }}"><i class="fas fa-user-tie"></i>
+                            <span class="side-link">Pegawai</span></a>
+                    </li>
+                    <li class="{{ $title == "Level" ? "active" : "" }}">
+                        <a href="{{ url('/level') }}"><i class="fas fa-user-lock"></i>
+                            <span class="side-link">Level Pegawai</span></a>
+                    </li>
+                    <li class="{{ $title == "Pulau" ? "active" : "" }}">
+                        <a href="{{ url('/island') }}"><i class="fas fa-globe-asia"></i>
+                            <span class="side-link">Pulau</span></a>
+                    </li>
+                    <li class="{{ $title == "Tipe Tempat" ? "active" : "" }}">
+                        <a href="{{ url('/type') }}"><i class="fas fa-align-justify"></i>
+                            <span class="side-link">Tipe Tempat</span></a>
+                    </li>
+                    <li class="{{ $title == "Tempat Wisata" ? "active" : "" }}">
+                        <a href="{{ url('/place') }}"><i class="fas fa-map-marker-alt"></i>
+                            <span class="side-link">Tempat Wisata</span></a>
+                    </li>
+                </ul>
+>>>>>>> 8617cbf892e29d647529dc90ca20bd6e29d2a6e2
             @else
             <ul class="list-unstyled components">
                 <li class="{{ $title == "Tambah Tempat" ? "active" : "" }}">

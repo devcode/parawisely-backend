@@ -9,6 +9,7 @@ use App\Models\Section;
 use App\Models\TravelPlace;
 use App\Models\Comment;
 use App\Models\Contact;
+use App\Models\Island;
 
 class DashboardController extends Controller
 {
@@ -20,7 +21,7 @@ class DashboardController extends Controller
         //
         $dataEmployee = Employee::get()->where('level_id', 2)->count();
 
-        $dataSection = Section::count();
+        $dataIsland = Island::count();
         $dataPlace = TravelPlace::count();
         $dataCommentCount = Comment::count();
         $dataContactCount = Contact::count();
@@ -28,6 +29,6 @@ class DashboardController extends Controller
         $dataComment = Comment::with('place')->orderBy('created_at', 'desc')->limit(3)->get();
         $dataContact = Contact::limit(3)->get();
 
-        return view('page.backend.admin.dashboard.index', compact('title', 'dataAuth', 'dataEmployee', 'dataPlace', 'dataCommentCount', 'dataComment', 'dataSection', 'dataContact', 'dataContactCount'));
+        return view('page.backend.admin.dashboard.index', compact('title', 'dataAuth', 'dataEmployee', 'dataPlace', 'dataCommentCount', 'dataComment', 'dataIsland', 'dataContact', 'dataContactCount'));
     }
 }

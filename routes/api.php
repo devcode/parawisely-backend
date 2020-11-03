@@ -23,6 +23,7 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 //Route Place
 Route::get('/map', [ApiController::class, 'map']);
 Route::get('/place', [ApiController::class, 'getAllPlace']);
+Route::get('/places', [ApiController::class, 'getPlacePagination']);
 Route::get('/place/type/{id}', [ApiController::class, 'getPlaceByType']);
 Route::get('/place-type', [ApiController::class, 'getTypePlace']);
 Route::get('/place/{slug}', [ApiController::class, 'getPlaceDetail']);
@@ -42,6 +43,8 @@ Route::get('/eksplorasi', [ApiController::class, 'getEksplorasi']);
 //Route Island
 Route::get('/island', [ApiController::class, 'dataIsland']);
 Route::get('/wisata-daerah', [ApiController::class, 'wisataDaerah']);
+Route::get('/wisata-daerah/{islandId}/{idPlace}', [ApiController::class, 'wisataDaerahLah']);
+Route::get('/wisata-daerah/{slug}', [ApiController::class, 'wisataDaerahDetail']);
 
 //Route Section
 Route::get('/get-data-section', [ApiController::class, 'dataSection'])->name('dataSection');
