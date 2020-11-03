@@ -83,10 +83,9 @@ class PlaceController extends Controller
             if ($image != null) {
                 // Script buat save data image ke google cloud storage
                 $name = 'place-' . time() . '-' . $image->getClientOriginalName();
-                $image_path = '/images/' . $name;
+                $image_path = 'images/' . $name;
                 Storage::disk('gcs')->put($image_path, file_get_contents($image));
-                // $disk = Storage::disk('gcs');
-                // $name_db = $disk->url($image_path);
+                $name_db = Storage::disk('gcs')->url($image_path);
 
                 TravelPlace::create([
                     'type_id' => $request->type_place,
@@ -100,7 +99,7 @@ class PlaceController extends Controller
                     'longitude' => $request->longitude,
                     'description' => $request->description,
                     'is_active' => 0,
-                    'image' => $image_path,
+                    'image' => $name_db,
                     'slug' => Str::slug($request->name_place)
                 ]);
             }

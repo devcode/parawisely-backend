@@ -13,6 +13,7 @@ use App\Http\Controllers\MitraController;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\IslandController;
 use App\Http\Controllers\ContactController;
+use Illuminate\Support\Facades\Storage;
 
 /*
 |--------------------------------------------------------------------------
@@ -112,3 +113,8 @@ Route::get('/showContact', [ContactController::class, 'index'])->name('showConta
 Route::get('/deleteContact/{id}', [ContactController::class, 'destroy'])->name('deleteContact');
 Route::get('/detailContact/{id}', [ContactController::class, 'show'])->name('detailComment');
 Route::post('/sendEmail', [ContactController::class, 'send'])->name('sendEmail');
+
+Route::get('/test', function () {
+    $image = Storage::disk('gcs')->url('images/place-1604406222-132805.png');
+    dd($image);
+});
