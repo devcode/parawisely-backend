@@ -18,7 +18,7 @@ class ApiController extends Controller
 {
     public function getAllPlace()
     {
-        $data = TravelPlace::where('is_active', 1)->with('comments')->get();
+        $data = TravelPlace::where('is_active', 1)->with('type')->with('comments')->get();
         return $this->success($data);
     }
 
@@ -72,14 +72,14 @@ class ApiController extends Controller
     public function getPlacebyType($id)
     {
         if ($id == 0) {
-            return $this->success(TravelPlace::with('comments')->get());
+            return $this->success(TravelPlace::with(['comments', 'type'])->get());
         }
 
         if (!is_numeric($id)) {
             return $this->fail();
         }
 
-        $data = TravelPlace::where('type_id', $id)->with('comments')->get();
+        $data = TravelPlace::where('type_id', $id)->with(['comments', 'type'])->get();
         if ($data) {
             return $this->success($data);
         } else {

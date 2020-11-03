@@ -14,6 +14,8 @@ use App\Models\Comment;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PlaceImport;
 use App\Exports\PlaceExport;
+use App\Http\Requests\PlaceStoreRequest;
+use Illuminate\Support\Facades\Storage;
 
 class PlaceController extends Controller
 {
@@ -79,11 +81,13 @@ class PlaceController extends Controller
 
         if ($place_name == 0) {
             if ($image != null) {
-                $image_name = $image->getClientOriginalName();
-                $image_full_name = time() . "-" . $image_name;
-                $upload_path = 'backend/uploads/placeImage';
-                $image->move($upload_path, $image_full_name);
-                $image_url = $image_full_name;
+                // Script buat save data image ke google cloud storage
+                $name = time() . '-' . $image->getClientOriginalName();
+                $image_path = '/images/' . $name;
+                Storage::disk('gcs')->put($image_path, file_get_contents($image));
+                $disk = Storage::disk('gcs');
+                $file_to_db = $disk->url($image_path);
+
                 TravelPlace::create([
                     'type_id' => $request->type_place,
                     'creator_id' => $id_user,
@@ -96,7 +100,7 @@ class PlaceController extends Controller
                     'longitude' => $request->longitude,
                     'description' => $request->description,
                     'is_active' => 0,
-                    'image' => $image_url,
+                    'image' => $file_to_db,
                     'slug' => Str::slug($request->name_place)
                 ]);
             }
@@ -180,15 +184,21 @@ class PlaceController extends Controller
         $image = $request->file('image');
 
         if ($image != null) {
-            $image_path = public_path("backend/uploads/placeImage/{$id->image}");
-            if (File::exists($image_path)) {
-                unlink($image_path);
-            }
-            $image_name = $image->getClientOriginalName();
-            $image_full_name = time() . "-" . $image_name;
-            $upload_path = 'backend/uploads/placeImage';
-            $image->move($upload_path, $image_full_name);
-            $image_url = $image_full_name;
+            $name = time() . '-' . $image->getClientOriginalName();
+            $image_path = '/images/' . $name;
+            Storage::disk('gcs')->put($image_path, file_get_contents($image));
+            $disk = Storage::disk('gcs');
+            $file_to_db = $disk->url($image_path);
+
+            // $image_path = public_path("backend/uploads/placeImage/{$id->image}");
+            // if (File::exists($image_path)) {
+            //     unlink($image_path);
+            // }
+            // $image_name = $image->getClientOriginalName();
+            // $image_full_name = time() . "-" . $image_name;
+            // $upload_path = 'backend/uploads/placeImage';
+            // $image->move($upload_path, $image_full_name);
+            // $image_url = $image_full_name;
             TravelPlace::where('id', $id->id)->update([
                 'type_id' => $request->type_place,
                 'creator_id' => $id_user,
@@ -200,8 +210,12 @@ class PlaceController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
-                'image' => $image_url,
+                'image' => $file_to_db,
                 'slug' => Str::slug($request->name_place)
+            ]);
+
+            return response()->json([
+                'message' => 'Gambar berhasil diupload'
             ]);
         } else {
             TravelPlace::where('id', $id->id)->update([
