@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\IslandImport;
 use App\Exports\IslandExport;
+use Illuminate\Support\Facades\Storage;
 
 class IslandController extends Controller
 {
@@ -56,15 +57,20 @@ class IslandController extends Controller
         $image = $request->file('image');
 
         if ($image != null) {
-            $image_name = $image->getClientOriginalName();
-            $image_full_name = time() . "-" . $image_name;
-            $upload_path = 'backend/uploads/island';
-            $image->move($upload_path, $image_full_name);
-            $image_url = $image_full_name;
+            // $image_name = $image->getClientOriginalName();
+            // $image_full_name = time() . "-" . $image_name;
+            // $upload_path = 'backend/uploads/island';
+            // $image->move($upload_path, $image_full_name);
+            // $image_url = $image_full_name;
+            $name = 'island-' . time() . '-' . $image->getClientOriginalName();
+            $image_path = '/images/' . $name;
+            Storage::disk('gcs')->put($image_path, file_get_contents($image));
+            $disk = Storage::disk('gcs');
+
             Island::create([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => $image_url,
+                'image' => $name,
                 'slug' => Str::slug($request->name)
             ]);
             return redirect()->back()->with('success', 'disimpan');
@@ -117,19 +123,25 @@ class IslandController extends Controller
         $image = $request->file('image');
 
         if ($image != null) {
-            $image_path = public_path("backend/uploads/island/{$id->image}");
-            if (File::exists($image_path)) {
-                unlink($image_path);
-            }
-            $image_name = $image->getClientOriginalName();
-            $image_full_name = time() . "-" . $image_name;
-            $upload_path = 'backend/uploads/island';
-            $image->move($upload_path, $image_full_name);
-            $image_url = $image_full_name;
+            // $image_path = public_path("backend/uploads/island/{$id->image}");
+            // if (File::exists($image_path)) {
+            //     unlink($image_path);
+            // }
+            // $image_name = $image->getClientOriginalName();
+            // $image_full_name = time() . "-" . $image_name;
+            // $upload_path = 'backend/uploads/island';
+            // $image->move($upload_path, $image_full_name);
+            // $image_url = $image_full_name;
+            $name = time() . '-' . $image->getClientOriginalName();
+            $image_path = '/images/' . $name;
+            Storage::disk('gcs')->put($image_path, file_get_contents($image));
+            $disk = Storage::disk('gcs');
+            $file_to_db = $disk->url($image_path);
+
             Island::where('id', $id->id)->update([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => $image_url,
+                'image' => $file_to_db,
                 'slug' => Str::slug($request->name)
             ]);
         } else {

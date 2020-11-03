@@ -82,11 +82,10 @@ class PlaceController extends Controller
         if ($place_name == 0) {
             if ($image != null) {
                 // Script buat save data image ke google cloud storage
-                $name = time() . '-' . $image->getClientOriginalName();
+                $name = 'place-' . time() . '-' . $image->getClientOriginalName();
                 $image_path = '/images/' . $name;
                 Storage::disk('gcs')->put($image_path, file_get_contents($image));
                 $disk = Storage::disk('gcs');
-                $file_to_db = $disk->url($image_path);
 
                 TravelPlace::create([
                     'type_id' => $request->type_place,
@@ -100,7 +99,7 @@ class PlaceController extends Controller
                     'longitude' => $request->longitude,
                     'description' => $request->description,
                     'is_active' => 0,
-                    'image' => $file_to_db,
+                    'image' => $name,
                     'slug' => Str::slug($request->name_place)
                 ]);
             }
@@ -185,9 +184,10 @@ class PlaceController extends Controller
 
         if ($image != null) {
             $name = time() . '-' . $image->getClientOriginalName();
-            // $image_path = public_path("backend/uploads/placeImage/{$name}");
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
+            $disk = Storage::disk('gcs');
+            // $file_to_db = $disk->url($image_path);
 
             // $image_path = public_path("backend/uploads/placeImage/{$id->image}");
             // if (File::exists($image_path)) {
@@ -209,7 +209,7 @@ class PlaceController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
-                'image' => $name,
+                'image' => $image_path,
                 'slug' => Str::slug($request->name_place)
             ]);
 
