@@ -85,8 +85,8 @@ class PlaceController extends Controller
                 $name = 'place-' . time() . '-' . $image->getClientOriginalName();
                 $image_path = '/images/' . $name;
                 Storage::disk('gcs')->put($image_path, file_get_contents($image));
-                $disk = Storage::disk('gcs');
-                $name_db = $disk->url($image_path);
+                // $disk = Storage::disk('gcs');
+                // $name_db = $disk->url($image_path);
 
                 TravelPlace::create([
                     'type_id' => $request->type_place,
@@ -100,7 +100,7 @@ class PlaceController extends Controller
                     'longitude' => $request->longitude,
                     'description' => $request->description,
                     'is_active' => 0,
-                    'image' => $name_db,
+                    'image' => $image_path,
                     'slug' => Str::slug($request->name_place)
                 ]);
             }
