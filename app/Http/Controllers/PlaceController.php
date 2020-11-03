@@ -100,7 +100,7 @@ class PlaceController extends Controller
                     'longitude' => $request->longitude,
                     'description' => $request->description,
                     'is_active' => 0,
-                    'image' => $file_to_db,
+                    'image' => $name,
                     'slug' => Str::slug($request->name_place)
                 ]);
             }
