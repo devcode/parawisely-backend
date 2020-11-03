@@ -18,7 +18,7 @@ class ContactController extends Controller
         $title = "Pesan";
         //
         $dataContactCount = Contact::count();
-        $dataContact = Contact::limit(3)->get();
+        $dataContact = Contact::all();
         return view('page.backend.admin.contact.index', compact('dataAuth', 'title', 'dataContactCount', 'dataContact'));
     }
 
