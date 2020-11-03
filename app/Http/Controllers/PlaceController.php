@@ -186,6 +186,7 @@ class PlaceController extends Controller
             $name = 'place-' . time() . '-' . $image->getClientOriginalName();
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
+            $image_db = Storage::disk('gcs')->url($image_path);
             // $image_path = public_path("backend/uploads/placeImage/{$id->image}");
             // if (File::exists($image_path)) {
             //     unlink($image_path);
@@ -206,7 +207,7 @@ class PlaceController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
-                'image' => $name,
+                'image' => $image_db,
                 'slug' => Str::slug($request->name_place)
             ]);
 
