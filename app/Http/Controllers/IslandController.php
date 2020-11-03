@@ -62,7 +62,7 @@ class IslandController extends Controller
             // $upload_path = 'backend/uploads/island';
             // $image->move($upload_path, $image_full_name);
             // $image_url = $image_full_name;
-            $name = time() . '-' . $image->getClientOriginalName();
+            $name = 'island-' . time() . '-' . $image->getClientOriginalName();
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
             $disk = Storage::disk('gcs');
