@@ -85,7 +85,7 @@ class PlaceController extends Controller
                 $name = 'place-' . time() . '-' . $image->getClientOriginalName();
                 $image_path = 'images/' . $name;
                 Storage::disk('gcs')->put($image_path, file_get_contents($image));
-                $name_db = Storage::disk('gcs')->url($image_path);
+                // $name_db = Storage::disk('gcs')->url($image_path);
 
                 TravelPlace::create([
                     'type_id' => $request->type_place,
@@ -99,7 +99,7 @@ class PlaceController extends Controller
                     'longitude' => $request->longitude,
                     'description' => $request->description,
                     'is_active' => 0,
-                    'image' => $image_path,
+                    'image' => $name,
                     'slug' => Str::slug($request->name_place)
                 ]);
             }
@@ -183,12 +183,9 @@ class PlaceController extends Controller
         $image = $request->file('image');
 
         if ($image != null) {
-            $name = time() . '-' . $image->getClientOriginalName();
+            $name = 'place-' . time() . '-' . $image->getClientOriginalName();
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
-            $disk = Storage::disk('gcs');
-            $file_to_db = $disk->url($image_path);
-
             // $image_path = public_path("backend/uploads/placeImage/{$id->image}");
             // if (File::exists($image_path)) {
             //     unlink($image_path);
@@ -209,7 +206,7 @@ class PlaceController extends Controller
                 'latitude' => $request->latitude,
                 'longitude' => $request->longitude,
                 'description' => $request->description,
-                'image' => $file_to_db,
+                'image' => $name,
                 'slug' => Str::slug($request->name_place)
             ]);
 
