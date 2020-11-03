@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\File;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\IslandImport;
 use App\Exports\IslandExport;
+use Illuminate\Support\Facades\Storage;
 
 class IslandController extends Controller
 {
