@@ -20,6 +20,8 @@ class TravelPlace extends Model
         'description', 'image', 'slug'
     ];
 
+    protected $with = ['type', 'comments'];
+
     public function comments()
     {
         return $this->hasMany(Comment::class, 'place_id', 'id');
