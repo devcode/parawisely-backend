@@ -14,7 +14,6 @@ use App\Models\Comment;
 use Maatwebsite\Excel\Facades\Excel;
 use App\Imports\PlaceImport;
 use App\Exports\PlaceExport;
-use App\Http\Requests\PlaceStoreRequest;
 use Illuminate\Support\Facades\Storage;
 
 class PlaceController extends Controller

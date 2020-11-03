@@ -65,11 +65,12 @@ class IslandController extends Controller
             $name = 'island-' . time() . '-' . $image->getClientOriginalName();
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
+            $name_db = Storage::disk('gcs')->url($image_path);
 
             Island::create([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => $name,
+                'image' => $name_db,
                 'slug' => Str::slug($request->name)
             ]);
             return redirect()->back()->with('success', 'disimpan');
@@ -134,11 +135,12 @@ class IslandController extends Controller
             $name = 'island-' . time() . '-' . $image->getClientOriginalName();
             $image_path = '/images/' . $name;
             Storage::disk('gcs')->put($image_path, file_get_contents($image));
+            $name_db = Storage::disk('gcs')->url($image_path);
 
             Island::where('id', $id->id)->update([
                 'name' => $request->name,
                 'description' => $request->description,
-                'image' => $name,
+                'image' => $name_db,
                 'slug' => Str::slug($request->name)
             ]);
         } else {
