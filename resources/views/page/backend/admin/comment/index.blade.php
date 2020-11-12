@@ -28,7 +28,7 @@
                     </div>
                 @endif
                 <div class="bawah m-0 float-right">
-                    <p class="text-danger font-weight-normal text-justify" style="font-size:15px;">Jumlah Komentar {{ $dataCommentCount }}</p>
+                    <p class="text-danger font-weight-normal text-justify" style="font-size:15px;">Jumlah Ulasan {{ $dataCommentCount }}</p>
                 </div>
             </div>
         </div>
