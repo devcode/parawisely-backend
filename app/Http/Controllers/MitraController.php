@@ -20,7 +20,7 @@ class MitraController extends Controller
     {
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "Tambah Tempat";
+        $title = "Tambah Tempat Wisata";
         //
         $dataType = TypePlace::all();
         $dataIsland = Island::all();

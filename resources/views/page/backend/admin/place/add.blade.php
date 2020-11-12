@@ -4,7 +4,7 @@
 <div class="title mb-3">
     <div class="row">
         <div class="col-md-6">
-            <h3>Tambah {{ $title }}</h3>
+            <h3>{{ $title }}</h3>
             <small class="form-text text-muted">Klick tempat kamu di map agar data bisa terkirim <span class="text-danger">*</span>.</small>
         </div>
         <div class="col-md-6">
