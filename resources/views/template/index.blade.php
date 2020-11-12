@@ -107,9 +107,9 @@
                     <a href="{{ url('/data-place') }}"><i class="fas fa-map-marker-alt"></i>
                         <span class="side-link">Data Tempat</span></a>
                 </li>
-                <li class="{{ $title == "Komentar" ? "active" : "" }}">
+                <li class="{{ $title == "Ulasan" ? "active" : "" }}">
                     <a href="{{ url('/showComment') }}"><i class="fas fa-comment-dots"></i>
-                        <span class="side-link">Komentar</span></a>
+                        <span class="side-link">Ulasan</span></a>
                 </li>
             </ul>
             @endif

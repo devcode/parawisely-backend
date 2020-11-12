@@ -19,7 +19,7 @@ class CommentController extends Controller
     {
         $id = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id);
-        $title = "Komentar";
+        $title = "Ulasan";
         //
         if ($dataAuth->level_id == 1) {
             $dataComment = Comment::with(['place'])->get();
@@ -79,7 +79,7 @@ class CommentController extends Controller
     {
         $id_auth = Auth::guard('employee')->id();
         $dataAuth = Employee::find($id_auth);
-        $title = "Komentar";
+        $title = "Ulasan";
         //
         $place = TravelPlace::find($id->place_id);
         return view('page.backend.admin.comment.detail', compact('id', 'place', 'dataAuth'));
