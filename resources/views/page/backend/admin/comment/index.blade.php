@@ -23,7 +23,7 @@
                     @endforeach
                 @else
                     <div class="komentar">
-                        <h6 class="text-primary">Tidak ada komentar</h6>
+                        <h6 class="text-primary">Tidak ada ulasan</h6>
                         <hr>
                     </div>
                 @endif

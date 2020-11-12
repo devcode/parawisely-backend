@@ -18,7 +18,7 @@
         <h6><i class="fas fa-envelope"></i> &nbsp;{{ $id->email }}</h6>
         <hr>
         <div class="form-group">
-            <label>Komentar</label>
+            <label>Ulasan</label>
             <textarea cols="12"  rows="7" {{ $dataAuth->level_id != 1 ? "readonly" : "" }} type="text" class="form-control" name="comment">{{ $id->comment }}</textarea>
         </div>
     </div>
