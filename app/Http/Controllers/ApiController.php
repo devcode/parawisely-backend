@@ -10,14 +10,22 @@ use App\Models\TravelPlace;
 use App\Models\TypePlace;
 use App\Models\Section;
 use App\Models\Contact;
-use GuzzleHttp\Promise\Is;
 use Illuminate\Support\Facades\Validator;
-use Illuminate\Http\Response;
 
 class ApiController extends Controller
 {
-    public function getAllPlace()
+    public function getAllPlace(Request $request)
     {
+        if ($request->has('type')) {
+            $type = $request->get('type');
+            if (!is_numeric($type)) {
+                return $this->fail();
+            }
+
+            $data = TravelPlace::where('type_id', $type)->where('is_active', 1)->with('type')->with('comments')->get();
+            return $this->success($data);
+        }
+
         $data = TravelPlace::where('is_active', 1)->with('type')->with('comments')->get();
         return $this->success($data);
     }
